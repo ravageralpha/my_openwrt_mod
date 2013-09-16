@@ -1,0 +1,52 @@
+#!/bin/sh
+
+[ "${ACTION}" = "released" ] || exit 0
+
+qssgreen="/sys/devices/platform/leds-gpio/leds/tp-link:green:qss"
+
+umount_disk(){
+  /etc/init.d/aria2 stop
+  /etc/init.d/samba stop
+  /etc/init.d/hd-idle stop
+  swapoff -a
+  dev_name=$(mount| grep /dev/sd| awk '{ print $1; }')
+  for dev_id in $dev_name
+  do
+    umount -l ${dev_id} 
+  done
+}
+
+wifi_switch(){
+  [ `uci get wireless.radio0.disabled` -eq 1 ] && uci del wireless.radio0.disabled && uci commit wireless
+  state=`uci get wireless.@wifi-iface[0].disabled`
+  case $state in
+    1)
+      uci del wireless.@wifi-iface[0].disabled && uci commit wireless && env -i /sbin/wifi up >/dev/null 2>/dev/null;;
+    *)
+      uci set wireless.@wifi-iface[0].disabled=1 && uci commit wireless && env -i /sbin/wifi down >/dev/null 2>/dev/null;;
+  esac
+}
+
+aria2_switch(){
+  [ -z `which aria2` ] && exit 1
+  pgrep aria2c >/dev/null 2>&1 || exit 1
+
+  aria2AT="`env -i /sbin/aria2 -status | grep 'ActiveTask' | awk -F ':' '{print $2}'`"
+  aria2WT="`env -i /sbin/aria2 -status | grep 'WaitingTask' | awk -F ':' '{print $2}'`"
+
+  if [ $aria2AT -gt 0 -a $aria2WT -gt 0 ];then
+    env -i /sbin/aria2 -pause &> /dev/null
+  elif [ $aria2AT -eq 0 -a $aria2WT -gt 0 ];then
+    env -i /sbin/aria2 -resume &> /dev/null
+  fi
+}
+
+[ "$SEEN" -lt 1 ] && aria2_switch
+[ "$SEEN" -gt 1 -a "$SEEN" -lt 4 ] && wifi_switch
+[ "$SEEN" -ge 4 ] && {
+  if [ -n "`mount | grep /dev/sd`" ];then
+    umount_disk > /dev/null
+    echo 1 > ${qssgreen}/brightness
+    echo heartbeat > ${qssgreen}/trigger
+  fi
+}

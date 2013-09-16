@@ -1,0 +1,14 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "Enable"
+msgstr ""
+
+msgid "vsftpd"
+msgstr ""
+
+msgid "vsftpd is not running"
+msgstr ""
+
+msgid "vsftpd is running"
+msgstr ""

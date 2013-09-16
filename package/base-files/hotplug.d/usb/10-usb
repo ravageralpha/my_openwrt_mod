@@ -1,0 +1,15 @@
+#!/bin/sh
+
+qssgreen="/sys/devices/platform/leds-gpio/leds/tp-link:green:qss"
+case "$ACTION" in
+        add)
+			usb_device_name="1-1"
+			echo 255 > ${qssgreen}/brightness
+			echo usbdev > ${qssgreen}/trigger
+			echo $usb_device_name > ${qssgreen}/device_name 
+        	;;
+        remove)
+        	echo 0 > ${qssgreen}/brightness
+	        echo none > ${qssgreen}/trigger
+			;;
+esac

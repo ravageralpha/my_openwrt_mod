@@ -1,0 +1,32 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "Enable"
+msgstr "Enable"
+
+msgid "Local Port"
+msgstr "Local Port"
+
+msgid "Proxy IP"
+msgstr "Proxy IP"
+
+msgid "Proxy Port"
+msgstr "Proxy Port"
+
+msgid "Proxy Type"
+msgstr "Proxy Type"
+
+msgid "redsocks"
+msgstr "redsocks"
+
+msgid "redsocks is not running"
+msgstr "redsocks is not running"
+
+msgid "redsocks is running"
+msgstr "redsocks is running"
+
+msgid "Bypass IP Whitelist"
+msgstr "Bypass IP Whitelist"
+
+msgid "Bypass Lan IP"
+msgstr "Bypass Lan IP"

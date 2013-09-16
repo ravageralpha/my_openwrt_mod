@@ -1,0 +1,15 @@
+--- a/Makefile	2013-08-16 12:04:57.971657924 +0800
++++ b/Makefile	2013-07-31 22:53:36.739116000 +0800
+@@ -53,6 +53,12 @@
+ 	$(INSTALL_DATA) ./files/fstab.default $(1)/etc/uci-defaults/10-fstab
+ 	$(INSTALL_DATA) ./files/mount.hotplug $(1)/etc/hotplug.d/block/10-mount
+ 
++	$(INSTALL_DIR) $(1)/lib/functions
++	$(INSTALL_DATA) ./files/mount.sh $(1)/lib/functions/
++	$(INSTALL_DATA) ./files/block.sh $(1)/lib/functions/
++	$(INSTALL_DIR) $(1)/etc/hotplug.d/block
++	$(INSTALL_DATA) ./files/20-swap $(1)/etc/hotplug.d/block/
++	
+ 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/block $(1)/sbin/
+ 	ln -s /sbin/block $(1)/usr/sbin/swapon
+ 	ln -s /sbin/block $(1)/usr/sbin/swapoff

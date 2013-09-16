@@ -1,0 +1,14 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "Enable"
+msgstr "Enable"
+
+msgid "pdnsd"
+msgstr "pdnsd"
+
+msgid "pdnsd is not running"
+msgstr "pdnsd is not running"
+
+msgid "pdnsd is running"
+msgstr "pdnsd is running"

@@ -1,0 +1,2 @@
+config pdnsd config
+	option enabled '1'

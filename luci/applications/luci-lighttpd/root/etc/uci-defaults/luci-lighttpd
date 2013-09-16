@@ -1,0 +1,11 @@
+#!/bin/sh
+
+uci -q batch <<-EOF >/dev/null
+	delete ucitrack.@lighttpd[-1]
+	add ucitrack lighttpd
+	set ucitrack.@lighttpd[-1].init=lighttpd
+	commit ucitrack
+EOF
+
+rm -f /tmp/luci-indexcache
+exit 0

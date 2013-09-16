@@ -1,0 +1,86 @@
+#!/bin/sh /etc/rc.common
+
+START=90
+APP=redsocks
+PID_FILE=/var/run/$APP.pid
+
+start() {
+	
+	config_load "$APP"
+	
+	local enabled localport proxytype proxyip proxyport whitelist_enabled blacklist_enabled
+	
+	config_get enabled config enabled
+	[ "$enabled" = '0' ] && {
+		stop
+		return 0
+	}
+
+	config_get localport config localport
+	config_get proxytype config proxytype
+	config_get proxyip config proxyip
+	config_get proxyport config proxyport
+	config_get whitelist_enabled config whitelist_enabled
+	config_get blacklist_enabled config blacklist_enabled
+
+	mkdir -p /var/etc
+	sed -e "s#|LOCALPORT|#$localport#g" \
+		-e "s#|PROXYTYPE|#$proxytype#g" \
+		-e "s#|PROXYIP|#$proxyip#g" \
+		-e "s#|PROXYPORT|#$proxyport#g" \
+		/etc/redsocks/redsocks.conf.template > /var/etc/redsocks.conf
+
+	service_start /usr/sbin/redsocks -c /var/etc/redsocks.conf -p $PID_FILE
+
+	iptables -t nat -N REDSOCKS
+	iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
+	iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+	iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
+	iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
+	iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
+	iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+	iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
+	iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
+	iptables -t nat -A REDSOCKS -d "$proxyip" -j RETURN
+
+	if [ "$whitelist_enabled" = '0' ] && [ "$blacklist_enabled" = '0' ]; then
+		
+		iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports "$localport"
+	
+	else
+
+		[ "$blacklist_enabled" = '1' ] && {
+			
+			checkblacklist=$(ipset -L blacklist 2> /dev/null | wc -l)
+			[ $checkblacklist -eq 0 ] && {
+				ipset -N blacklist nethash --hashsize 64
+				for IP in $(cat /etc/redsocks/blacklist)
+				do
+					ipset -A blacklist $IP
+				done
+				iptables -t nat -A REDSOCKS -p tcp -m set --match-set blacklist src -j RETURN
+			}
+		}
+
+		[ "$whitelist_enabled" = '1' ] && {
+			
+			checkwhitelist=$(ipset -L whitelist 2> /dev/null | wc -l)
+			[ $checkwhitelist -eq 0 ] && {
+				ipset -N whitelist nethash --hashsize 4096
+				for IP in $(cat /etc/redsocks/whitelist)
+				do
+					ipset -A whitelist $IP
+				done	
+			}
+			iptables -t nat -A REDSOCKS -p tcp -m set ! --match-set whitelist dst -j REDIRECT --to-ports "$localport"
+		}
+	fi
+	iptables -t nat -I zone_lan_prerouting -j REDSOCKS
+}
+
+stop() {
+	service_stop /usr/sbin/redsocks && rm -rf $PID_FILE
+	fw3 -q restart
+	ipset destroy whitelist
+	ipset destroy blacklist
+}

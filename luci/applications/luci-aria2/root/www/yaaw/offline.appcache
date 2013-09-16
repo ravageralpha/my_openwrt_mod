@@ -1,0 +1,18 @@
+CACHE MANIFEST
+#2013-5-13 1426:
+
+CACHE:
+index.html
+css/main.css
+css/bootstrap.min.css
+css/bootstrap-responsive.min.css
+img/glyphicons-halflings-white.png
+img/glyphicons-halflings.png
+js/jquery-1.7.2.min.js
+js/bootstrap.min.js
+js/jquery.jsonrpc.js
+js/jquery.Storage.js
+js/jquery.base64.min.js
+js/mustache.js
+js/aria2.js
+js/yaaw.js

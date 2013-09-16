@@ -1,0 +1,32 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "Enable"
+msgstr "启动"
+
+msgid "Local Port"
+msgstr "本地端口"
+
+msgid "Proxy IP"
+msgstr "代理IP"
+
+msgid "Proxy Port"
+msgstr "代理端口"
+
+msgid "Proxy Type"
+msgstr "代理类型"
+
+msgid "redsocks"
+msgstr "redsocks"
+
+msgid "redsocks is not running"
+msgstr "redsocks未运行"
+
+msgid "redsocks is running"
+msgstr "redsocks运行中"
+
+msgid "Bypass IP Whitelist"
+msgstr "IP白名单"
+
+msgid "Bypass Lan IP"
+msgstr "忽略内网IP列表"
