@@ -32,6 +32,8 @@ start() {
 
 	service_start /usr/sbin/redsocks -c /var/etc/redsocks.conf -p $PID_FILE
 
+	remoteip="`ping -q -w1 $proxyip | grep PING | sed -e "s/).*//" | sed -e "s/.*(//"`"
+
 	iptables -t nat -N REDSOCKS
 	iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
 	iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
@@ -41,7 +43,7 @@ start() {
 	iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
 	iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
 	iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
-	iptables -t nat -A REDSOCKS -d "$proxyip" -j RETURN
+	iptables -t nat -A REDSOCKS -d "$remoteip" -j RETURN
 
 	if [ "$whitelist_enabled" = '0' ] && [ "$blacklist_enabled" = '0' ]; then
 		

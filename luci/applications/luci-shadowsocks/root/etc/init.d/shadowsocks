@@ -36,9 +36,11 @@ start() {
 
 		service_start /usr/bin/ss-redir -s "$remote" -p "$rport" -l "$redir_port" ${cipher:+-m $cipher} -k "$pass" -f "$ss_redir_PID_FILE"
 
+		remoteip="`ping -q -w1 $remote | grep PING | sed -e "s/).*//" | sed -e "s/.*(//"`"
+		
 		iptables -t nat -N SHADOWSOCKS
 		
-		iptables -t nat -A SHADOWSOCKS -d $remote -j RETURN
+		iptables -t nat -A SHADOWSOCKS -d $remoteip -j RETURN
 		iptables -t nat -A SHADOWSOCKS -d 0.0.0.0/8 -j RETURN
 		iptables -t nat -A SHADOWSOCKS -d 10.0.0.0/8 -j RETURN
 		iptables -t nat -A SHADOWSOCKS -d 127.0.0.0/8 -j RETURN
