@@ -3,7 +3,7 @@
 
 SERVICE_USE_PID=1
 
-START=50
+START=80
 
 start() {
 	mkdir -m 0755 -p /var/log/lighttpd
