@@ -13,9 +13,9 @@ PKG_VERSION:=1.2.5
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/addison/exfat-nofuse
+PKG_SOURCE_URL:=https://github.com/dorimanx/exfat-nofuse
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=42250d562293704a4b266fdb1ac4abd02289d922
+PKG_SOURCE_VERSION:=89d7aab646fd31c6102225f08e39dcbddda5106f
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 include $(INCLUDE_DIR)/package.mk
@@ -32,6 +32,13 @@ define KernelPackage/fs-exfat/description
   Kernel module to exfat native driver leak from Samsung
 endef
 
+define Build/Prepare
+	rm -rf $(PKG_BUILD_DIR)
+	mkdir -p $(PKG_BUILD_DIR)
+	$(PKG_UNPACK)
+	cp ./files/Makefile $(PKG_BUILD_DIR)/Makefile
+endef
+
 MAKE_OPTS:= \
 	ARCH="$(LINUX_KARCH)" \
 	CROSS_COMPILE="$(TARGET_CROSS)" \
@@ -39,7 +46,10 @@ MAKE_OPTS:= \
 
 define Build/Compile
 	$(MAKE) -C "$(LINUX_DIR)" \
-		$(MAKE_OPTS) \
+		CROSS_COMPILE="$(TARGET_CROSS)" \
+		ARCH="$(LINUX_KARCH)" \
+		SUBDIRS="$(PKG_BUILD_DIR)" \
+		EXTRA_CFLAGS="$(BUILDFLAGS)" \
 		modules
 endef
 
