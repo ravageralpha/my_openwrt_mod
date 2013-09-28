@@ -7,8 +7,9 @@ PKG_RELEASE=$(PKG_SOURCE_VERSION)
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=git://github.com/madeye/shadowsocks-libev.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=85fcbed91d7ab78606b3c83722ac5a1427b8c212
+PKG_SOURCE_VERSION:=eb9d31869e1d7590cd8c2fb1e7d226ac6cf32fad
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_MAINTAINER:=Max Lv <max.c.lv@gmail.com>
 
 PKG_INSTALL:=1 
 PKG_FIXUP:=autoreconf 
@@ -24,8 +25,9 @@ define Package/shadowsocks-libev
   TITLE:=shadowsocks implementation with libev
 endef
 
-TARGET_CFLAGS += -I$(STAGING_DIR)/usr/include -I$(STAGING_DIR)/usr/include/libev
-TARGET_LDFLAGS += -L$(STAGING_DIR)/usr/lib/libev -L$(STAGING_DIR)/usr/lib -lm
+define Package/shadowsocks-libev/description
+Shadowsocks-libev is a lightweight secured scoks5 proxy for embedded devices and low end boxes.
+endef
 
 define Package/shadowsocks-libev/install
 	$(INSTALL_DIR) $(1)/usr/bin
