@@ -1,0 +1,9 @@
+--- a/trunk/package/base-files/files/etc/sysctl.conf
++++ b/trunk/package/base-files/files/etc/sysctl.conf
+@@ -26,3 +26,6 @@
+ net.bridge.bridge-nf-call-arptables=0
+ net.bridge.bridge-nf-call-ip6tables=0
+ net.bridge.bridge-nf-call-iptables=0
++
++# Possible fix redsocks crash
++fs.file-max=16384
