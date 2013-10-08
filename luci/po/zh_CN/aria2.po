@@ -74,9 +74,6 @@ msgstr "分钟"
 msgid "Network"
 msgstr "网络设置"
 
-msgid "Open Web Interface"
-msgstr "打开Web客户端"
-
 msgid "RPC Password"
 msgstr "RPC 密码"
 

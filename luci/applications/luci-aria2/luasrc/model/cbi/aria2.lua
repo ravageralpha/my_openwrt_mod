@@ -6,10 +6,11 @@ local fs = require "nixio.fs"
 local util = require "nixio.util"
 
 local running=(luci.sys.call("pidof aria2c > /dev/null") == 0)
-local button=""
+yaaw="&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"button\" value=\" " .. "yaaw" .. " \" onclick=\"window.open('http://binux.github.io/yaaw/demo')\"/>"
+aria2_webui="&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"button\" value=\" " .. "aria2-webui" .. " \" onclick=\"window.open('http://ziahamza.github.io/webui-aria2')\"/>"
+
 if running then
-	button="&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"button\" value=\" " .. translate("Open Web Interface") .. " \" onclick=\"window.open('http://'+window.location.host+'/yaaw')\"/>"
-	m = Map("aria2", translate("aria2"), translate("aria2 is running") .. button)
+	m = Map("aria2", translate("aria2"), translate("aria2 is running") .. yaaw .. aria2_webui)
 else
 	m = Map("aria2", translate("aria2"), translate("aria2 is not running,make sure you have mounted USB Storage device"))
 end
@@ -71,7 +72,7 @@ end
 network=m:section(TypedSection, "aria2", translate("Network"))
 network.anonymous = true
 
-maxthread = network:option(Value, "maxthread", translate("Max Thread"), translate("Default 5 , Max 16"))
+maxthread = network:option(Value, "maxthread", translate("Max Thread"), translate("Default 5"))
 maxthread.default = "5"
 maxthread.placeholder = "5"
 maxthread.datatype = "uinteger"

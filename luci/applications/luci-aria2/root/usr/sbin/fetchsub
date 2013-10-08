@@ -105,10 +105,10 @@ while [ -n "$1" ];do
 		rm "$bin"
 		# maybe not handle well , fix me
 		gzip=`dd if="$sub" bs=1 count=2 2> /dev/null | hexdump -x | awk '{print $2}'`
-		[ "$gzip" = '1f8b' ] && {
+		[ "$gzip" = '1f8b' -o "$gzip" = '8b1f' ] && {
 			echo "Got gzip here,unzipping..."
 			mv "$sub" "${sub}.tgz"
-			gunzip -c "${sub}.tgz" > "$sub"
+			gunzip -c "${sub}.tgz" 2>/dev/null > "$sub"
 			rm "${sub}.tgz"
 		}
 		echo "Got subtitle:[$(basename "$file")]"

@@ -64,9 +64,6 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
-msgid "Open Web Interface"
-msgstr ""
-
 msgid "RPC Password"
 msgstr ""
 

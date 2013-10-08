@@ -74,9 +74,6 @@ msgstr "Minute"
 msgid "Network"
 msgstr "Network"
 
-msgid "Open Web Interface"
-msgstr "Open Web Interface"
-
 msgid "RPC Password"
 msgstr "RPC Password"
 
