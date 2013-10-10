@@ -11,7 +11,7 @@ PKG_VERSION:=0.4
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/addison/redsocks.git
+PKG_SOURCE_URL:=https://github.com/ravageralpha/redsocks.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=a92d5bd037fa4cab48be096efac0e30ca4650c78
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
