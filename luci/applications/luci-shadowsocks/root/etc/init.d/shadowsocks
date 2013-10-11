@@ -5,6 +5,8 @@ STOP=95
 
 ss_local_PID_FILE="/var/run/ss-local.pid"
 ss_redir_PID_FILE="/var/run/ss-redir.pid"
+ipset_blacklist="/etc/ipset/blacklist"
+ipset_whitelist="/etc/ipset/whitelist"
 
 start() {
 	
@@ -59,9 +61,9 @@ start() {
 			[ "$blacklist_enabled" = '1' ] && {
 				
 				checkblacklist=$(ipset -L blacklist 2> /dev/null | wc -l)
-				[ $checkblacklist -eq 0 ] && {
+				[ $checkblacklist -eq 0 -a -f "$ipset_blacklist" ] && {
 					ipset -N blacklist nethash --hashsize 64
-					for IP in $(cat /etc/shadowsocks/blacklist)
+					for IP in $(cat $ipset_blacklist)
 					do
 						ipset -A blacklist $IP
 					done
@@ -72,9 +74,9 @@ start() {
 			[ "$whitelist_enabled" = '1' ] && {
 				
 				checkwhitelist=$(ipset -L whitelist 2> /dev/null | wc -l)
-				[ $checkwhitelist -eq 0 ] && {
+				[ $checkwhitelist -eq 0 -a -f "$ipset_whitelist" ] && {
 					ipset -N whitelist nethash --hashsize 4096
-					for IP in $(cat /etc/shadowsocks/whitelist)
+					for IP in $(cat $ipset_whitelist)
 					do
 						ipset -A whitelist $IP
 					done	

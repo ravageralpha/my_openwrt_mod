@@ -49,14 +49,15 @@ blacklist.wrap = "off"
 blacklist:depends("blacklist_enabled", 1)
 
 function blacklist.cfgvalue(self, section)
-	return fs.readfile("/etc/redsocks/blacklist") or ""
+	return fs.readfile("/etc/ipset/blacklist") or ""
 end
 function blacklist.write(self, section, value)
 	if value then
 		value = value:gsub("\r\n?", "\n")
 		fs.writefile("/tmp/blacklist", value)
-		if (luci.sys.call("cmp -s /tmp/blacklist /etc/redsocks/blacklist") == 1) then
-			fs.writefile("/etc/redsocks/blacklist", value)
+		fs.mkdirr("/etc/ipset")
+		if (fs.access("/etc/ipset/blacklist") ~= true or luci.sys.call("cmp -s /tmp/blacklist /etc/ipset/blacklist") == 1) then
+			fs.writefile("/etc/ipset/blacklist", value)
 		end
 		fs.remove("/tmp/blacklist")
 	end
@@ -73,14 +74,15 @@ whitelist.wrap = "off"
 whitelist:depends("whitelist_enabled", 1)
 
 function whitelist.cfgvalue(self, section)
-	return fs.readfile("/etc/redsocks/whitelist") or ""
+	return fs.readfile("/etc/ipset/whitelist") or ""
 end
 function whitelist.write(self, section, value)
 	if value then
 		value = value:gsub("\r\n?", "\n")
 		fs.writefile("/tmp/whitelist", value)
-		if (luci.sys.call("cmp -s /tmp/whitelist /etc/redsocks/whitelist") == 1) then
-			fs.writefile("/etc/redsocks/whitelist", value)
+		fs.mkdirr("/etc/ipset")
+		if (fs.access("/etc/ipset/whitelist") ~= true or luci.sys.call("cmp -s /tmp/whitelist /etc/ipset/whitelist") == 1) then
+			fs.writefile("/etc/ipset/whitelist", value)
 		end
 		fs.remove("/tmp/whitelist")
 	end
