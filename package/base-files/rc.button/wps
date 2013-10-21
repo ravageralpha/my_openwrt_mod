@@ -7,7 +7,6 @@ qssgreen="/sys/devices/platform/leds-gpio/leds/tp-link:green:qss"
 umount_disk(){
   /etc/init.d/aria2 stop
   /etc/init.d/samba stop
-  /etc/init.d/hd-idle stop
   swapoff -a
   dev_name=$(mount| grep /dev/sd| awk '{ print $1; }')
   for dev_id in $dev_name

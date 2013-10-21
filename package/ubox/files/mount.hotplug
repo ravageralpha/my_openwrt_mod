@@ -129,7 +129,6 @@ if [ `basename $blkdev` != "block" ]; then
 			}
 			pgrep aria2c >/dev/null 2>&1 || /etc/init.d/aria2 start
 			pgrep smbd >/dev/null 2>&1 || /etc/init.d/samba start
-			pgrep hd-idle >/dev/null 2>&1 || /etc/init.d/hd-idle start
 		}
 
 		[ -z "$use_device" ] && {
