@@ -129,6 +129,8 @@ if [ `basename $blkdev` != "block" ]; then
 			}
 			pgrep aria2c >/dev/null 2>&1 || /etc/init.d/aria2 start
 			pgrep smbd >/dev/null 2>&1 || /etc/init.d/samba start
+			# hack for 2.5 inch hard drive delay
+			[ -n "`which hdparm`" -a -n "hdparm -I /dev/$device | grep 5400" ] && hdparm -B 254 /dev/$device
 		}
 
 		[ -z "$use_device" ] && {
