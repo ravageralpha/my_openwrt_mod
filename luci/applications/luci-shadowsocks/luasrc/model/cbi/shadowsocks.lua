@@ -15,25 +15,17 @@ else
 	m = Map("shadowsocks", translate("shadowsocks"), translate("shadowsocks is not running"))
 end
 
-s = m:section(TypedSection, "shadowsocks", translate("Standalone SOCKS5 Proxy"))
-s.anonymous = true
+server = m:section(TypedSection, "shadowsocks", translate("Server Setting"))
 
-switch = s:option(Flag, "enabled", translate("Enable"))
-switch.rmempty = false
-
-remote_server = s:option(Value, "remote_server", translate("Server Address"))
+remote_server = server:option(Value, "remote_server", translate("Server Address"))
 remote_server.datatype = ipaddr
 remote_server.optional = false
 
-remote_port = s:option(Value, "remote_port", translate("Server Port"))
+remote_port = server:option(Value, "remote_port", translate("Server Port"))
 remote_port.datatype = "range(0,65535)"
 remote_port.optional = false
 
-local_port = s:option(Value, "local_port", translate("Local Port"))
-local_port.datatype = "range(0,65535)"
-local_port.optional = false
-
-cipher = s:option(ListValue, "cipher", translate("Cipher Method"))
+cipher = server:option(ListValue, "cipher", translate("Cipher Method"))
 cipher:value("table")
 cipher:value("rc4")
 cipher:value("aes-128-cfb")
@@ -49,7 +41,17 @@ cipher:value("idea-cfb")
 cipher:value("rc2-cfb")
 cipher:value("seed-cfb")
 
-password = s:option(Value, "password", translate("Password"))
+socks5 = m:section(TypedSection, "shadowsocks", translate("SOCKS5 Proxy"))
+socks5.anonymous = true
+
+switch = socks5:option(Flag, "enabled", translate("Enable"))
+switch.rmempty = false
+
+local_port = socks5:option(Value, "local_port", translate("Local Port"))
+local_port.datatype = "range(0,65535)"
+local_port.optional = false
+
+password = socks5:option(Value, "password", translate("Password"))
 password.password = true
 
 redir = m:section(TypedSection, "shadowsocks", translate("Transparent Proxy"))
@@ -116,3 +118,5 @@ function whitelist.write(self, section, value)
 end
 
 return m
+
+

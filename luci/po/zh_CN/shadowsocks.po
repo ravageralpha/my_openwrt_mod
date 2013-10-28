@@ -19,13 +19,16 @@ msgstr "本地端口"
 msgid "Password"
 msgstr "密码"
 
+msgid "Server Setting"
+msgstr "服务器设置"
+
 msgid "Server Address"
 msgstr "服务器地址"
 
 msgid "Server Port"
 msgstr "服务器端口"
 
-msgid "Standalone SOCKS5 Proxy"
+msgid "SOCKS5 Proxy"
 msgstr "SOCK5代理"
 
 msgid "Transparent Proxy"

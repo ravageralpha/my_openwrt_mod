@@ -22,11 +22,14 @@ msgstr "Password"
 msgid "Server Address"
 msgstr "Server Address"
 
+msgid "Server Setting"
+msgstr "Server Setting"
+
 msgid "Server Port"
 msgstr "Server Port"
 
-msgid "Standalone SOCKS5 Proxy"
-msgstr "Standalone SOCKS5 Proxy"
+msgid "SOCKS5 Proxy"
+msgstr "SOCKS5 Proxy"
 
 msgid "Transparent Proxy"
 msgstr "Transparent Proxy"
