@@ -16,6 +16,7 @@ else
 end
 
 server = m:section(TypedSection, "shadowsocks", translate("Server Setting"))
+server.anonymous = true
 
 remote_server = server:option(Value, "remote_server", translate("Server Address"))
 remote_server.datatype = ipaddr
