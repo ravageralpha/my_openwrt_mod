@@ -26,6 +26,9 @@ remote_port = server:option(Value, "remote_port", translate("Server Port"))
 remote_port.datatype = "range(0,65535)"
 remote_port.optional = false
 
+password = server:option(Value, "password", translate("Password"))
+password.password = true
+
 cipher = server:option(ListValue, "cipher", translate("Cipher Method"))
 cipher:value("table")
 cipher:value("rc4")
@@ -51,9 +54,6 @@ switch.rmempty = false
 local_port = socks5:option(Value, "local_port", translate("Local Port"))
 local_port.datatype = "range(0,65535)"
 local_port.optional = false
-
-password = socks5:option(Value, "password", translate("Password"))
-password.password = true
 
 redir = m:section(TypedSection, "shadowsocks", translate("Transparent Proxy"))
 redir.anonymous = true
