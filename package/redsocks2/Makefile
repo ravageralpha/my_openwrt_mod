@@ -6,19 +6,19 @@
 #
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=redsocks
-PKG_VERSION:=0.4
+PKG_NAME:=redsocks2
+PKG_VERSION:=0.5
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/ravageralpha/redsocks.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=a92d5bd037fa4cab48be096efac0e30ca4650c78
+PKG_SOURCE_VERSION:=f8f7bfc80405d025d79658b70e6ef09f221822a6
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/redsocks
+define Package/redsocks2
   SECTION:=net
   CATEGORY:=Network
   SUBMENU:=Web Servers/Proxies
@@ -27,17 +27,9 @@ define Package/redsocks
 endef
 
 define Package/redsocks/description
-  Redsocks is a daemon running on the local system, that will transparently
-  tunnel any TCP connection via a remote SOCKS4, SOCKS5 or HTTP proxy server. It
-  uses the system firewall's redirection facility to intercept TCP connections,
-  thus the redirection is system-wide, with fine-grained control, and does
-  not depend on LD_PRELOAD libraries.
-
-  Redsocks supports tunneling TCP connections and UDP packets. It has
-  authentication support for both, SOCKS and HTTP proxies.
-
-  Also included is a small DNS server returning answers with the "truncated" flag
-  set for any UDP query, forcing the resolver to use TCP.
+  This is a modified version of original redsocks.
+  The name is changed to be REDSOCKS2 since this release to distinguish with original redsocks. 
+  This variant is useful for anti-GFW (Great Fire Wall).
 endef
 
 define Package/redsocks/install
