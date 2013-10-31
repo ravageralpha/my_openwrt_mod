@@ -23,13 +23,14 @@ localport.optional = false
 localport.datatype = "range(0,65535)"
 
 proxytype = s:option(ListValue, "proxytype", translate("Proxy Type"))
+proxytype:value("direct")
 proxytype:value("socks4")
 proxytype:value("socks5")
 proxytype:value("http-connect")
 proxytype:value("http-relay")
-proxytype:value("direct")
-proxytype:value("autosocks5")
-proxytype:value("autohttp-connect")
+
+autoproxy = s:option(Flag, "autoproxy", translate("AutoProxy"))
+autoproxy.rmempty = false
 
 proxyip = s:option(Value, "proxyip", translate("Proxy IP"))
 proxyip.optional = false

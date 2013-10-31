@@ -1,7 +1,8 @@
 config redsocks config
 	option enabled '0'
 	option localport '11111'
-	option proxytype 'autosocks5'
+	option proxytype 'socks5'
+	option autoproxy '0'
 	option proxyip '127.0.0.1'
 	option proxyport '10000'
 	option whitelist_enabled '0'
