@@ -16,6 +16,9 @@ msgstr "Proxy Port"
 msgid "Proxy Type"
 msgstr "Proxy Type"
 
+msgid "AutoProxy"
+msgstr "AutoProxy"
+
 msgid "redsocks"
 msgstr "redsocks"
 

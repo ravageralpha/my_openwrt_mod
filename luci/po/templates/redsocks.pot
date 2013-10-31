@@ -22,6 +22,9 @@ msgstr ""
 msgid "Proxy Type"
 msgstr ""
 
+msgid "AutoProxy"
+msgstr ""
+
 msgid "redsocks"
 msgstr ""
 

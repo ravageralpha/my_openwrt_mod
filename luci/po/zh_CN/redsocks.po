@@ -16,6 +16,9 @@ msgstr "代理端口"
 msgid "Proxy Type"
 msgstr "代理类型"
 
+msgid "AutoProxy"
+msgstr "自动判断"
+
 msgid "redsocks"
 msgstr "redsocks"
 
