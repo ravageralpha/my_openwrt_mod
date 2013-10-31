@@ -23,8 +23,7 @@ redsocks {
 	ip = |PROXYIP|;
 	port = |PROXYPORT|;
 
-	// known types: socks4, socks5, http-connect, http-relay
-	// New types: direct, autosocks5, autohttp-connect
+	// known types: direct, socks4, socks5, http-connect, http-relay
 	type = |PROXYTYPE|;
-
+	autoproxy = |AUTOPROXY|;
 }

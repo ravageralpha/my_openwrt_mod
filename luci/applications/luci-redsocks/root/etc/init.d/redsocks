@@ -20,6 +20,7 @@ start() {
 
 	config_get localport config localport
 	config_get proxytype config proxytype
+	config_get autoproxy config autoproxy 0
 	config_get proxyip config proxyip
 	config_get proxyport config proxyport
 	config_get whitelist_enabled config whitelist_enabled
@@ -28,6 +29,7 @@ start() {
 	mkdir -p /var/etc
 	sed -e "s#|LOCALPORT|#$localport#g" \
 		-e "s#|PROXYTYPE|#$proxytype#g" \
+		-e "s#|AUTOPROXY|#$autoproxy#g" \
 		-e "s#|PROXYIP|#$proxyip#g" \
 		-e "s#|PROXYPORT|#$proxyport#g" \
 		/etc/redsocks/redsocks.conf.template > /var/etc/redsocks.conf
