@@ -26,7 +26,7 @@ define Package/redsocks2
   TITLE:=Redirect any TCP connection to a SOCKS or HTTPS proxy server
 endef
 
-define Package/redsocks/description
+define Package/redsocks2/description
   This is a modified version of original redsocks.
   The name is changed to be REDSOCKS2 since this release to distinguish with original redsocks. 
   This variant is useful for anti-GFW (Great Fire Wall).
@@ -37,4 +37,4 @@ define Package/redsocks/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/redsocks $(1)/usr/sbin/
 endef
 
-$(eval $(call BuildPackage,redsocks))
+$(eval $(call BuildPackage,redsocks2))
