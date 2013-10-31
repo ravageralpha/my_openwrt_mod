@@ -32,7 +32,7 @@ define Package/redsocks2/description
   This variant is useful for anti-GFW (Great Fire Wall).
 endef
 
-define Package/redsocks/install
+define Package/redsocks2/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/redsocks $(1)/usr/sbin/
 endef
