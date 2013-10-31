@@ -27,7 +27,7 @@
 +	+PACKAGE_luci-app-pdnsd:pdnsd))
 +
 +$(eval $(call application,redsocks,LuCI Support for redsocks,\
-+	+PACKAGE_luci-app-redsocks:redsocks \
++	+PACKAGE_luci-app-redsocks:redsocks2 \
 +	+PACKAGE_luci-app-redsocks:kmod-ipt-ipset \
 +	+PACKAGE_luci-app-redsocks:ipset))
 +
