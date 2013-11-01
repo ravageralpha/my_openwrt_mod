@@ -64,11 +64,9 @@ redir_enable.default = false
 redir_port = redir:option(Value, "redir_port", translate("Transparent Proxy Local Port"))
 redir_port.datatype = "range(0,65535)"
 redir_port.optional = false
-redir_port:depends("redir_enabled", 1)
 
 blacklist_enable = redir:option(Flag, "blacklist_enabled", translate("Bypass Lan IP"))
 blacklist_enable.default = false
-blacklist_enable:depends("redir_enabled", 1)
 
 blacklist = redir:option(TextValue, "blacklist", " ", "")
 blacklist.template = "cbi/tvalue"
@@ -94,7 +92,6 @@ end
 
 whitelist_enable = redir:option(Flag, "whitelist_enabled", translate("Bypass IP Whitelist"))
 whitelist_enable.default = false
-whitelist_enable:depends("redir_enabled", 1)
 
 whitelist = redir:option(TextValue, "whitelist", " ", "")
 whitelist.template = "cbi/tvalue"
