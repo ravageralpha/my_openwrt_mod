@@ -13,7 +13,7 @@ PKG_RELEASE=$(PKG_SOURCE_VERSION)
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/ravageralpha/redsocks.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=f8f7bfc80405d025d79658b70e6ef09f221822a6
+PKG_SOURCE_VERSION:=d95286eaab9b504acec92a713e50bd644d8a913c
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 include $(INCLUDE_DIR)/package.mk
@@ -34,7 +34,7 @@ endef
 
 define Package/redsocks2/install
 	$(INSTALL_DIR) $(1)/usr/sbin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/redsocks $(1)/usr/sbin/
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/redsocks2 $(1)/usr/sbin/
 endef
 
 $(eval $(call BuildPackage,redsocks2))
