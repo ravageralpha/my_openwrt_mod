@@ -2,7 +2,6 @@ config network
 	option init network
 	list affects dhcp
 	list affects radvd
-	list affects lighttpd
 
 config wireless
 	list affects network
@@ -60,9 +59,6 @@ config aria2
 
 config shadowsocks
 	option init shadowsocks
-
-config lighttpd
-	option init lighttpd
 
 config vsftpd
 	option init vsftpd
