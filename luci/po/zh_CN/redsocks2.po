@@ -19,14 +19,14 @@ msgstr "代理类型"
 msgid "AutoProxy"
 msgstr "自动判断"
 
-msgid "redsocks"
-msgstr "redsocks"
+msgid "redsocks2"
+msgstr "redsocks2"
 
-msgid "redsocks is not running"
-msgstr "redsocks未运行"
+msgid "redsocks2 is not running"
+msgstr "redsocks2未运行"
 
-msgid "redsocks is running"
-msgstr "redsocks运行中"
+msgid "redsocks2 is running"
+msgstr "redsocks2运行中"
 
 msgid "Bypass IP Whitelist"
 msgstr "IP白名单"

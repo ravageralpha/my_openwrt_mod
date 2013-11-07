@@ -2,16 +2,7 @@ base {
 	log_debug = off;
 	log_info = off;
 	log = "file:/var/log/redsocks.log";
-
-	// detach from console
 	daemon = on;
-
-	/* possible `redirector' values are:
-	 *   iptables   - for Linux
-	 *   ipf        - for FreeBSD
-	 *   pf         - for OpenBSD
-	 *   generic    - some generic redirector that MAY work
-	 */
 	redirector = iptables;
 }
 
@@ -26,4 +17,5 @@ redsocks {
 	// known types: direct, socks4, socks5, http-connect, http-relay
 	type = |PROXYTYPE|;
 	autoproxy = |AUTOPROXY|;
+	timeout = |TIMEOUT|;
 }

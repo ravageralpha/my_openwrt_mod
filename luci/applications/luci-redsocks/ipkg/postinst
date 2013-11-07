@@ -1,7 +1,0 @@
-#!/bin/sh
-[ -n "${IPKG_INSTROOT}" ] || {
-	( . /etc/uci-defaults/luci-redsocks ) && rm -f /etc/uci-defaults/luci-redsocks
-	chmod 755 /etc/init.d/redsocks >/dev/null 2>&1
-	/etc/init.d/redsocks enable >/dev/null 2>&1
-	exit 0
-}

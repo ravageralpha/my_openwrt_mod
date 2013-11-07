@@ -1,7 +1,7 @@
 #!/bin/sh /etc/rc.common
 
 START=90
-APP=redsocks
+APP=redsocks2
 PID_FILE=/var/run/$APP.pid
 ipset_blacklist="/etc/ipset/blacklist"
 ipset_whitelist="/etc/ipset/whitelist"
@@ -10,7 +10,7 @@ start() {
 	
 	config_load "$APP"
 	
-	local enabled localport proxytype proxyip proxyport whitelist_enabled blacklist_enabled
+	local enabled localport proxytype autoproxy timeout proxyip proxyport whitelist_enabled blacklist_enabled
 	
 	config_get enabled config enabled
 	[ "$enabled" = '0' ] && {
@@ -21,6 +21,7 @@ start() {
 	config_get localport config localport
 	config_get proxytype config proxytype
 	config_get autoproxy config autoproxy 0
+	config_get timeout config timeout 5
 	config_get proxyip config proxyip
 	config_get proxyport config proxyport
 	config_get whitelist_enabled config whitelist_enabled
@@ -30,28 +31,29 @@ start() {
 	sed -e "s#|LOCALPORT|#$localport#g" \
 		-e "s#|PROXYTYPE|#$proxytype#g" \
 		-e "s#|AUTOPROXY|#$autoproxy#g" \
+		-e "s#|TIMEOUT|#$timeout#g" \
 		-e "s#|PROXYIP|#$proxyip#g" \
 		-e "s#|PROXYPORT|#$proxyport#g" \
-		/etc/redsocks/redsocks.conf.template > /var/etc/redsocks.conf
+		/etc/redsocks2/redsocks2.conf.template > /var/etc/redsocks2.conf
 
-	service_start /usr/sbin/redsocks -c /var/etc/redsocks.conf -p $PID_FILE
+	service_start /usr/sbin/redsocks2 -c /var/etc/redsocks2.conf -p $PID_FILE
 
 	remoteip="`ping -q -w1 $proxyip | grep PING | sed -e "s/).*//" | sed -e "s/.*(//"`"
 
-	iptables -t nat -N REDSOCKS
-	iptables -t nat -A REDSOCKS -d 0.0.0.0/8 -j RETURN
-	iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
-	iptables -t nat -A REDSOCKS -d 127.0.0.0/8 -j RETURN
-	iptables -t nat -A REDSOCKS -d 169.254.0.0/16 -j RETURN
-	iptables -t nat -A REDSOCKS -d 172.16.0.0/12 -j RETURN
-	iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
-	iptables -t nat -A REDSOCKS -d 224.0.0.0/4 -j RETURN
-	iptables -t nat -A REDSOCKS -d 240.0.0.0/4 -j RETURN
-	iptables -t nat -A REDSOCKS -d "$remoteip" -j RETURN
+	iptables -t nat -N REDSOCKS2
+	iptables -t nat -A REDSOCKS2 -d 0.0.0.0/8 -j RETURN
+	iptables -t nat -A REDSOCKS2 -d 10.0.0.0/8 -j RETURN
+	iptables -t nat -A REDSOCKS2 -d 127.0.0.0/8 -j RETURN
+	iptables -t nat -A REDSOCKS2 -d 169.254.0.0/16 -j RETURN
+	iptables -t nat -A REDSOCKS2 -d 172.16.0.0/12 -j RETURN
+	iptables -t nat -A REDSOCKS2 -d 192.168.0.0/16 -j RETURN
+	iptables -t nat -A REDSOCKS2 -d 224.0.0.0/4 -j RETURN
+	iptables -t nat -A REDSOCKS2 -d 240.0.0.0/4 -j RETURN
+	iptables -t nat -A REDSOCKS2 -d "$remoteip" -j RETURN
 
 	if [ "$whitelist_enabled" = '0' ] && [ "$blacklist_enabled" = '0' ]; then
 		
-		iptables -t nat -A REDSOCKS -p tcp -j REDIRECT --to-ports "$localport"
+		iptables -t nat -A REDSOCKS2 -p tcp -j REDIRECT --to-ports "$localport"
 	
 	else
 
@@ -64,7 +66,7 @@ start() {
 				do
 					ipset -A blacklist $IP
 				done
-				iptables -t nat -A REDSOCKS -p tcp -m set --match-set blacklist src -j RETURN
+				iptables -t nat -A REDSOCKS2 -p tcp -m set --match-set blacklist src -j RETURN
 			}
 		}
 
@@ -78,14 +80,14 @@ start() {
 					ipset -A whitelist $IP
 				done	
 			}
-			iptables -t nat -A REDSOCKS -p tcp -m set ! --match-set whitelist dst -j REDIRECT --to-ports "$localport"
+			iptables -t nat -A REDSOCKS2 -p tcp -m set ! --match-set whitelist dst -j REDIRECT --to-ports "$localport"
 		}
 	fi
-	iptables -t nat -I zone_lan_prerouting -j REDSOCKS
+	iptables -t nat -I zone_lan_prerouting -j REDSOCKS2
 }
 
 stop() {
-	service_stop /usr/sbin/redsocks && rm -rf $PID_FILE
+	service_stop /usr/sbin/redsocks2 && rm -rf $PID_FILE
 	fw3 -q restart
 	ipset destroy whitelist
 	ipset destroy blacklist

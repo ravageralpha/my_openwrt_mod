@@ -13,7 +13,7 @@ config firewall
 	list affects qos
 	list affects miniupnpd
 	list affects shadowsocks
-	list affects redsocks
+	list affects redsocks2
 
 config olsr
 	option init olsrd
@@ -70,5 +70,5 @@ config vsftpd
 config pdnsd
 	option init pdnsd
 
-config redsocks
-	option init redsocks
+config redsocks2
+	option init redsocks2

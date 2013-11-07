@@ -19,14 +19,14 @@ msgstr "Proxy Type"
 msgid "AutoProxy"
 msgstr "AutoProxy"
 
-msgid "redsocks"
-msgstr "redsocks"
+msgid "redsocks2"
+msgstr "redsocks2"
 
-msgid "redsocks is not running"
-msgstr "redsocks is not running"
+msgid "redsocks2 is not running"
+msgstr "redsocks2 is not running"
 
-msgid "redsocks is running"
-msgstr "redsocks is running"
+msgid "redsocks2 is running"
+msgstr "redsocks2 is running"
 
 msgid "Bypass IP Whitelist"
 msgstr "Bypass IP Whitelist"

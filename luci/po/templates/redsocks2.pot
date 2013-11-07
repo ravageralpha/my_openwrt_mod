@@ -25,11 +25,11 @@ msgstr ""
 msgid "AutoProxy"
 msgstr ""
 
-msgid "redsocks"
+msgid "redsocks2"
 msgstr ""
 
-msgid "redsocks is not running"
+msgid "redsocks2 is not running"
 msgstr ""
 
-msgid "redsocks is running"
+msgid "redsocks2 is running"
 msgstr ""
