@@ -32,6 +32,9 @@ proxytype:value("http-relay")
 autoproxy = s:option(Flag, "autoproxy", translate("AutoProxy"))
 autoproxy.rmempty = false
 
+timeout = s:option(Value, "timeout", translate("Timeout"))
+proxyip.optional = false
+
 proxyip = s:option(Value, "proxyip", translate("Proxy IP"))
 proxyip.optional = false
 

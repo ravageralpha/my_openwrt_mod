@@ -25,6 +25,9 @@ msgstr ""
 msgid "AutoProxy"
 msgstr ""
 
+msgid "Timeout"
+msgstr ""
+
 msgid "redsocks2"
 msgstr ""
 

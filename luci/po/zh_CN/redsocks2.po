@@ -19,6 +19,9 @@ msgstr "代理类型"
 msgid "AutoProxy"
 msgstr "自动判断"
 
+msgid "Timeout"
+msgstr "超时值(秒)"
+
 msgid "redsocks2"
 msgstr "redsocks2"
 
