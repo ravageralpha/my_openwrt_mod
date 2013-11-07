@@ -1,4 +1,4 @@
-config redsocks config
+config redsocks2 config
 	option enabled '0'
 	option localport '11111'
 	option proxytype 'socks5'
