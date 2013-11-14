@@ -11,9 +11,9 @@ PKG_VERSION:=0.5
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/ravageralpha/redsocks.git
+PKG_SOURCE_URL:=https://github.com/semigodking/redsocks.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=e13a03da86418671d1ef55a9c852cbf7dc43fd8d
+PKG_SOURCE_VERSION:=992737893ee29994aa968ef78c2c0caef7d4c442
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 include $(INCLUDE_DIR)/package.mk
@@ -30,6 +30,13 @@ define Package/redsocks2/description
   This is a modified version of original redsocks.
   The name is changed to be REDSOCKS2 since this release to distinguish with original redsocks. 
   This variant is useful for anti-GFW (Great Fire Wall).
+endef
+
+define Build/Prepare
+	rm -rf $(PKG_BUILD_DIR)
+	mkdir -p $(PKG_BUILD_DIR)
+	$(PKG_UNPACK)
+	cp ./files/Makefile $(PKG_BUILD_DIR)/Makefile
 endef
 
 define Package/redsocks2/install
