@@ -33,12 +33,12 @@ start() {
 	aria2_downloadlist="$aria2_conf_path/aria2file.txt"
 	aria2_DHT="$aria2_conf_path/dht.dat"
 	aria2_downloadfolder="$mountpoint/$download_folder"
-	
-	if [ "`mount | grep $device | cut -d' ' -f3`" = "ext4" ]; then
-		fileallocation="falloc"
-	else
-		fileallocation="trunc"
-	fi
+
+	case "`mount | grep $device | cut -d' ' -f5`" in
+		'ext4')fileallocation="falloc";;
+		*fat*)fileallocation="none";;
+		*)fileallocation="trunc";;
+	esac
 
 	[ ! -d "$aria2_conf_path" ] && mkdir -p "$aria2_conf_path"
 	[ ! -f "$aria2_downloadlist" ] && touch "$aria2_downloadlist"
