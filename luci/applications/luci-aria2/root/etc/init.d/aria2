@@ -14,7 +14,7 @@ start() {
 
 	mountpoint="`mount | grep "$device" | awk '{print $3}'`"
 
-	[ -z "`mount | grep "$device" | grep "$mountpoint"`" ] && exit 1
+	[ -z "$mountpoint" ] && exit 1
 
 	config_get download_folder config download_folder Downloads
 	config_get diskcache config diskcache '1M'
