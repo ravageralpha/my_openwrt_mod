@@ -12,9 +12,9 @@ start() {
 
 	config_get device config device
 
-	mountpoint="`mount | grep "$device" | awk '{print $3}'`"
+	[ -z "$device" ] && exit 1
 
-	[ -z "$mountpoint" ] && exit 1
+	mountpoint="`mount | grep "$device" | awk '{print $3}'`"
 
 	config_get download_folder config download_folder Downloads
 	config_get diskcache config diskcache '1M'
