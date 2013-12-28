@@ -13,7 +13,7 @@
 +
 +$(eval $(call application,shadowsocks,LuCI Support for shadowsocks,\
 +	+PACKAGE_luci-app-shadowsocks:shadowsocks-libev \
-+	+PACKAGE_luci-app-shadowsocks:libev \
++	+PACKAGE_luci-app-shadowsocks:libevent2 \
 +	+PACKAGE_luci-app-shadowsocks:kmod-ipt-ipset \
 +	+PACKAGE_luci-app-shadowsocks:ipset))
 +
