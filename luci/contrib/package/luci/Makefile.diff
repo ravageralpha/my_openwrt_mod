@@ -1,10 +1,9 @@
 --- a/luci/contrib/package/luci/Makefile
 +++ b/luci/contrib/package/luci/Makefile
-@@ -455,6 +455,29 @@
- 
+@@ -456,6 +456,32 @@
  $(eval $(call application,watchcat,LuCI Support for Watchcat,\
  	+PACKAGE_luci-app-watchcat:watchcat))
-+
+ 
 +$(eval $(call application,aria2,LuCI Support for aria2,\
 +	+PACKAGE_luci-app-aria2:aria2 \
 +	+PACKAGE_luci-app-aria2:curl \
@@ -30,6 +29,7 @@
 +	+PACKAGE_luci-app-redsocks2:kmod-ipt-nat-extra \
 +	+PACKAGE_luci-app-redsocks2:kmod-ipt-ipset \
 +	+PACKAGE_luci-app-redsocks2:ipset))
- 
++
  ### Server Gateway Interfaces ###
  define sgi
+   define Package/luci-sgi-$(1)
