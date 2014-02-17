@@ -9,7 +9,7 @@ ipset_blacklist="/etc/ipset/blacklist"
 ipset_whitelist="/etc/ipset/whitelist"
 
 start() {
-	
+
 	config_load "shadowsocks"
 	local enabled remote rport lport pass redir_enabled redir_port whitelist_enabled blacklist_enabled
 	config_get enabled config enabled
@@ -31,7 +31,7 @@ start() {
 	[ "$enabled" = '1' ] && {
 
 		service_start /usr/bin/ss-local -s "$remote" -p "$rport" -l "$lport" ${cipher:+-m $cipher} -k "$pass" -f "$ss_local_PID_FILE"
-	
+
 	}
 
 	[ "$redir_enabled" = '1' ] && {
@@ -39,9 +39,9 @@ start() {
 		service_start /usr/bin/ss-redir -s "$remote" -p "$rport" -l "$redir_port" ${cipher:+-m $cipher} -k "$pass" -f "$ss_redir_PID_FILE"
 
 		remoteip="`ping -q -w1 $remote | grep PING | sed -e "s/).*//" | sed -e "s/.*(//"`"
-		
+
 		iptables -t nat -N SHADOWSOCKS
-		
+
 		iptables -t nat -A SHADOWSOCKS -d $remoteip -j RETURN
 		iptables -t nat -A SHADOWSOCKS -d 0.0.0.0/8 -j RETURN
 		iptables -t nat -A SHADOWSOCKS -d 10.0.0.0/8 -j RETURN
@@ -53,13 +53,13 @@ start() {
 		iptables -t nat -A SHADOWSOCKS -d 240.0.0.0/4 -j RETURN
 
 		if [ "$whitelist_enabled" = '0' ] && [ "$blacklist_enabled" = '0' ]; then
-		
+
 			iptables -t nat -A SHADOWSOCKS -p tcp -j REDIRECT --to-ports $redir_port
-		
+
 		else
 
 			[ "$blacklist_enabled" = '1' ] && {
-				
+
 				checkblacklist=$(ipset -L blacklist 2> /dev/null | wc -l)
 				[ $checkblacklist -eq 0 -a -f "$ipset_blacklist" ] && {
 					ipset -N blacklist nethash --hashsize 64
@@ -72,16 +72,23 @@ start() {
 			}
 
 			[ "$whitelist_enabled" = '1' ] && {
-				
+
 				checkwhitelist=$(ipset -L whitelist 2> /dev/null | wc -l)
 				[ $checkwhitelist -eq 0 -a -f "$ipset_whitelist" ] && {
-					ipset -N whitelist nethash --hashsize 4096
-					for IP in $(cat $ipset_whitelist)
-					do
-						ipset -A whitelist $IP
-					done	
+					local tmpfile="/tmp/ipset.tmp"
+					local ipset_white_restore_file="/tmp/ipset_whitelist_rfile"
+					if [ -f "$ipset_white_restore_file" ]; then
+						ipset -R < $ipset_white_restore_file
+					else
+						cp -f $ipset_whitelist $tmpfile
+						sed -i "s/^/-A whitelist &/g" $tmpfile
+						sed -i "1 i\-N whitelist nethash --hashsize 4096" $tmpfile
+						echo COMMIT >> $tmpfile
+						mv -f $tmpfile $ipset_white_restore_file
+						ipset -R < $ipset_white_restore_file
+					fi
 				}
-				iptables -t nat -A SHADOWSOCKS -p tcp -m set ! --match-set whitelist dst -j REDIRECT --to-ports $redir_port	
+				iptables -t nat -A SHADOWSOCKS -p tcp -m set ! --match-set whitelist dst -j REDIRECT --to-ports $redir_port
 			}
 		fi
 		iptables -t nat -I zone_lan_prerouting -j SHADOWSOCKS
