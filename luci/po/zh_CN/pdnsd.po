@@ -1,0 +1,14 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "Enable"
+msgstr "启动"
+
+msgid "pdnsd"
+msgstr "pdnsd"
+
+msgid "pdnsd is not running"
+msgstr "pdnsd 未运行"
+
+msgid "pdnsd is running"
+msgstr "pdnsd 运行中"

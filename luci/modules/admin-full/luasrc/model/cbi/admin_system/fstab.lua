@@ -63,7 +63,7 @@ mount = m:section(TypedSection, "mount", translate("Mount Points"), translate("M
 mount.anonymous = true
 mount.addremove = true
 mount.template = "cbi/tblsection"
-mount.extedit  = luci.dispatcher.build_url("admin/system/fstab/mount/%s")
+mount.extedit  = luci.dispatcher.build_url("admin/fstab/mount/%s")
 
 mount.create = function(...)
 	local sid = TypedSection.create(...)
@@ -126,7 +126,7 @@ swap = m:section(TypedSection, "swap", "SWAP", translate("If your physical memor
 swap.anonymous = true
 swap.addremove = true
 swap.template = "cbi/tblsection"
-swap.extedit  = luci.dispatcher.build_url("admin/system/fstab/swap/%s")
+swap.extedit  = luci.dispatcher.build_url("admin/fstab/swap/%s")
 
 swap.create = function(...)
 	local sid = TypedSection.create(...)

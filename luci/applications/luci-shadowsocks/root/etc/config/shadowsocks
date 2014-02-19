@@ -1,0 +1,11 @@
+config shadowsocks config
+	option enabled '0'
+	option remote_server ''
+	option remote_port ''
+	option local_port ''
+	option cipher ''
+	option password ''
+	option whitelist_enabled '0'
+	option blacklist_enabled '0'
+	option redir_port ''
+	option redir_enabled '0'

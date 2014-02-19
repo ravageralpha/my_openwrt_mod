@@ -1,0 +1,47 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Bypass IP Whitelist"
+msgstr "Bypass IP Whitelist"
+
+msgid "Bypass Lan IP"
+msgstr "Bypass Lan IP"
+
+msgid "Cipher Method"
+msgstr "Cipher Method"
+
+msgid "Enable"
+msgstr "Enable"
+
+msgid "Local Port"
+msgstr "Local Port"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Server Address"
+msgstr "Server Address"
+
+msgid "Server Setting"
+msgstr "Server Setting"
+
+msgid "Server Port"
+msgstr "Server Port"
+
+msgid "SOCKS5 Proxy"
+msgstr "SOCKS5 Proxy"
+
+msgid "Transparent Proxy"
+msgstr "Transparent Proxy"
+
+msgid "Transparent Proxy Local Port"
+msgstr "Transparent Proxy Local Port"
+
+msgid "shadowsocks"
+msgstr "shadowsocks"
+
+msgid "shadowsocks is not running"
+msgstr "shadowsocks is not running"
+
+msgid "shadowsocks is running"
+msgstr "shadowsocks is running"

@@ -456,6 +456,31 @@ $(eval $(call application,transmission,LuCI Support for Transmission,\
 $(eval $(call application,watchcat,LuCI Support for Watchcat,\
 	+PACKAGE_luci-app-watchcat:watchcat))
 
+$(eval $(call application,aria2,LuCI Support for aria2,\
+	+PACKAGE_luci-app-aria2:aria2 \
+	+PACKAGE_luci-app-aria2:curl \
+	+PACKAGE_luci-app-aria2:wget \
+	+PACKAGE_luci-app-aria2:openssl-util))
+
+$(eval $(call application,shadowsocks,LuCI Support for shadowsocks,\
+	+PACKAGE_luci-app-shadowsocks:shadowsocks-libev \
+	+PACKAGE_luci-app-shadowsocks:kmod-ipt-nat \
+	+PACKAGE_luci-app-shadowsocks:kmod-ipt-nat-extra \
+	+PACKAGE_luci-app-shadowsocks:kmod-ipt-ipset \
+	+PACKAGE_luci-app-shadowsocks:ipset))
+
+$(eval $(call application,redsocks2,LuCI Support for redsocks2,\
+	+PACKAGE_luci-app-redsocks2:redsocks2 \
+	+PACKAGE_luci-app-redsocks2:kmod-ipt-nat \
+	+PACKAGE_luci-app-redsocks2:kmod-ipt-nat-extra \
+	+PACKAGE_luci-app-redsocks2:kmod-ipt-ipset \
+	+PACKAGE_luci-app-redsocks2:ipset))
+
+$(eval $(call application,vsftpd,LuCI Support for vsftpd,\
+	+PACKAGE_luci-app-vsftpd:vsftpd-tls))
+$(eval $(call application,pdnsd,LuCI Support for pdnsd,\
+	+PACKAGE_luci-app-pdnsd:pdnsd))
+
 ### Server Gateway Interfaces ###
 define sgi
   define Package/luci-sgi-$(1)

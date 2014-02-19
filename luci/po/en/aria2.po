@@ -1,0 +1,123 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: RA <ravageralpha@gmail.com>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+msgid "Authentication"
+msgstr "Authentication"
+
+msgid "Auto Download Subtitle"
+msgstr "Auto Download Subtitle"
+
+msgid "BT/PT Max Peers"
+msgstr "BT/PT Max Peers"
+
+msgid "Basic Settings"
+msgstr "Basic Settings"
+
+msgid "Comment Using #"
+msgstr "Comment Using #"
+
+msgid "Default 5"
+msgstr "Default 5"
+
+msgid "Default 5 , Max 16"
+msgstr "Default 5 , Max 16"
+
+msgid "Default 51413"
+msgstr "Default 51413"
+
+msgid "Default Bytes"
+msgstr "Default Bytes"
+
+msgid "Device"
+msgstr "Device"
+
+msgid "Download Folder"
+msgstr "Download Folder"
+
+msgid "Download Limit"
+msgstr "Download Limit"
+
+msgid "Edit Configuration"
+msgstr "Edit Configuration"
+
+msgid "Enable"
+msgstr "Enable"
+
+msgid "Enable Disk Cache"
+msgstr "Enable Disk Cache"
+
+msgid "File Allocation Method"
+msgstr "File Allocation Method"
+
+msgid "FileType"
+msgstr "FileType"
+
+msgid "Max Concurrent Queue"
+msgstr "Max Concurrent Queue"
+
+msgid "Max Thread"
+msgstr "Max Thread"
+
+msgid "Minute"
+msgstr "Minute"
+
+msgid "Network"
+msgstr "Network"
+
+msgid "RPC Password"
+msgstr "RPC Password"
+
+msgid "RPC Username"
+msgstr "RPC Username"
+
+msgid "Recommand 25"
+msgstr "Recommand 25"
+
+msgid "Seed Time"
+msgstr "Seed Time"
+
+msgid "Separate with Comma"
+msgstr "Separate with Comma"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "TCP Port"
+msgstr "TCP Port"
+
+msgid "UDP Port"
+msgstr "UDP Port"
+
+msgid "Upload Limit"
+msgstr "Upload Limit"
+
+msgid "Where Your Files Save"
+msgstr "Where Your Files Save"
+
+msgid "You can customize aria2 configuration here"
+msgstr "You can customize aria2 configuration here"
+
+msgid "Your RPC Password"
+msgstr "Your RPC Password"
+
+msgid "Your RPC Username"
+msgstr "Your RPC Username"
+
+msgid "aria2"
+msgstr "aria2"
+
+msgid "aria2 is not running,make sure you have mounted USB Storage device"
+msgstr "aria2 is not running,make sure you have mounted USB Storage device"
+
+msgid "aria2 is running"
+msgstr "aria2 is running"

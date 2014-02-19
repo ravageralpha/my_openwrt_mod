@@ -2793,6 +2793,30 @@ msgstr "是"
 msgid "« Back"
 msgstr "« 后退"
 
+msgid "Network Shares"
+msgstr "网络共享"
+
+msgid "aria2"
+msgstr "aria2"
+
+msgid "Free_Memory"
+msgstr "释放内存"
+
+msgid "shadowsocks"
+msgstr "shadowsocks"
+
+msgid "vsftpd"
+msgstr "vsftpd"
+
+msgid "lighttpd"
+msgstr "lighttpd"
+
+msgid "pdnsd"
+msgstr "pdnsd"
+
+msgid "redsocks"
+msgstr "redsocks"
+
 #~ msgid "Waiting for router..."
 #~ msgstr "等待路由器..."
 

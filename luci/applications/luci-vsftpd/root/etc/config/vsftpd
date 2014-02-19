@@ -1,0 +1,2 @@
+config vsftpd config
+	option enabled '0'

@@ -32,8 +32,9 @@ function index()
 
 	-- Empty services menu to be populated by addons
 	entry({"admin", "services"}, firstchild(), _("Services"), 40).index = true
-
-	entry({"admin", "logout"}, call("action_logout"), _("Logout"), 90)
+	entry({"admin", "RA-MOD"}, firstchild(), _("RA-MOD"), 65).index = true
+	entry({"admin", "Free_Memory"}, call("Free_Memory"), _("Free_Memory"), 75)
+	entry({"admin", "logout"}, call("action_logout"), _("Logout"), 99)
 end
 
 function action_logout()
@@ -46,4 +47,10 @@ function action_logout()
 
 	luci.http.header("Set-Cookie", "sysauth=; path=" .. dsp.build_url())
 	luci.http.redirect(luci.dispatcher.build_url())
+end
+
+function Free_Memory()
+	luci.util.exec("echo 3 > /proc/sys/vm/drop_caches")
+	luci.util.exec("pdnsd-ctl empty-cache")
+	luci.http.redirect(luci.dispatcher.build_url("admin", "status", "overview"))
 end

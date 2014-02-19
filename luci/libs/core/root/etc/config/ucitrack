@@ -11,6 +11,8 @@ config firewall
 	list affects luci-splash
 	list affects qos
 	list affects miniupnpd
+	list affects shadowsocks
+	list affects redsocks2
 
 config olsr
 	option init olsrd
@@ -51,3 +53,18 @@ config tinyproxy
 
 config 6relayd
 	option init 6relayd
+
+config aria2
+	option init aria2
+
+config shadowsocks
+	option init shadowsocks
+
+config vsftpd
+	option init vsftpd
+
+config pdnsd
+	option init pdnsd
+
+config redsocks2
+	option init redsocks2

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ "$ACTION" = ifup ] || exit 0
+
+pgrep ss-redir >/dev/null 2>&1 && iptables -t nat -I zone_lan_prerouting -j SHADOWSOCKS
