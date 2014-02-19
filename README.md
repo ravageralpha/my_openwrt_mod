@@ -3,7 +3,7 @@ my_openwrt_mod
 
 my openwrt customization
 
-Add "src-git RA-MOD git://github.com/ravageralpha/my_openwrt_mod.git" to your feeds.conf.default.
+Add "src-git ramod git://github.com/ravageralpha/my_openwrt_mod.git" to your feeds.conf.default.
 
 Also you need to commment this line "#src-git luci git://nbd.name/luci.git".
 
