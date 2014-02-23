@@ -33,7 +33,7 @@ start() {
 
 	[ "$enabled" = '1' ] && {
 
-		service_start /usr/bin/ss-local -s "$remote" -p "$rport" -l "$lport" ${cipher:+-m $cipher} -k "$pass" -f "$ss_local_PID_FILE"
+		service_start /usr/bin/ss-local -s "$remote" -p "$rport" -l "$lport" ${cipher:+-m $cipher} -k "$pass" -u -f "$ss_local_PID_FILE"
 
 	}
 
