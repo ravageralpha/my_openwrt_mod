@@ -1,6 +1,6 @@
 #!/bin/sh /etc/rc.common
 
-START=80
+START=95
 
 start() {
 	config_load "vsftpd"
