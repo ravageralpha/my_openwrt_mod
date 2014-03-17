@@ -13,8 +13,9 @@ PKG_MAINTAINER:=Max Lv <max.c.lv@gmail.com>
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSION)
 
-PKG_INSTALL:=1 
-PKG_FIXUP:=autoreconf 
+PKG_INSTALL:=1
+PKG_FIXUP:=autoreconf
+PKG_USE_MIPS16:=0
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
