@@ -12,6 +12,7 @@ PKG_VERSION:=$(shell $(LUCI_TOPDIR)/build/mkrevision.sh 2>/dev/null || echo unkn
 PKG_BUILD_DEPENDS:=$(if $(STAGING_DIR_ROOT),lua/host)
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 PKG_INSTALL_DIR:=$(PKG_BUILD_DIR)/ipkg-install
+PKG_USE_MIPS16:=0
 
 LUA_TARGET:=source
 LUCI_CFLAGS:=
@@ -642,6 +643,7 @@ define Build/Prepare
 		--exclude='boa-0*' --exclude='*.o' --exclude='*.so' \
 		--exclude=dist | \
 			tar x -C $(PKG_BUILD_DIR)/
+	$(call Build/Prepare/Default)
 endef
 
 define Build/Configure
