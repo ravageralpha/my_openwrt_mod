@@ -58,7 +58,7 @@ if [ $# -ge 1 ]; then
 				rawdata=$(echo "$result" | awk -F 'result":' '{print $2}' | sed -e 's/["{}]//g' | awk -v RS="," '{print}' | awk -F ':' '{print $2}')
 
 				DOWNLOADSPEED="$(($(echo "$rawdata" | sed -n 1p)/1024))K"
-				UPLOADSPEED="$(($(echo "$rawdata" | sed -n 5p)/1024))K"
+				UPLOADSPEED="$(($(echo "$rawdata" | sed -n 6p)/1024))K"
 				ActivedTask=$(echo "$rawdata" | sed -n 2p)
 				WaitingTask=$(echo "$rawdata" | sed -n 5p)
 
