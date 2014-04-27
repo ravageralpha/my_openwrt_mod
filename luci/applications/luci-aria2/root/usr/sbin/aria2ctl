@@ -60,7 +60,7 @@ if [ $# -ge 1 ]; then
 				DOWNLOADSPEED="$(($(echo "$rawdata" | sed -n 1p)/1024))K"
 				UPLOADSPEED="$(($(echo "$rawdata" | sed -n 5p)/1024))K"
 				ActivedTask=$(echo "$rawdata" | sed -n 2p)
-				WaitingTask=$(echo "$rawdata" | sed -n 4p)
+				WaitingTask=$(echo "$rawdata" | sed -n 5p)
 
 				echo "DownloadSpeed:$DOWNLOADSPEED"
 				echo "UploadSpeed:$UPLOADSPEED"
