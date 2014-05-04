@@ -58,4 +58,4 @@ define Build/Compile
 	modules
 endef
 
-$(eval $(call KernelPackage,fs-exfat))
+#$(eval $(call KernelPackage,fs-exfat))
