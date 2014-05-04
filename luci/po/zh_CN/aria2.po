@@ -74,12 +74,6 @@ msgstr "分钟"
 msgid "Network"
 msgstr "网络设置"
 
-msgid "RPC Password"
-msgstr "RPC 密码"
-
-msgid "RPC Username"
-msgstr "RPC 用户名"
-
 msgid "Recommand 25"
 msgstr "推荐 25, 太大会影响浏览网页速度"
 
@@ -107,11 +101,8 @@ msgstr "保存下载文件的文件夹"
 msgid "You can customize aria2 configuration here"
 msgstr "可以在这里修改aria2的设置，详细请搜索aria2相关帮助文档"
 
-msgid "Your RPC Password"
-msgstr "RPC 用户密码"
-
-msgid "Your RPC Username"
-msgstr "RPC 用户账号"
+msgid "RPC secret authorization token"
+msgstr "RPC 令牌"
 
 msgid "aria2"
 msgstr "aria2"

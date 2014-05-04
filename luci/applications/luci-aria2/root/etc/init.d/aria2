@@ -28,8 +28,7 @@ start() {
 	config_get tcp_port config tcp_port 51413
 	config_get udp_port config udp_port 51413
 	config_get seedtime config seedtime 525600
-	config_get rpc_user config rpc_user ""
-	config_get rpc_passwd config rpc_passwd ""
+	config_get rpc_token config rpc_token ""
 
 	aria2_conf_path="$mountpoint/.aria2"
 	aria2_downloadlist="$aria2_conf_path/aria2file.txt"
@@ -37,7 +36,8 @@ start() {
 	aria2_downloadfolder="$mountpoint/$download_folder"
 
 	case "`mount | grep $device | cut -d' ' -f5`" in
-		'ext4')fileallocation="falloc";;
+		#Only for fallocate patched uClibc
+		#'ext4')fileallocation="falloc";;
 		*fat*)fileallocation="none";;
 		*)fileallocation="trunc";;
 	esac
@@ -46,9 +46,7 @@ start() {
 	[ ! -f "$aria2_downloadlist" ] && touch "$aria2_downloadlist"
 	[ ! -f "$aria2_DHT" ] && touch "$aria2_DHT"
 
-	[ -f "/rom/etc/aria2/aria2.conf" ] && aria2_configfile="/rom/etc/aria2/aria2.conf"
-	[ -f "/etc/aria2/aria2.conf" ] && aria2_configfile="/etc/aria2/aria2.conf"
-	[ -f "$aria2_conf_path/aria2.conf" ] && aria2_configfile="$aria2_conf_path/aria2.conf"
+	aria2_configfile="/etc/aria2/aria2.conf"
 	[ ! -f "$aria2_configfile" ] && {
 		aria2_configfile="/etc/aria2/aria2.conf"
 		cat > "$aria2_configfile" << EOF
@@ -83,19 +81,18 @@ EOF
 	}
 
 	cmd="aria2c -c -D \
-	--conf-path=$aria2_configfile \
-	--dir=$aria2_downloadfolder \
+	--conf-path="$aria2_configfile" \
+	--dir="$aria2_downloadfolder" \
 	--enable-rpc \
 	--rpc-listen-all \
 	--rpc-allow-origin-all \
+	--rpc-secret="$rpc_token" \
 	--listen-port=$tcp_port \
 	--dht-listen-port=$udp_port \
-	--rpc-user=$rpc_user \
-	--rpc-passwd=$rpc_passwd \
 	--file-allocation=$fileallocation \
-	--input-file=$aria2_downloadlist \
-	--save-session=$aria2_downloadlist \
-	--dht-file-path=$aria2_DHT \
+	--input-file="$aria2_downloadlist" \
+	--save-session="$aria2_downloadlist" \
+	--dht-file-path="$aria2_DHT" \
 	--seed-time=$seedtime \
 	--disk-cache=$diskcache \
 	--max-overall-download-limit=$download_limit \

@@ -17,33 +17,31 @@ usage() {
 
 [ $# -eq 0 ] && usage
 
-aria2_getPasswd(){
+aria2_getToken(){
 	config_load "aria2"
-	config_get rpc_user config rpc_user ""
-	config_get rpc_passwd config rpc_passwd ""
+	config_get rpc_token config rpc_token ""
 }
 . /lib/functions.sh
-aria2_getPasswd
+aria2_getToken
 JSONPATH="http://127.0.0.1:6800/jsonrpc"
-[ -n "$rpc_user" -o -n "$rpc_passwd" ] && JSONPATH="http://$rpc_user:$rpc_passwd@127.0.0.1:6800/jsonrpc"
 
 if [ $# -ge 1 ]; then
 
 	case "$1" in
 		'-add')
-			json="{\"jsonrpc\":\"2.0\", \"id\":\"RA\", \"method\":\"aria2.addUri\", \"params\":[[\""$2"\"]]}"
+			json="{\"jsonrpc\":\"2.0\", \"id\":\"RA\", \"method\":\"aria2.addUri\", \"params\":[\"token:"$rpc_token"\", [\""$2"\"]]}"
 			;;
 		'-addTorrent')
-			json="{\"jsonrpc\":\"2.0\", \"id\":\"RA\", \"method\":\"aria2.addTorrent\", \"params\":[\""`cat "$2" | "$BASE64"`"\"]}"
+			json="{\"jsonrpc\":\"2.0\", \"id\":\"RA\", \"method\":\"aria2.addTorrent\", \"params\":[\"token:"$rpc_token"\", \""`cat "$2" | "$BASE64"`"\"]}"
 			;;
 		'-pause')
-			json="{\"jsonrpc\":\"2.0\", \"id\":\"RA\", \"method\":\"aria2.pauseAll\"}"
+			json="{\"jsonrpc\":\"2.0\", \"id\":\"RA\", \"method\":\"aria2.pauseAll\", \"params\":[\"token:"$rpc_token"\"]}"
 			;;
 		'-resume')
-			json="{\"jsonrpc\":\"2.0\", \"id\":\"RA\", \"method\":\"aria2.unpauseAll\"}"
+			json="{\"jsonrpc\":\"2.0\", \"id\":\"RA\", \"method\":\"aria2.unpauseAll\", \"params\":[\"token:"$rpc_token"\"]}"
 			;;
 		'-status')
-			json="{\"jsonrpc\":\"2.0\", \"id\":\"RA\", \"method\":\"aria2.getGlobalStat\"}"
+			json="{\"jsonrpc\":\"2.0\", \"id\":\"RA\", \"method\":\"aria2.getGlobalStat\", \"params\":[\"token:"$rpc_token"\"]}"
 			;;
 		*)
 			usage

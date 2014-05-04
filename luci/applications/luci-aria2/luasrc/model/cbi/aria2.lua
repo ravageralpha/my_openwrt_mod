@@ -110,15 +110,11 @@ rpc=m:section(TypedSection, "aria2", translate("Authentication"))
 rpc.anonymous = true
 rpc_auth = rpc:option(Flag, "rpc_auth", translate("Enable"))
 rpc_auth.default = false
-rpc_user = rpc:option(Value, "rpc_user", translate("RPC Username"), translate("Your RPC Username"))
-rpc_user.default = ""
-rpc_user:depends("rpc_auth", 1)
-rpc_passwd = rpc:option(Value, "rpc_passwd", translate("RPC Password"), translate("Your RPC Password"))
-rpc_passwd.password = true
-rpc_passwd.default = ""
-rpc_passwd:depends("rpc_auth", 1)
+rpc_token = rpc:option(Value, "rpc_token", translate("RPC secret authorization token"))
+rpc_token.default = ""
+rpc_token:depends("rpc_auth", 1)
 
--- Auto download Subtitle
+-- Subtitle
 autosub=m:section(TypedSection, "aria2", translate("Auto Download Subtitle"))
 autosub.anonymous = true
 

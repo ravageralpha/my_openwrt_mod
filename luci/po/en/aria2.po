@@ -74,12 +74,6 @@ msgstr "Minute"
 msgid "Network"
 msgstr "Network"
 
-msgid "RPC Password"
-msgstr "RPC Password"
-
-msgid "RPC Username"
-msgstr "RPC Username"
-
 msgid "Recommand 25"
 msgstr "Recommand 25"
 
@@ -107,11 +101,8 @@ msgstr "Where Your Files Save"
 msgid "You can customize aria2 configuration here"
 msgstr "You can customize aria2 configuration here"
 
-msgid "Your RPC Password"
-msgstr "Your RPC Password"
-
-msgid "Your RPC Username"
-msgstr "Your RPC Username"
+msgid "RPC secret authorization token"
+msgstr "RPC secret authorization token"
 
 msgid "aria2"
 msgstr "aria2"
