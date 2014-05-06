@@ -86,7 +86,6 @@ EOF
 	--enable-rpc \
 	--rpc-listen-all \
 	--rpc-allow-origin-all \
-	--rpc-secret="$rpc_token" \
 	--listen-port=$tcp_port \
 	--dht-listen-port=$udp_port \
 	--file-allocation=$fileallocation \
@@ -101,6 +100,8 @@ EOF
 	--split=$maxthread \
 	--max-connection-per-server=$maxthread \
 	--max-concurrent-downloads=$maxjobs"
+
+	[ -n "$rpc_token" ] && cmd="$cmd --rpc-secret=$rpc_token"
 
 	eval "$cmd"
 }
