@@ -4,8 +4,11 @@ PKG_NAME:=shadowsocks-libev
 PKG_VERSION:=1.4.5
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
-PKG_SOURCE_URL:=https://github.com/madeye/shadowsocks-libev/archive
-PKG_SOURCE:=v$(PKG_VERSION).tar.gz
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/madeye/shadowsocks-libev.git
+PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE_VERSION:=a3172adafd24c9f2c9835ecf384d7750c23c8b4f
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 PKG_MAINTAINER:=Max Lv <max.c.lv@gmail.com>
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSION)
@@ -45,12 +48,14 @@ endef
 Package/shadowsocks-libev-polarssl/description=$(Package/shadowsocks-libev/description)
 
 ifeq ($(BUILD_VARIANT),polarssl)
-CONFIGURE_ARGS += --with-crypto-library=polarssl
+        CONFIGURE_ARGS += --with-crypto-library=polarssl
 endif
 
 define Package/shadowsocks-libev/install
-$(INSTALL_DIR) $(1)/usr/bin
-$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/ss-{local,redir,tunnel} $(1)/usr/bin
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/ss-local $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/ss-redir $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/ss-tunnel $(1)/usr/bin
 endef
 
 Package/shadowsocks-libev-polarssl/install=$(Package/shadowsocks-libev/install)
