@@ -79,7 +79,9 @@ ss_local_stop() {
 
 ss_redir_stop() {
 	service_stop /usr/bin/ss-redir && {
-		fw3 -q restart
+		iptables -t nat -F SHADOWSOCKS
+		iptables -t nat -D zone_lan_prerouting -j SHADOWSOCKS
+		iptables -t nat -X SHADOWSOCKS
 		ipset destroy whitelist &> /dev/null
 		ipset destroy blacklist &> /dev/null
 		rm -rf "$ss_redir_PID_FILE"
