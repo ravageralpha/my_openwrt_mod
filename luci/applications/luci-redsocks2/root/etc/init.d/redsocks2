@@ -7,7 +7,6 @@ ipset_blacklist="/etc/ipset/blacklist"
 ipset_whitelist="/etc/ipset/whitelist"
 
 start() {
-	
 	# HACK fd
 	ulimit -n 4096
 
@@ -39,7 +38,7 @@ start() {
 
 	service_start /usr/sbin/redsocks2 -c /var/etc/redsocks2.conf -p $PID_FILE
 
-	remoteip="`ping -q -w1 $proxyip | grep PING | sed -e "s/).*//" | sed -e "s/.*(//"`"
+	remoteip="`resolveip -t5 $remote`"
 
 	iptables -t nat -N REDSOCKS2
 	iptables -t nat -A REDSOCKS2 -d 0.0.0.0/8 -j RETURN
@@ -52,18 +51,15 @@ start() {
 	iptables -t nat -A REDSOCKS2 -d 240.0.0.0/4 -j RETURN
 	iptables -t nat -A REDSOCKS2 -d "$remoteip" -j RETURN
 
-	if [ "$whitelist_enabled" = '0' ] && [ "$blacklist_enabled" = '0' ]; then
-		
-		iptables -t nat -A REDSOCKS2 -p tcp -j REDIRECT --to-ports "$localport"
+	[ "$blacklist_enabled" = '1' ] && {
+		sed -e "s/^/-A blacklist &/g" -e "1 i\-N blacklist nethash --hashsize 64" $ipset_blacklist | ipset -R -!
+		iptables -t nat -A REDSOCKS2 -p tcp -m set --match-set blacklist src -j RETURN
+	}
+	if [ "$whitelist_enabled" = '1' ];then
+		sed -e "s/^/-A whitelist &/g" -e "1 i\-N whitelist nethash --hashsize 4096" $ipset_whitelist | ipset -R -!
+		iptables -t nat -A REDSOCKS2 -p tcp -m set ! --match-set whitelist dst -j REDIRECT --to-ports "$localport"
 	else
-		[ "$blacklist_enabled" = '1' ] && {
-			sed -e "s/^/-A blacklist &/g" -e "1 i\-N blacklist nethash --hashsize 64" $ipset_blacklist | ipset -R -!
-			iptables -t nat -A REDSOCKS2 -p tcp -m set --match-set blacklist src -j RETURN
-		}
-		[ "$whitelist_enabled" = '1' ] && {
-			sed -e "s/^/-A whitelist &/g" -e "1 i\-N whitelist nethash --hashsize 4096" $ipset_whitelist | ipset -R -!
-			iptables -t nat -A REDSOCKS2 -p tcp -m set ! --match-set whitelist dst -j REDIRECT --to-ports "$localport"
-		}
+		iptables -t nat -A REDSOCKS2 -p tcp -j REDIRECT --to-ports "$localport"
 	fi
 	iptables -t nat -I zone_lan_prerouting -j REDSOCKS2
 }

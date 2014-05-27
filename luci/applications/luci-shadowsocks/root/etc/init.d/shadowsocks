@@ -9,7 +9,6 @@ ipset_blacklist="/etc/ipset/blacklist"
 ipset_whitelist="/etc/ipset/whitelist"
 
 start() {
-
 	# HACK fd
 	ulimit -n 4096
 	
@@ -32,16 +31,13 @@ start() {
 	}
 
 	[ "$enabled" = '1' ] && {
-
 		service_start /usr/bin/ss-local -s "$remote" -p "$rport" -l "$lport" ${cipher:+-m $cipher} -k "$pass" -u -f "$ss_local_PID_FILE"
-
 	}
 
 	[ "$redir_enabled" = '1' ] && {
-
 		service_start /usr/bin/ss-redir -s "$remote" -p "$rport" -l "$redir_port" ${cipher:+-m $cipher} -k "$pass" -f "$ss_redir_PID_FILE"
-
-		remoteip="`ping -q -w1 $remote | grep PING | sed -e "s/).*//" | sed -e "s/.*(//"`"
+		
+		remoteip="`resolveip -t5 $remote`"
 
 		iptables -t nat -N SHADOWSOCKS
 		iptables -t nat -A SHADOWSOCKS -d 0.0.0.0/8 -j RETURN
@@ -54,18 +50,16 @@ start() {
 		iptables -t nat -A SHADOWSOCKS -d 240.0.0.0/4 -j RETURN
 		iptables -t nat -A SHADOWSOCKS -d $remoteip -j RETURN
 
-		if [ "$whitelist_enabled" = '0' ] && [ "$blacklist_enabled" = '0' ]; then
+		[ "$blacklist_enabled" = '1' ] && {
+			sed -e "s/^/-A blacklist &/g" -e "1 i\-N blacklist nethash --hashsize 64" $ipset_blacklist | ipset -R -!
+			iptables -t nat -A SHADOWSOCKS -p tcp -m set --match-set blacklist src -j RETURN
+		}
 
-			iptables -t nat -A SHADOWSOCKS -p tcp -j REDIRECT --to-ports $redir_port
+		if [ "$whitelist_enabled" = '1' ];then
+			sed -e "s/^/-A whitelist &/g" -e "1 i\-N whitelist nethash --hashsize 4096" $ipset_whitelist | ipset -R -!
+			iptables -t nat -A SHADOWSOCKS -p tcp -m set ! --match-set whitelist dst -j REDIRECT --to-ports $redir_port
 		else
-			[ "$blacklist_enabled" = '1' ] && {
-				sed -e "s/^/-A blacklist &/g" -e "1 i\-N blacklist nethash --hashsize 64" $ipset_blacklist | ipset -R -!
-				iptables -t nat -A SHADOWSOCKS -p tcp -m set --match-set blacklist src -j RETURN
-			}
-			[ "$whitelist_enabled" = '1' ] && {
-				sed -e "s/^/-A whitelist &/g" -e "1 i\-N whitelist nethash --hashsize 4096" $ipset_whitelist | ipset -R -!
-				iptables -t nat -A SHADOWSOCKS -p tcp -m set ! --match-set whitelist dst -j REDIRECT --to-ports $redir_port
-			}
+			iptables -t nat -A SHADOWSOCKS -p tcp -j REDIRECT --to-ports $redir_port
 		fi
 		iptables -t nat -I zone_lan_prerouting -j SHADOWSOCKS
 	}
