@@ -81,6 +81,7 @@ ss_redir_stop() {
 	service_stop /usr/bin/ss-redir && {
 		iptables -t nat -D zone_lan_prerouting -j SHADOWSOCKS &> /dev/null
 		iptables -t nat -F SHADOWSOCKS &> /dev/null
+		sleep 1
 		iptables -t nat -X SHADOWSOCKS &> /dev/null
 		ipset destroy whitelist &> /dev/null
 		ipset destroy blacklist &> /dev/null

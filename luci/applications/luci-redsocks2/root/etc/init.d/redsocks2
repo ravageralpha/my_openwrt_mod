@@ -72,6 +72,7 @@ stop() {
 	service_stop /usr/sbin/redsocks2 && rm -rf $PID_FILE
 	iptables -t nat -D zone_lan_prerouting -j REDSOCKS2 &> /dev/null
 	iptables -t nat -F REDSOCKS2 &> /dev/null
+	sleep 1
 	iptables -t nat -X REDSOCKS2 &> /dev/null
 	ipset destroy whitelist &> /dev/null
 	ipset destroy blacklist &> /dev/null
