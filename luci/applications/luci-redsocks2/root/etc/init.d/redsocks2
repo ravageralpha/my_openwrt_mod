@@ -38,7 +38,7 @@ start() {
 
 	service_start /usr/sbin/redsocks2 -c /var/etc/redsocks2.conf -p $PID_FILE
 
-	remoteip="`resolveip -t5 $remote`"
+	remoteip="`resolveip -t5 $proxyip`"
 
 	iptables -t nat -N REDSOCKS2
 	iptables -t nat -A REDSOCKS2 -d 0.0.0.0/8 -j RETURN
