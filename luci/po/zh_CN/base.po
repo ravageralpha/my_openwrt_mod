@@ -2817,11 +2817,17 @@ msgstr "pdnsd"
 msgid "redsocks"
 msgstr "redsocks"
 
+msgid "Openconnect"
+msgid "Openconnect (Cisco Anyconnect)"
+
 msgid "Server SHA1 Fingerprint"
 msgstr "服务器证书指纹"
 
 msgid "Authentication Login Group"
 msgstr "登录认证用户组"
+
+msgid "Certificate Authentication"
+msgstr "证书登录认证"
 
 msgid "CA Certificate"
 msgstr "CA证书"

@@ -2845,6 +2845,9 @@ msgstr "pdnsd"
 msgid "redsocks"
 msgstr "redsocks"
 
+msgid "Openconnect"
+msgid "Openconnect (Cisco Anyconnect)"
+
 msgid "Server SHA1 Fingerprint"
 msgstr "Server SHA1 Fingerprint"
 
@@ -2853,6 +2856,9 @@ msgstr "Authentication Login Group"
 
 msgid "CA Certificate"
 msgstr "CA Certificate"
+
+msgid "Certificate Authentication"
+msgstr "Certificate Authentication"
 
 msgid "User Certificate"
 msgstr "User Certificate"
