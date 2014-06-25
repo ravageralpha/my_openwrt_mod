@@ -18,7 +18,7 @@ limitations under the License.
 ]]--
 
 local netmod = luci.model.network
-
+local interface = luci.model.network.interface
 local proto = netmod:register_protocol("openconnect")
 
 function proto.get_i18n(self)
@@ -43,6 +43,10 @@ end
 
 function proto.is_virtual(self)
 	return true
+end
+
+function proto.get_interface(self)
+	return interface(self:ifname(), self)
 end
 
 function proto.get_interfaces(self)
