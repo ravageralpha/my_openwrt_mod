@@ -2817,6 +2817,21 @@ msgstr "pdnsd"
 msgid "redsocks"
 msgstr "redsocks"
 
+msgid "Server SHA1 Fingerprint"
+msgstr "服务器证书指纹"
+
+msgid "Authentication Login Group"
+msgstr "登录认证用户组"
+
+msgid "CA Certificate"
+msgstr "CA证书"
+
+msgid "User Certificate"
+msgstr "用户证书"
+
+msgid "User Private Key"
+msgstr "用户私钥"
+
 #~ msgid "Waiting for router..."
 #~ msgstr "等待路由器..."
 

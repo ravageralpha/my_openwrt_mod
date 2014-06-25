@@ -2845,6 +2845,21 @@ msgstr "pdnsd"
 msgid "redsocks"
 msgstr "redsocks"
 
+msgid "Server SHA1 Fingerprint"
+msgstr "Server SHA1 Fingerprint"
+
+msgid "Authentication Login Group"
+msgstr "Authentication Login Group"
+
+msgid "CA Certificate"
+msgstr "CA Certificate"
+
+msgid "User Certificate"
+msgstr "User Certificate"
+
+msgid "User Private Key"
+msgstr "User Private Key"
+
 #~ msgid "Active Leases"
 #~ msgstr "Active Leases"
 
