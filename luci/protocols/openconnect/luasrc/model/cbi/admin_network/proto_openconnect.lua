@@ -11,7 +11,7 @@ You may obtain a copy of the License at
 ]]--
 
 local map, section, net = ...
-local config = net:ifname():gsub("^vpn%-", "")
+local config = net.sid
 local fs = require "nixio.fs"
 local username, password, server, port, serverhash, authgroup,
 	  cafile, usercert_switch, usercert, privatekey
