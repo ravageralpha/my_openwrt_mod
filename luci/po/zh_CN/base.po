@@ -2826,6 +2826,9 @@ msgstr "服务器证书指纹"
 msgid "Authentication Login Group"
 msgstr "登录认证用户组"
 
+msgid "CA Authentication"
+msgstr "CA认证"
+
 msgid "Certificate Authentication"
 msgstr "证书登录认证"
 

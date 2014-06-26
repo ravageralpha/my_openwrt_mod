@@ -11,11 +11,15 @@ You may obtain a copy of the License at
 ]]--
 
 local map, section, net = ...
-local config = net.sid
 local fs = require "nixio.fs"
+
 local username, password, server, port, serverhash, authgroup,
 	  cafile, usercert_switch, usercert, privatekey
 
+local config = net.sid
+local ca_file = "/etc/openconnect/ca-vpn-" .. config .. ".pem"
+local usercert_file = "/etc/openconnect/user-cert-vpn-" .. config .. ".pem"
+local privatekey_file = "/etc/openconnect/user-key-vpn-" .. config .. ".pem"
 
 server = section:taboption("general", Value, "server", translate("VPN Server"))
 server.datatype = "host"
@@ -29,31 +33,47 @@ username = section:taboption("general", Value, "username", translate("Username")
 password = section:taboption("general", Value, "password", translate("Password"))
 password.password = true
 
-serverhash = section:taboption("general", Value, "serverhash", translate("Server SHA1 Fingerprint"))
-
 authgroup = section:taboption("general", Value, "authgroup", translate("Authentication Login Group"))
+
+ca_switch = section:taboption("general", Flag, "ca_switch", translate("CA Authentication"))
+ca_switch.default = false
+
+function ca_switch.write(self, section, value)
+	if value == "0" then
+		fs.remove(ca_file)
+	end
+	Flag.write(self, section, value)
+end
+
+serverhash = section:taboption("general", Value, "serverhash", translate("Server SHA1 Fingerprint"))
 
 cafile = section:taboption("general", TextValue, "cafile", translate("CA Certificate"))
 cafile.template = "cbi/tvalue"
 cafile.rows = 15
+cafile:depends("ca_switch", 1)
 
 function cafile.cfgvalue(self, section)
-	return fs.readfile("/etc/openconnect/ca-vpn-" .. config .. ".pem") or ""
+	return fs.readfile(ca_file) or ""
 end
 
 function cafile.write(self, section, value)
-	file = "/etc/openconnect/ca-vpn-" .. config .. ".pem"
 	if value then
 		value = value:gsub("\r\n?", "\n")
 		fs.mkdirr("/etc/openconnect")
-		fs.writefile(file, value)
-	else
-		fs.remove(file)
+		fs.writefile(ca_file, value)
 	end
 end
 
 usercert_switch = section:taboption("general", Flag, "usercert_switch", translate("Certificate Authentication"))
 usercert_switch.default = false
+
+function usercert_switch.write(self, section, value)
+	if value == "0" then
+		fs.remove(usercert_file)
+		fs.remove(privatekey_file)
+	end
+	Flag.write(self, section, value)
+end
 
 usercert = section:taboption("general", TextValue, "usercert", translate("User Certificate"))
 usercert.template = "cbi/tvalue"
@@ -61,17 +81,14 @@ usercert.rows = 15
 usercert:depends("usercert_switch", 1)
 
 function usercert.cfgvalue(self, section)
-	return fs.readfile("/etc/openconnect/user-cert-vpn-" .. config .. ".pem") or ""
+	return fs.readfile(usercert_file) or ""
 end
 
 function usercert.write(self, section, value)
-	file = "/etc/openconnect/user-cert-vpn-" .. config .. ".pem"
 	if value then
 		value = value:gsub("\r\n?", "\n")
 		fs.mkdirr("/etc/openconnect")
-		fs.writefile(file, value)
-	else
-		fs.remove(file)
+		fs.writefile(usercert_file, value)
 	end
 end
 
@@ -81,16 +98,13 @@ privatekey.rows = 15
 privatekey:depends("usercert_switch", 1)
 
 function privatekey.cfgvalue(self, section)
-	return fs.readfile("/etc/openconnect/user-key-vpn-" .. config .. ".pem") or ""
+	return fs.readfile(privatekey_file) or ""
 end
 
 function usercert.write(self, section, value)
-	file = "/etc/openconnect/user-key-vpn-" .. config .. ".pem"
 	if value then
 		value = value:gsub("\r\n?", "\n")
 		fs.mkdirr("/etc/openconnect")
-		fs.writefile(file, value)
-	else
-		fs.remove(file)
+		fs.writefile(privatekey_file, value)
 	end
 end

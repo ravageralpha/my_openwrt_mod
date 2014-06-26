@@ -2854,6 +2854,9 @@ msgstr "Server SHA1 Fingerprint"
 msgid "Authentication Login Group"
 msgstr "Authentication Login Group"
 
+msgid "CA Authentication"
+msgstr "CA Authentication"
+
 msgid "CA Certificate"
 msgstr "CA Certificate"
 
