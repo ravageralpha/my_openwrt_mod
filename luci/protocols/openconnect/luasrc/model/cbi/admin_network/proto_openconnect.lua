@@ -38,14 +38,14 @@ authgroup = section:taboption("general", Value, "authgroup", translate("Authenti
 ca_switch = section:taboption("general", Flag, "ca_switch", translate("CA Authentication"))
 ca_switch.default = false
 
-serverhash = section:taboption("general", Value, "serverhash", translate("Server SHA1 Fingerprint"))
-
 function ca_switch.write(self, section, value)
 	if value == "0" then
 		fs.remove(ca_file)
 	end
 	Flag.write(self, section, value)
 end
+
+serverhash = section:taboption("general", Value, "serverhash", translate("Server SHA1 Fingerprint"))
 
 cafile = section:taboption("general", TextValue, "cafile", translate("CA Certificate"))
 cafile.template = "cbi/tvalue"
