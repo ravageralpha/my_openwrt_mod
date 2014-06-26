@@ -201,7 +201,8 @@ $(eval $(call protocol,ppp,Support for PPP/PPPoE/PPPoA/PPtP))
 $(eval $(call protocol,ipv6,Support for DHCPv6/6in4/6to4/6rd/DS-Lite))
 $(eval $(call protocol,3g,Support for 3G,+PACKAGE_luci-proto-3g:comgt))
 $(eval $(call protocol,relay,Support for relayd pseudo bridges,+PACKAGE_luci-proto-relay:relayd))
-$(eval $(call protocol,openconnect,Support for OpenConnect VPN,+openconnect))
+$(eval $(call protocol,openconnect,Support for OpenConnect VPN,+PACKAGE_luci-proto-openconnect:openconnect \
+	+PACKAGE_luci-proto-openconnect:vpnc))
 
 ### Community Packages ###
 define Package/luci-mod-freifunk-community
