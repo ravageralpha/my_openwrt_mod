@@ -109,7 +109,7 @@ function privatekey.write(self, section, value)
 	end
 end
 
-vpncscript = section:taboption("general", TextValue, "vpncscript", "vpnc-script"))
+vpncscript = section:taboption("general", TextValue, "vpncscript", "vpnc-script")
 vpncscript.template = "cbi/tvalue"
 vpncscript.rows = 15
 
