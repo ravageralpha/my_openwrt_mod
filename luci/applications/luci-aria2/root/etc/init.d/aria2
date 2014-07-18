@@ -4,8 +4,9 @@ START=99
 
 start() {
 	
-	config_load "aria2"
-	
+	ulimit -n 4096
+
+	config_load "aria2"	
 	config_get enabled config enabled 0
 
 	[ "$enabled" = 0 ] && return 0
