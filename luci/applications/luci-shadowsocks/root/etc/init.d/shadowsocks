@@ -63,9 +63,9 @@ start() {
 				-c /etc/chinadns_chnroute.txt \
 				-p 1053 \
 				-s 114.114.114.114,127.0.0.1:5353
-			iptables -t nat -A zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 1053
+			iptables -t nat -I zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 1053
 		else
-			iptables -t nat -A zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 5353
+			iptables -t nat -I zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 5353
 		fi
 	}
 
@@ -108,7 +108,7 @@ start() {
 
 ss_local_stop() {
 	service_stop /usr/bin/ss-local && {
-		rm -rf "$ss_local_PID_FILE"
+		rm "$ss_local_PID_FILE"
 	}
 }
 
@@ -120,11 +120,21 @@ ss_redir_stop() {
 		iptables -t nat -X SHADOWSOCKS &> /dev/null
 		ipset destroy whitelist &> /dev/null
 		ipset destroy blacklist &> /dev/null
-		rm -rf "$ss_redir_PID_FILE"
+		rm "$ss_redir_PID_FILE"
+	}
+}
+
+ss_tunnel_stop() {
+	service_stop /usr/bin/ss-tunnel && {
+		iptables -t nat -D zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 1053 &> /dev/null
+		iptables -t nat -D zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 5353 &> /dev/null
+		killall -9 chinadns
+		rm "$ss_tunnel_PID_FILE"
 	}
 }
 
 stop() {
 	ss_local_stop
 	ss_redir_stop
+	ss_tunnel_stop
 }
