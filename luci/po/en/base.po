@@ -2824,26 +2824,8 @@ msgstr "« Back"
 msgid "Network Shares"
 msgstr "Network Shares"
 
-msgid "aria2"
-msgstr "aria2"
-
 msgid "Free_Memory"
 msgstr "Free Memory"
-
-msgid "shadowsocks"
-msgstr "shadowsocks"
-
-msgid "vsftpd"
-msgstr "vsftpd"
-
-msgid "lighttpd"
-msgstr "lighttpd"
-
-msgid "pdnsd"
-msgstr "pdnsd"
-
-msgid "redsocks"
-msgstr "redsocks"
 
 msgid "Openconnect"
 msgid "Openconnect (Cisco Anyconnect)"

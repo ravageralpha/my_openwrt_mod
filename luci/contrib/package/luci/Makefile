@@ -481,9 +481,7 @@ $(eval $(call application,redsocks2,LuCI Support for redsocks2,\
 	+PACKAGE_luci-app-shadowsocks:resolveip))
 
 $(eval $(call application,vsftpd,LuCI Support for vsftpd,\
-	+PACKAGE_luci-app-vsftpd:vsftpd-tls))
-$(eval $(call application,pdnsd,LuCI Support for pdnsd,\
-	+PACKAGE_luci-app-pdnsd:pdnsd))
+	+PACKAGE_luci-app-vsftpd:vsftpd))
 
 ### Server Gateway Interfaces ###
 define sgi
