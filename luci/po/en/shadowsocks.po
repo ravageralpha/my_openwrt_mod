@@ -45,3 +45,6 @@ msgstr "shadowsocks is not running"
 
 msgid "shadowsocks is running"
 msgstr "shadowsocks is running"
+
+msgid "DNS Forward"
+msgstr "DNS Forward"

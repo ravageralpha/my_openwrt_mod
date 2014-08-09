@@ -5,6 +5,7 @@ STOP=95
 
 ss_local_PID_FILE="/var/run/ss-local.pid"
 ss_redir_PID_FILE="/var/run/ss-redir.pid"
+ss_tunnel_PID_FILE="/var/run/ss-tunnel.pid"
 ipset_blacklist="/etc/ipset/blacklist"
 ipset_whitelist="/etc/ipset/whitelist"
 
@@ -13,7 +14,9 @@ start() {
 	ulimit -n 4096
 	
 	config_load "shadowsocks"
-	local enabled remote rport lport pass redir_enabled redir_port whitelist_enabled blacklist_enabled
+	local enabled remote rport lport pass redir_enabled redir_port \
+			whitelist_enabled blacklist_enabled dnsforward_enabled \
+			dnsforward_type
 	config_get enabled config enabled
 	config_get remote config remote_server
 	config_get rport config remote_port
@@ -24,6 +27,7 @@ start() {
 	config_get redir_port config redir_port
 	config_get whitelist_enabled config whitelist_enabled
 	config_get blacklist_enabled config blacklist_enabled
+	config_get dnsforward_enabled config dnsforward_enabled
 
 	[ -z "$remote" ] || [ -z "$rport" ] || [ -z "$lport" ] || [ -z "$pass" ] && {
 		echo "missing parameters. check config"
@@ -31,11 +35,48 @@ start() {
 	}
 
 	[ "$enabled" = '1' ] && {
-		service_start /usr/bin/ss-local -s "$remote" -p "$rport" -l "$lport" ${cipher:+-m $cipher} -k "$pass" -u -f "$ss_local_PID_FILE"
+		service_start /usr/bin/ss-local \
+			-s "$remote" \
+			-p "$rport" \
+			-l "$lport" \
+			${cipher:+-m $cipher} \
+			-k "$pass" \
+			-u \
+			-f "$ss_local_PID_FILE"
+	}
+
+	[ "$dnsforward_enabled" = '1' ] && {
+		service_start /usr/bin/ss-tunnel \
+			-s "$remote" \
+			-p "$rport" \
+			-l "$lport" \
+			${cipher:+-m $cipher} \
+			-k "$pass" \
+			-u \
+			-l 5353 \
+			-L 8.8.8.8:53 \
+			-f "$ss_tunnel_PID_FILE"
+
+		if [ "$dnsforward_type" = 'ChinaDNS-C' ];then
+			service_start /usr/bin/chinadns \
+				-l /etc/chinadns_iplist.txt \
+        		-c /etc/chinadns_chnroute.txt \
+        		-p 1053 \
+        		-s 114.114.114.114,127.0.0.1:5353
+        	iptables -t nat -A zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 1053
+        else
+        	iptables -t nat -A zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 5353
+        fi
 	}
 
 	[ "$redir_enabled" = '1' ] && {
-		service_start /usr/bin/ss-redir -s "$remote" -p "$rport" -l "$redir_port" ${cipher:+-m $cipher} -k "$pass" -f "$ss_redir_PID_FILE"
+		service_start /usr/bin/ss-redir \
+			-s "$remote" \
+			-p "$rport" \
+			-l "$lport" \
+			${cipher:+-m $cipher} \
+			-k "$pass" \
+			-f "$ss_redir_PID_FILE"
 		
 		remoteip="`resolveip -t5 $remote`"
 

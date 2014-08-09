@@ -9,3 +9,5 @@ config shadowsocks config
 	option blacklist_enabled '0'
 	option redir_port ''
 	option redir_enabled '0'
+	option dnsforward_enabled '1'
+	option dnsforward_type 'self'
