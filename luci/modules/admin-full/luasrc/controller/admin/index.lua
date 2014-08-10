@@ -51,6 +51,5 @@ end
 
 function Free_Memory()
 	luci.util.exec("echo 3 > /proc/sys/vm/drop_caches")
-	luci.util.exec("pdnsd-ctl empty-cache")
 	luci.http.redirect(luci.dispatcher.build_url("admin", "status", "overview"))
 end
