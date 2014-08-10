@@ -61,8 +61,5 @@ config shadowsocks
 config vsftpd
 	option init vsftpd
 
-config pdnsd
-	option init pdnsd
-
 config redsocks2
 	option init redsocks2
