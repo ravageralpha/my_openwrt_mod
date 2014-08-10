@@ -28,6 +28,7 @@ start() {
 	config_get whitelist_enabled config whitelist_enabled
 	config_get blacklist_enabled config blacklist_enabled
 	config_get dnsforward_enabled config dnsforward_enabled
+	config_get dnsforward_type config dnsforward_type
 
 	[ -z "$remote" ] || [ -z "$rport" ] || [ -z "$lport" ] || [ -z "$pass" ] && {
 		echo "missing parameters. check config"
@@ -128,7 +129,7 @@ ss_tunnel_stop() {
 	service_stop /usr/bin/ss-tunnel && {
 		iptables -t nat -D zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 1053 &> /dev/null
 		iptables -t nat -D zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 5353 &> /dev/null
-		killall -9 chinadns
+		killall -9 chinadns &> /dev/null
 		rm "$ss_tunnel_PID_FILE"
 	}
 }
