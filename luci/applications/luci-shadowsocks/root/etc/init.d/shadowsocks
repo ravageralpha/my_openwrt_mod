@@ -63,7 +63,7 @@ start() {
 				-l /etc/chinadns_iplist.txt \
 				-c /etc/chinadns_chnroute.txt \
 				-p 1053 \
-				-s 114.114.114.114,127.0.0.1:5353
+				-s 114.114.114.114,127.0.0.1:5353 &
 			iptables -t nat -I zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 1053
 		else
 			iptables -t nat -I zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 5353
