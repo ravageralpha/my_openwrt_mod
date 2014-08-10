@@ -43,6 +43,7 @@ cipher:value("rc2-cfb")
 cipher:value("seed-cfb")
 
 dnsforward = m:section(TypedSection, "shadowsocks", translate("DNS Forward"))
+dnsforward.anonymous = true
 dnsforward_enable = dnsforward:option(Flag, "dnsforward_enabled", translate("Enable"))
 dnsforward_type = dnsforward:option(ListValue, "dnsforward_type", translate("Type"))
 dnsforward_type:depends("dnsforward_enabled", 1)
