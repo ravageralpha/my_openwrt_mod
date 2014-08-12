@@ -74,7 +74,7 @@ start() {
 		service_start /usr/bin/ss-redir \
 			-s "$remote" \
 			-p "$rport" \
-			-l "$lport" \
+			-l "$redir_port" \
 			${cipher:+-m $cipher} \
 			-k "$pass" \
 			-f "$ss_redir_PID_FILE"
