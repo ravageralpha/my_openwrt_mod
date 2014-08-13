@@ -50,7 +50,6 @@ start() {
 		service_start /usr/bin/ss-tunnel \
 			-s "$remote" \
 			-p "$rport" \
-			-l "$lport" \
 			${cipher:+-m $cipher} \
 			-k "$pass" \
 			-u \
@@ -63,11 +62,15 @@ start() {
 				-l /etc/chinadns_iplist.txt \
 				-c /etc/chinadns_chnroute.txt \
 				-p 1053 \
-				-s 114.114.114.114,127.0.0.1:5353 &
-			iptables -t nat -I zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 1053
+				-s 114.114.114.114,127.0.0.1:5353 &	
+			uci del dhcp.@dnsmasq[-1].server
+			uci add_list dhcp.@dnsmasq[-1].server=127.0.0.1#1053
 		else
-			iptables -t nat -I zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 5353
+			uci add_list dhcp.@dnsmasq[-1].server=127.0.0.1#5353
 		fi
+		uci set dhcp.@dnsmasq[-1].noresolv=1
+		uci commit dhcp
+		/etc/init.d/dnsmasq restart
 	}
 
 	[ "$redir_enabled" = '1' ] && {
@@ -127,8 +130,10 @@ ss_redir_stop() {
 
 ss_tunnel_stop() {
 	service_stop /usr/bin/ss-tunnel && {
-		iptables -t nat -D zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 1053 &> /dev/null
-		iptables -t nat -D zone_lan_prerouting -p udp --dport 53 -j REDIRECT --to-ports 5353 &> /dev/null
+		uci set dhcp.@dnsmasq[-1].noresolv=0
+		uci del dhcp.@dnsmasq[-1].server
+		uci commit dhcp
+		/etc/init.d/dnsmasq restart
 		killall -9 chinadns &> /dev/null
 		rm "$ss_tunnel_PID_FILE"
 	}
