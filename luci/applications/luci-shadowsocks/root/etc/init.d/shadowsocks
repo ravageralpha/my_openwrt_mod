@@ -57,18 +57,19 @@ start() {
 			-L 8.8.8.8:53 \
 			-f "$ss_tunnel_PID_FILE"
 
+		uci del dhcp.@dnsmasq[-1].server
+		uci set dhcp.@dnsmasq[-1].noresolv=1
+
 		if [ "$dnsforward_type" = 'ChinaDNS-C' ];then
 			service_start /usr/bin/chinadns \
 				-l /etc/chinadns_iplist.txt \
 				-c /etc/chinadns_chnroute.txt \
 				-p 1053 \
 				-s 114.114.114.114,127.0.0.1:5353 &	
-			uci del dhcp.@dnsmasq[-1].server
 			uci add_list dhcp.@dnsmasq[-1].server=127.0.0.1#1053
 		else
 			uci add_list dhcp.@dnsmasq[-1].server=127.0.0.1#5353
 		fi
-		uci set dhcp.@dnsmasq[-1].noresolv=1
 		uci commit dhcp
 		/etc/init.d/dnsmasq restart
 	}
