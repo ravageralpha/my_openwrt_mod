@@ -16,7 +16,7 @@ start() {
 	config_load "shadowsocks"
 	local enabled remote rport lport pass redir_enabled redir_port \
 			whitelist_enabled blacklist_enabled dnsforward_enabled \
-			dnsforward_type fast_open_enabled
+			dnsforward_type
 	config_get enabled config enabled
 	config_get remote config remote_server
 	config_get rport config remote_port
@@ -29,20 +29,11 @@ start() {
 	config_get blacklist_enabled config blacklist_enabled
 	config_get dnsforward_enabled config dnsforward_enabled
 	config_get dnsforward_type config dnsforward_type
-	config_get fast_open_enabled config fast_open_enabled
-	
 
 	[ -z "$remote" ] || [ -z "$rport" ] || [ -z "$lport" ] || [ -z "$pass" ] && {
 		echo "missing parameters. check config"
 		return 1
 	}
-
-
-	fse=""
-	if fast_open_enabled == 1;then
-		fse=" --f"
-	fi
-
 
 	[ "$enabled" = '1' ] && {
 		service_start /usr/bin/ss-local \
@@ -52,9 +43,7 @@ start() {
 			${cipher:+-m $cipher} \
 			-k "$pass" \
 			-u \
-			$fse\
 			-f "$ss_local_PID_FILE"
-			 
 	}
 
 	[ "$dnsforward_enabled" = '1' ] && {
@@ -66,7 +55,6 @@ start() {
 			-u \
 			-l 5353 \
 			-L 8.8.8.8:53 \
-			$fse\
 			-f "$ss_tunnel_PID_FILE"
 
 		uci del dhcp.@dnsmasq[-1].server
@@ -93,7 +81,6 @@ start() {
 			-l "$redir_port" \
 			${cipher:+-m $cipher} \
 			-k "$pass" \
-			$fse\
 			-f "$ss_redir_PID_FILE"
 		
 		remoteip="`resolveip -t5 $remote`"

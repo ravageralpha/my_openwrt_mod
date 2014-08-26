@@ -26,7 +26,8 @@ remote_port.optional = false
 password = server:option(Value, "password", translate("Password"))
 password.password = true
 
-fast_open:server:option(Flag, "fast_open_enabled", translate("Fast Open"))
+fast_open_enable = server:option(Flag, "fast_open", translate("Fast Open"))
+fast_open:option(Flag, "fast_open_enabled", translate("Enable"))
 fast_open.rmempty = false
 
 cipher = server:option(ListValue, "cipher", translate("Cipher Method"))
