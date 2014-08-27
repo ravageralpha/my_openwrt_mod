@@ -41,7 +41,7 @@ start() {
 	fse=""
 	[ "$fast_open_enabled" = '1' ] && {
 		logger Fast Open Enabled                                                                                   
-		fse=" --f"
+		fse=" --fast-open"
 	}
 
 	[ "$enabled" = '1' ] && {
@@ -93,7 +93,6 @@ start() {
 			-l "$redir_port" \
 			${cipher:+-m $cipher} \
 			-k "$pass" \
-			$fse\
 			-f "$ss_redir_PID_FILE"
 		
 		remoteip="`resolveip -t5 $remote`"
