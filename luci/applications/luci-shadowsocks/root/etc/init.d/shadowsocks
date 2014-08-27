@@ -39,26 +39,27 @@ start() {
 
 
 	fse=""
-	if fast_open_enabled == 1;then
+	[ "$fast_open_enabled" = '1' ] && {
+		logger Fast Open Enabled                                                                                   
 		fse=" --f"
-	fi
-
+	}
 
 	[ "$enabled" = '1' ] && {
 		service_start /usr/bin/ss-local \
+			$fse\
 			-s "$remote" \
 			-p "$rport" \
 			-l "$lport" \
 			${cipher:+-m $cipher} \
 			-k "$pass" \
 			-u \
-			$fse\
 			-f "$ss_local_PID_FILE"
 			 
 	}
 
 	[ "$dnsforward_enabled" = '1' ] && {
 		service_start /usr/bin/ss-tunnel \
+			$fse\
 			-s "$remote" \
 			-p "$rport" \
 			${cipher:+-m $cipher} \
@@ -66,7 +67,6 @@ start() {
 			-u \
 			-l 5353 \
 			-L 8.8.8.8:53 \
-			$fse\
 			-f "$ss_tunnel_PID_FILE"
 
 		uci del dhcp.@dnsmasq[-1].server
