@@ -16,7 +16,7 @@ start() {
 	config_load "shadowsocks"
 	local enabled remote rport lport pass redir_enabled redir_port \
 			whitelist_enabled blacklist_enabled dnsforward_enabled \
-			dnsforward_type
+			dnsforward_type fast_open_enabled
 	config_get enabled config enabled
 	config_get remote config remote_server
 	config_get rport config remote_port
@@ -29,14 +29,24 @@ start() {
 	config_get blacklist_enabled config blacklist_enabled
 	config_get dnsforward_enabled config dnsforward_enabled
 	config_get dnsforward_type config dnsforward_type
+	config_get fast_open_enabled config fast_open_enabled
+	
 
 	[ -z "$remote" ] || [ -z "$rport" ] || [ -z "$lport" ] || [ -z "$pass" ] && {
 		echo "missing parameters. check config"
 		return 1
 	}
 
+
+	fse=""
+	[ "$fast_open_enabled" = '1' ] && {
+		logger Fast Open Enabled                                                                                   
+		fse=" --fast-open"
+	}
+
 	[ "$enabled" = '1' ] && {
 		service_start /usr/bin/ss-local \
+			$fse\
 			-s "$remote" \
 			-p "$rport" \
 			-l "$lport" \
@@ -44,10 +54,12 @@ start() {
 			-k "$pass" \
 			-u \
 			-f "$ss_local_PID_FILE"
+			 
 	}
 
 	[ "$dnsforward_enabled" = '1' ] && {
 		service_start /usr/bin/ss-tunnel \
+			$fse\
 			-s "$remote" \
 			-p "$rport" \
 			${cipher:+-m $cipher} \

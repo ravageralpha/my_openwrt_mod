@@ -5,6 +5,7 @@ config shadowsocks config
 	option local_port ''
 	option cipher ''
 	option password ''
+	option fast_open_enabled "0"
 	option whitelist_enabled '0'
 	option blacklist_enabled '0'
 	option redir_port ''
