@@ -1,10 +1,18 @@
 my_openwrt_mod
 ==============
 
-my openwrt customization
+Install
+-------
 
-Add "src-git ramod git://github.com/ravageralpha/my_openwrt_mod.git" to your feeds.conf.default.
+Add this line to your feeds.conf.default.
 
-Also you need to comment this line "#src-git luci git://nbd.name/luci.git".
+    src-git ramod git://github.com/ravageralpha/my_openwrt_mod.git 
 
-PS: Other hack need to apply manually.
+And comment this line 
+
+    #src-git luci http://git.openwrt.org/project/luci.git
+
+
+And run
+
+    ./scripts/feed update -a && ./scripts/feed install -a
