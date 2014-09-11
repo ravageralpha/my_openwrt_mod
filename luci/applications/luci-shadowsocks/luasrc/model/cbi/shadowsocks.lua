@@ -29,6 +29,7 @@ password.password = true
 cipher = server:option(ListValue, "cipher", translate("Cipher Method"))
 cipher:value("table")
 cipher:value("rc4")
+cipher:value("rc4-md5")
 cipher:value("aes-128-cfb")
 cipher:value("aes-192-cfb")
 cipher:value("aes-256-cfb")
