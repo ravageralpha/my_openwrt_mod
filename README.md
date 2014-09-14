@@ -15,4 +15,4 @@ And comment this line
 
 And run
 
-    ./scripts/feed update -a && ./scripts/feed install -a
+    ./scripts/feeds update -a && ./scripts/feeds install -a
