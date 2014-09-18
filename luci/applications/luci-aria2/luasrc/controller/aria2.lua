@@ -13,6 +13,7 @@ function index()
 	local page
 	page = node("admin", "RA-MOD")
 	page.target = firstchild()
+	page.title = _("RA-MOD")
 	page.order  = 65
 	
 	page = entry({"admin", "RA-MOD", "aria2"}, cbi("aria2"), _("aria2"), 10)
