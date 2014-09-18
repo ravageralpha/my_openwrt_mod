@@ -53,7 +53,7 @@ define protocol
   LUCI_BUILD_PACKAGES += luci-proto-$(1)
 endef
 
-$(eval $(call protocol,openconnect,Support for OpenConnect VPN,+openconnect))
+$(eval $(call protocol,openconnect-ra,Support for OpenConnect VPN,+openconnect))
 
 ### Applications ###
 define application
