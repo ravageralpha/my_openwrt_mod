@@ -1,6 +1,6 @@
 include build/config.mk
 
-MODULES = contrib/* applications/* libs/* modules/* themes/* i18n/*
+MODULES = applications/* libs/*
 
 OS:=$(shell uname)
 MODULES:=$(foreach item,$(wildcard $(MODULES)),$(if $(realpath $(wildcard $(item)/Makefile)),$(item)))

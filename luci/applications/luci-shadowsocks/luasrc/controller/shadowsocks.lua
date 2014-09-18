@@ -11,6 +11,10 @@ function index()
 	end
 
 	local page
+	page = node("admin", "RA-MOD")
+	page.target = firstchild()
+	page.order  = 65
+
 	page = entry({"admin", "RA-MOD", "shadowsocks"}, cbi("shadowsocks"), _("shadowsocks"), 45)
 	page.i18n = "shadowsocks"
 	page.dependent = true

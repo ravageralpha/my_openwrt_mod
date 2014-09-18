@@ -1,6 +1,6 @@
 LUAC = luac
 LUAC_OPTIONS = -s
-LUA_TARGET ?= source
+LUA_TARGET ?= compile
 
 LUA_MODULEDIR = /usr/local/share/lua/5.1
 LUA_LIBRARYDIR = /usr/local/lib/lua/5.1
