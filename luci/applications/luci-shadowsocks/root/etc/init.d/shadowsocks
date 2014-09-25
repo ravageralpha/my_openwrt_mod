@@ -131,10 +131,6 @@ ss_redir_stop() {
 
 ss_tunnel_stop() {
 	service_stop /usr/bin/ss-tunnel && {
-		uci set dhcp.@dnsmasq[-1].noresolv=0
-		uci del dhcp.@dnsmasq[-1].server
-		uci commit dhcp
-		/etc/init.d/dnsmasq restart
 		killall -9 chinadns &> /dev/null
 		rm "$ss_tunnel_PID_FILE"
 	}
