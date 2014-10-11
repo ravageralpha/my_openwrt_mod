@@ -43,14 +43,6 @@ cipher:value("idea-cfb")
 cipher:value("rc2-cfb")
 cipher:value("seed-cfb")
 
-dnsforward = m:section(TypedSection, "shadowsocks", translate("DNS Forward"))
-dnsforward.anonymous = true
-dnsforward_enable = dnsforward:option(Flag, "dnsforward_enabled", translate("Enable"))
-dnsforward_type = dnsforward:option(ListValue, "dnsforward_type", translate("Type"))
-dnsforward_type:depends("dnsforward_enabled", 1)
-dnsforward_type:value("self")
-dnsforward_type:value("ChinaDNS-C")
-
 socks5 = m:section(TypedSection, "shadowsocks", translate("SOCKS5 Proxy"))
 socks5.anonymous = true
 

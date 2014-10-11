@@ -45,6 +45,3 @@ msgstr "shadowsocks 未运行"
 
 msgid "shadowsocks is running"
 msgstr "shadowsocks 运行中"
-
-msgid "DNS Forward"
-msgstr "DNS 转发"
