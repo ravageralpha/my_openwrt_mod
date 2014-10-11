@@ -1,0 +1,39 @@
+#!/bin/sh /etc/rc.common
+
+START=90
+STOP=15
+PIDFILE='/tmp/run/chinadns.pid'
+
+start()
+{
+	config_load "chinadns"
+	local enabled dns port
+	config_get enabled config enabled
+	config_get dns config dns
+	config_get port config port
+
+	if [ -f $PIDFILE ]
+		then
+			echo "already started: $PIDFILE exists"
+			exit 1
+	fi
+
+	chinadns \
+		-l /etc/chinadns_iplist.txt \
+		-c /etc/chinadns_chnroute.txt \
+		-p $port \
+		-s "$dns" &
+	echo $! > $PIDFILE
+
+	uci del dhcp.@dnsmasq[-1].server
+	uci set dhcp.@dnsmasq[-1].noresolv=1
+	uci add_list dhcp.@dnsmasq[-1].server=127.0.0.1#$port
+	uci commit dhcp
+	/etc/init.d/dnsmasq restart
+}
+
+stop()
+{
+	kill `cat $PIDFILE`
+	rm $PIDFILE
+}

@@ -1,0 +1,20 @@
+msgid "Enable"
+msgstr "启动并设置为 dnsmasq 上游服务器"
+
+msgid "chinadns"
+msgstr "ChinaDNS-C"
+
+msgid "chinadns is not running"
+msgstr "ChinaDNS-C 未启动"
+
+msgid "chinadns is running"
+msgstr "ChinaDNS-C 已启动"
+
+msgid "Upstream DNS Server"
+msgstr "上游DNS服务器"
+
+msgid "IP blacklist"
+msgstr "被污染IP"
+
+msgid "CHNroute"
+msgstr "中国路由表"

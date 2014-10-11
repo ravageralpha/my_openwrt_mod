@@ -1,0 +1,20 @@
+msgid "Enable"
+msgstr "Enable"
+
+msgid "chinadns"
+msgstr "chinadns"
+
+msgid "chinadns is not running"
+msgstr "chinadns is not running"
+
+msgid "chinadns is running"
+msgstr "chinadns is running"
+
+msgid "Upstream DNS Server"
+msgstr "Upstream DNS Server"
+
+msgid "IP blacklist"
+msgstr "IP blacklist"
+
+msgid "CHNroute"
+msgstr "CHNroute"
