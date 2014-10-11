@@ -106,6 +106,9 @@ $(eval $(call application,redsocks2,LuCI Support for redsocks2,\
 $(eval $(call application,vsftpd,LuCI Support for vsftpd,\
 	+PACKAGE_luci-app-vsftpd:vsftpd))
 
+$(eval $(call application,chinadns,LuCI Support for ChinaDNS-C,\
+	+PACKAGE_luci-app-chinadns:ChinaDNS-C))
+
 ### Compile ###
 PKG_CONFIG_DEPENDS=$(patsubst %,CONFIG_PACKAGE_%,$(LUCI_BUILD_PACKAGES))
 
