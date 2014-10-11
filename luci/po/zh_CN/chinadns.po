@@ -1,6 +1,3 @@
-msgid "Enable"
-msgstr "启动并设置为 dnsmasq 上游服务器"
-
 msgid "chinadns"
 msgstr "ChinaDNS-C"
 

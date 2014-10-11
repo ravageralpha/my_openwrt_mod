@@ -1,14 +1,11 @@
-msgid "Enable"
-msgstr "Enable"
-
 msgid "chinadns"
-msgstr "chinadns"
+msgstr "ChinaDNS-C"
 
 msgid "chinadns is not running"
-msgstr "chinadns is not running"
+msgstr "ChinaDNS-C is not running"
 
 msgid "chinadns is running"
-msgstr "chinadns is running"
+msgstr "ChinaDNS-C is running"
 
 msgid "Upstream DNS Server"
 msgstr "Upstream DNS Server"

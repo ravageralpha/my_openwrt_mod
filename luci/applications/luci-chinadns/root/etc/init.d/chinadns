@@ -17,7 +17,7 @@ start()
 	if [ -f $PIDFILE ]
 		then
 			echo "already started: $PIDFILE exists"
-			exit 1
+			return 1
 	fi
 
 	chinadns \
@@ -37,7 +37,7 @@ start()
 stop()
 {
 	[ -f $PIDFILE ] && {
-		kill `cat $PIDFILE`
+		kill -9 `cat $PIDFILE`
 		rm $PIDFILE
 	}
 }
