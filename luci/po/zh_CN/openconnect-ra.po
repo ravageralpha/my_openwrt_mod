@@ -1,0 +1,20 @@
+msgid "Authentication Login Group"
+msgstr "登录认证用户组"
+
+msgid "Server SHA1 Fingerprint"
+msgstr "服务器证书指纹"
+
+msgid "CA Authentication"
+msgstr "CA 认证"
+
+msgid "CA Certificate"
+msgstr "CA 证书"
+
+msgid "Certificate Authentication"
+msgstr "证书认证"
+
+msgid "User Certificate"
+msgstr "用户证书"
+
+msgid "User Private Key"
+msgstr "用户私钥"
