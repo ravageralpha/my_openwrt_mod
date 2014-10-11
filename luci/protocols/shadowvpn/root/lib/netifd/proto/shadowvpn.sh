@@ -30,6 +30,7 @@ proto_shadowvpn_setup() {
 	sed -e "s#|SERVER|#$server#g" \
 		-e "s#|PORT|#$port#g" \
 		-e "s#|PASSWORD|#$password#g" \
+		-e "s#|INTERFACE|#vpn-$config" \
 		/etc/shadowvpn/client.conf.template > /var/etc/shadowvpnclient.conf
 
 	proto_export INTERFACE="$config"
