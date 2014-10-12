@@ -30,7 +30,7 @@ function proto.ifname(self)
 end
 
 function proto.opkg_package(self)
-	return "shadowvpn"
+	return "ShadowVPN"
 end
 
 function proto.is_installed(self)
