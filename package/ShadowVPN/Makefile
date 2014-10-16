@@ -42,7 +42,6 @@ endef
 define Package/ShadowVPN/install
 	$(INSTALL_DIR) $(1)/etc/shadowvpn
 	$(INSTALL_DIR) $(1)/etc/hotplug.d/iface
-	$(INSTALL_CONF) ./files/client.conf.template $(1)/etc/shadowvpn/client.conf.template
 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/samples/client_up.sh $(1)/etc/shadowvpn/client_up.sh
 	$(INSTALL_CONF) $(PKG_BUILD_DIR)/samples/client_down.sh $(1)/etc/shadowvpn/client_down.sh
 	$(INSTALL_DIR) $(1)/usr/bin
