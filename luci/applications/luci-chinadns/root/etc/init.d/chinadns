@@ -23,6 +23,7 @@ start()
 	chinadns \
 		-l /etc/chinadns_iplist.txt \
 		-c /etc/chinadns_chnroute.txt \
+		-d \
 		-p $port \
 		-s "$dns" &
 	echo $! > $PIDFILE
