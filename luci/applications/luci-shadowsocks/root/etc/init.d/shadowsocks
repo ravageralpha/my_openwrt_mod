@@ -101,5 +101,4 @@ ss_redir_stop() {
 stop() {
 	ss_local_stop
 	ss_redir_stop
-	ss_tunnel_stop
 }
