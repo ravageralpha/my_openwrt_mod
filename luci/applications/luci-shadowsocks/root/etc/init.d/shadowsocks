@@ -5,7 +5,6 @@ STOP=95
 
 ss_local_PID_FILE="/var/run/ss-local.pid"
 ss_redir_PID_FILE="/var/run/ss-redir.pid"
-ss_tunnel_PID_FILE="/var/run/ss-tunnel.pid"
 ipset_blacklist="/etc/ipset/blacklist"
 ipset_whitelist="/etc/ipset/whitelist"
 
