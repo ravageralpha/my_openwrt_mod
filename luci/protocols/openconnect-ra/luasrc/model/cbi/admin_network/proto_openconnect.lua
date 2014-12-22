@@ -14,7 +14,7 @@ local map, section, net = ...
 local fs = require "nixio.fs"
 
 local username, password, server, port, serverhash, authgroup,
-	  cafile, usercert_switch, usercert, privatekey, vpncscript
+	  cafile, usercert_switch, usercert, privatekey
 
 local config = net.sid
 local ca_file = "/etc/openconnect/ca-vpn-" .. config .. ".pem"
@@ -106,20 +106,5 @@ function privatekey.write(self, section, value)
 		value = value:gsub("\r\n?", "\n")
 		fs.mkdirr("/etc/openconnect")
 		fs.writefile(privatekey_file, value)
-	end
-end
-
-vpncscript = section:taboption("general", TextValue, "vpncscript", "vpnc-script")
-vpncscript.template = "cbi/tvalue"
-vpncscript.rows = 15
-
-function vpncscript.cfgvalue(self, section)
-	return fs.readfile("/lib/netifd/vpnc-script") or ""
-end
-
-function vpncscript.write(self, section, value)
-	if value then
-		value = value:gsub("\r\n?", "\n")
-		fs.writefile("/lib/netifd/vpnc-script", value)
 	end
 end
