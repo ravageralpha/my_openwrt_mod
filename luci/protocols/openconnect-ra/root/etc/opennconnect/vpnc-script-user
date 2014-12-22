@@ -1,0 +1,40 @@
+#!/bin/sh
+
+hook="$1"
+
+case "$hook" in
+	pre-init)
+		;;
+	connect)
+		save_default_gw
+		;;
+	post-connect)
+		;;
+	disconnect)
+		;;
+	post-disconnect)
+		del_vpn_route
+		;;
+	reconnect)
+		;;
+	*)
+		logger -t openconnect "unknown reason '$hook'. Ignored" 1>&2
+		exit 1
+		;;
+esac
+
+get_default_gw() {
+	netstat -r -n | awk '/:/ { next; } /^(default|0\.0\.0\.0)/ { print $2; }'
+}
+
+save_default_gw() {
+	echo "`get_default_gw`" > /tmp/defaultgw
+	echo "$VPNGATEWAY" > /tmp/vpngw
+}
+
+del_vpn_route() {
+	defaultgw="`cat /tmp/defaultgw`"
+	route del "$VPNGATEWAY" gw "$defaultgw"
+	[ -z "`get_default_gw`" ] && route add default gw "$defaultgw"
+	rm /tmp/defaultgw /tmp/vpngw
+}
