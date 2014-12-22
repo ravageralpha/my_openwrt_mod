@@ -7,6 +7,8 @@ proto_shadowvpn_init_config() {
 	proto_config_add_string "server"
 	proto_config_add_int "port"
 	proto_config_add_string "password"
+	proto_config_add_string "mtu"
+	proto_config_add_string "concurrency"
 	no_device=1
 	available=1
 }
@@ -14,23 +16,19 @@ proto_shadowvpn_init_config() {
 proto_shadowvpn_setup() {
 	local config="$1"
 
-	json_get_vars server port password
+	json_get_vars server port password mtu concurrency
 
 	grep -q tun /proc/modules || insmod tun
 
 	logger -t shadowvpn "initializing..."
-
-	[ -z "$server" ] || [ -z "$port" ] || [ -z "$password" ] && {
-		logger -t shadowvpn "Missing required configuration"
-		proto_setup_failed "$config"
-		exit 1
-	}
 
 	mkdir -p /var/etc
 	sed -e "s#|SERVER|#$server#g" \
 		-e "s#|PORT|#$port#g" \
 		-e "s#|PASSWORD|#$password#g" \
 		-e "s#|INTERFACE|#vpn-$config#g" \
+		-e "s#|MTU|#$mtu#g" \
+		-e "s#|CONCURRENCY|#$concurrency#g" \
 		/etc/shadowvpn/client.conf.template > /var/etc/shadowvpnclient.conf
 
 	echo "$config" > /var/etc/shadowvpn_intf

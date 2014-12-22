@@ -1,0 +1,5 @@
+msgid "MTU"
+msgstr "MTU"
+
+msgid "Concurrency"
+msgstr "并发连接数"
