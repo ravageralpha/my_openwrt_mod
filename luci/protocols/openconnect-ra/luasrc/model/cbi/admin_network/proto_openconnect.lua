@@ -114,12 +114,12 @@ vpncscript.template = "cbi/tvalue"
 vpncscript.rows = 15
 
 function vpncscript.cfgvalue(self, section)
-	return fs.readfile("/lib/netifd/vpnc-script-user") or ""
+	return fs.readfile("/etc/openconnect/vpnc-script-user") or ""
 end
 
 function vpncscript.write(self, section, value)
 	if value then
 		value = value:gsub("\r\n?", "\n")
-		fs.writefile("/lib/netifd/vpnc-script-user", value)
+		fs.writefile("/etc/openconnect/vpnc-script-user", value)
 	end
 end
