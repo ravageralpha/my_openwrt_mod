@@ -42,6 +42,8 @@ cipher:value("camellia-256-cfb")
 cipher:value("idea-cfb")
 cipher:value("rc2-cfb")
 cipher:value("seed-cfb")
+cipher:value("chacha20")
+cipher:value("salsa20")
 
 socks5 = m:section(TypedSection, "shadowsocks", translate("SOCKS5 Proxy"))
 socks5.anonymous = true
