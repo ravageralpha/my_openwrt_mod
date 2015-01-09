@@ -1,14 +1,14 @@
 msgid "chinadns"
-msgstr "ChinaDNS-C"
+msgstr "ChinaDNS"
 
 msgid "chinadns is not running"
-msgstr "ChinaDNS-C 未启动"
+msgstr "ChinaDNS 未启动"
 
 msgid "chinadns is running"
-msgstr "ChinaDNS-C 已启动"
+msgstr "ChinaDNS 已启动"
 
 msgid "Upstream DNS Server"
-msgstr "上游DNS服务器"
+msgstr "上游服务器"
 
 msgid "IP blacklist"
 msgstr "被污染IP"

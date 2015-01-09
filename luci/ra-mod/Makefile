@@ -92,8 +92,7 @@ $(eval $(call application,shadowsocks,LuCI Support for shadowsocks,\
 	+PACKAGE_luci-app-shadowsocks:kmod-ipt-nat-extra \
 	+PACKAGE_luci-app-shadowsocks:kmod-ipt-ipset \
 	+PACKAGE_luci-app-shadowsocks:ipset \
-	+PACKAGE_luci-app-shadowsocks:resolveip \
-	+PACKAGE_luci-app-shadowsocks:ChinaDNS-C))
+	+PACKAGE_luci-app-shadowsocks:resolveip
 
 $(eval $(call application,redsocks2,LuCI Support for redsocks2,\
 	+PACKAGE_luci-app-redsocks2:redsocks2 \
@@ -106,8 +105,8 @@ $(eval $(call application,redsocks2,LuCI Support for redsocks2,\
 $(eval $(call application,vsftpd,LuCI Support for vsftpd,\
 	+PACKAGE_luci-app-vsftpd:vsftpd))
 
-$(eval $(call application,chinadns,LuCI Support for ChinaDNS-C,\
-	+PACKAGE_luci-app-chinadns:ChinaDNS-C))
+$(eval $(call application,chinadns,LuCI Support for ChinaDNS,\
+	+PACKAGE_luci-app-chinadns:ChinaDNS))
 
 ### Compile ###
 PKG_CONFIG_DEPENDS=$(patsubst %,CONFIG_PACKAGE_%,$(LUCI_BUILD_PACKAGES))
