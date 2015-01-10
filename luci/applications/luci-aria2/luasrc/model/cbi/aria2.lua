@@ -114,16 +114,4 @@ rpc_token = rpc:option(Value, "rpc_token", translate("RPC secret authorization t
 rpc_token.default = ""
 rpc_token:depends("rpc_auth", 1)
 
--- Subtitle
-autosub=m:section(TypedSection, "aria2", translate("Auto Download Subtitle"))
-autosub.anonymous = true
-
-autosub_enable = autosub:option(Flag, "autosub_enable", translate("Enable"))
-autosub_enable.default = false
-
-autosub_filetype = autosub:option(Value, "autosub_filetype", translate("FileType"), translate("Separate with Comma"))
-autosub_filetype.placeholder = "avi,mkv"
-autosub_filetype.default = "avi,mkv"
-autosub_filetype:depends("autosub_enable", 1)
-
 return m

@@ -14,9 +14,6 @@ msgstr ""
 msgid "Authentication"
 msgstr "认证"
 
-msgid "Auto Download Subtitle"
-msgstr "自动下载字幕"
-
 msgid "BT/PT Max Peers"
 msgstr "BT/PT任务最大连接数"
 
@@ -59,9 +56,6 @@ msgstr "开启磁盘缓存"
 msgid "File Allocation Method"
 msgstr "文件分配方式"
 
-msgid "FileType"
-msgstr "文件类型"
-
 msgid "Max Concurrent Queue"
 msgstr "最大并发任务数"
 
@@ -79,9 +73,6 @@ msgstr "推荐 25, 太大会影响浏览网页速度"
 
 msgid "Seed Time"
 msgstr "做种时间"
-
-msgid "Separate with Comma"
-msgstr "逗号分隔"
 
 msgid "Settings"
 msgstr "基本设置"

@@ -1,9 +1,6 @@
 msgid "Authentication"
 msgstr "Authentication"
 
-msgid "Auto Download Subtitle"
-msgstr "Auto Download Subtitle"
-
 msgid "BT/PT Max Peers"
 msgstr "BT/PT Max Peers"
 
@@ -46,9 +43,6 @@ msgstr "Enable Disk Cache"
 msgid "File Allocation Method"
 msgstr "File Allocation Method"
 
-msgid "FileType"
-msgstr "FileType"
-
 msgid "Max Concurrent Queue"
 msgstr "Max Concurrent Queue"
 
@@ -66,9 +60,6 @@ msgstr "Recommand 25"
 
 msgid "Seed Time"
 msgstr "Seed Time"
-
-msgid "Separate with Comma"
-msgstr "Separate with Comma"
 
 msgid "Settings"
 msgstr "Settings"
