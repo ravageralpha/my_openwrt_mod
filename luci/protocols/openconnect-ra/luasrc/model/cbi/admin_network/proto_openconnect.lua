@@ -17,9 +17,9 @@ local username, password, server, port, serverhash, authgroup,
 	  cafile, usercert_switch, usercert, privatekey
 
 local config = net.sid
-local ca_file = "/etc/openconnect/ca-vpn-" .. config .. ".pem"
-local usercert_file = "/etc/openconnect/user-cert-vpn-" .. config .. ".pem"
-local privatekey_file = "/etc/openconnect/user-key-vpn-" .. config .. ".pem"
+local ca_file = "/etc/config/ca-vpn-" .. config .. ".pem"
+local usercert_file = "/etc/config/user-cert-vpn-" .. config .. ".pem"
+local privatekey_file = "/etc/config/user-key-vpn-" .. config .. ".pem"
 
 server = section:taboption("general", Value, "server", translate("VPN Server"))
 server.datatype = "host"
@@ -59,7 +59,6 @@ end
 function cafile.write(self, section, value)
 	if value then
 		value = value:gsub("\r\n?", "\n")
-		fs.mkdirr("/etc/openconnect")
 		fs.writefile(ca_file, value)
 	end
 end
@@ -87,7 +86,6 @@ end
 function usercert.write(self, section, value)
 	if value then
 		value = value:gsub("\r\n?", "\n")
-		fs.mkdirr("/etc/openconnect")
 		fs.writefile(usercert_file, value)
 	end
 end
@@ -104,7 +102,6 @@ end
 function privatekey.write(self, section, value)
 	if value then
 		value = value:gsub("\r\n?", "\n")
-		fs.mkdirr("/etc/openconnect")
 		fs.writefile(privatekey_file, value)
 	end
 end

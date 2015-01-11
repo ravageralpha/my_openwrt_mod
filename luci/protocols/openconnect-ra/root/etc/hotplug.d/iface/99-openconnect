@@ -7,6 +7,6 @@ PROTO="`ubus call network.interface.$INTERFACE status | grep proto | grep -q ope
 [ $PROTO -eq 0 ] || exit 0
 
 rm -f \
-/etc/openconnect/ca-vpn-$INTERFACE.pem \
-/etc/openconnect/user-cert-vpn-$INTERFACE.pem \
-/etc/openconnect/user-key-vpn-$INTERFACE.pem
+/etc/config/ca-vpn-$INTERFACE.pem \
+/etc/config/user-cert-vpn-$INTERFACE.pem \
+/etc/config/user-key-vpn-$INTERFACE.pem
