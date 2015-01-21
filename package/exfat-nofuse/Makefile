@@ -15,7 +15,7 @@ PKG_RELEASE=$(PKG_SOURCE_VERSION)
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/dorimanx/exfat-nofuse
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=a862d506bd776c69b85741146e46f420dba78d00
+PKG_SOURCE_VERSION:=f02406cb11045baff597f97e1e8283e9d37747b0
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 include $(INCLUDE_DIR)/package.mk
@@ -58,4 +58,4 @@ define Build/Compile
 	modules
 endef
 
-#$(eval $(call KernelPackage,fs-exfat))
+$(eval $(call KernelPackage,fs-exfat))
