@@ -10,8 +10,5 @@ msgstr "ChinaDNS 已启动"
 msgid "Upstream DNS Server"
 msgstr "上游服务器"
 
-msgid "IP blacklist"
-msgstr "被污染IP"
-
 msgid "CHNroute"
 msgstr "中国路由表"

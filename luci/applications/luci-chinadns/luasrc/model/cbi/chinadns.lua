@@ -25,22 +25,6 @@ port = s:option(Value, "port", translate("Port"))
 port.datatype = "range(0,65535)"
 port.optional = false
 
-iplist = s:option(Value, "iplist", translate("IP blacklist"), "")
-iplist.template = "cbi/tvalue"
-iplist.size = 30
-iplist.rows = 10
-iplist.wrap = "off"
-
-function iplist.cfgvalue(self, section)
-	return fs.readfile("/etc/chinadns_iplist.txt") or ""
-end
-function iplist.write(self, section, value)
-	if value then
-		value = value:gsub("\r\n?", "\n")
-		fs.writefile("/etc/chinadns_iplist.txt", value)
-	end
-end
-
 chn = s:option(Value, "chn", translate("CHNroute"), "")
 chn.template = "cbi/tvalue"
 chn.size = 30
