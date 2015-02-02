@@ -31,9 +31,16 @@ start() {
 		return 1
 	}
 
+	remoteip="`resolveip -4 -t10 $remote`"
+	[ -z "$remoteip" ] && {
+		echo "cannot resolve the server hostname"
+		return 1
+	}
+
 	[ "$enabled" = '1' ] && {
 		service_start /usr/bin/ss-local \
-			-s "$remote" \
+			-b "0.0.0.0" \
+			-s "$remoteip" \
 			-p "$rport" \
 			-l "$lport" \
 			${cipher:+-m $cipher} \
@@ -50,8 +57,6 @@ start() {
 			${cipher:+-m $cipher} \
 			-k "$pass" \
 			-f "$ss_redir_PID_FILE"
-		
-		remoteip="`resolveip -t5 $remote`"
 
 		iptables -t nat -N SHADOWSOCKS
 		iptables -t nat -A SHADOWSOCKS -d 0.0.0.0/8 -j RETURN
