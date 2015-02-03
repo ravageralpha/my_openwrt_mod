@@ -51,6 +51,7 @@ start() {
 
 	[ "$redir_enabled" = '1' ] && {
 		service_start /usr/bin/ss-redir \
+			-b "0.0.0.0" \
 			-s "$remote" \
 			-p "$rport" \
 			-l "$redir_port" \
