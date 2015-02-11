@@ -13,7 +13,7 @@ You may obtain a copy of the License at
 local map, section, net = ...
 local fs = require "nixio.fs"
 
-local server, port, password, mtu, concurrency
+local server, port, password, mtu, concurrency, ifname
 
 server = section:taboption("general", Value, "server", translate("VPN Server"))
 server.datatype = "host"
@@ -32,12 +32,15 @@ mtu.datatype = "uinteger"
 mtu.default = "1440"
 mtu.placeholder = "1440"
 
+ifname = section:taboption("general", Value, "interface", translate("Output Interface"))
+ifname.template = "cbi/network_netlist"
+
 concurrency = section:taboption("general", Value, "concurrency", translate("Concurrency"))
 concurrency.datatype = "uinteger"
 concurrency.default = "1"
 concurrency.placeholder = "1"
 
-clientup = section:taboption("general", TextValue, "clientup", "client_up.sh")
+clientup = section:taboption("advanced", TextValue, "clientup", "client_up.sh")
 clientup.template = "cbi/tvalue"
 clientup.rows = 15
 
@@ -52,7 +55,7 @@ function clientup.write(self, section, value)
 	end
 end
 
-clientdown = section:taboption("general", TextValue, "clientdown", "client_down.sh")
+clientdown = section:taboption("advanced", TextValue, "clientdown", "client_down.sh")
 clientdown.template = "cbi/tvalue"
 clientdown.rows = 15
 

@@ -9,6 +9,7 @@ proto_shadowvpn_init_config() {
 	proto_config_add_string "password"
 	proto_config_add_string "mtu"
 	proto_config_add_string "concurrency"
+	proto_config_add_string "interface"
 	no_device=1
 	available=1
 }
@@ -16,11 +17,23 @@ proto_shadowvpn_init_config() {
 proto_shadowvpn_setup() {
 	local config="$1"
 
-	json_get_vars server port password mtu concurrency
+	json_get_vars server port password mtu concurrency interface
 
 	grep -q tun /proc/modules || insmod tun
 
 	logger -t shadowvpn "initializing..."
+
+	serv_addr=
+	for ip in $(resolveip -t 10 "$server"); do
+		( proto_add_host_dependency "$config" "$ip" $interface )
+		serv_addr=1
+	done
+	[ -n "$serv_addr" ] || {
+		logger -t shadowvpn "Could not resolve server address: '$server'"
+		sleep 60
+		proto_setup_failed "$config"
+		exit 1
+	}
 
 	mkdir -p /var/etc
 	sed -e "s#|SERVER|#$server#g" \
@@ -35,6 +48,7 @@ proto_shadowvpn_setup() {
 
 	proto_export INTERFACE="$config"
 	logger -t shadowvpn "executing ShadowVPN"
+
 	proto_run_command "$config" \
 	/usr/bin/shadowvpn -c /var/etc/shadowvpnclient.conf
 }
