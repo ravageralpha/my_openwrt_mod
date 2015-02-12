@@ -44,8 +44,6 @@ proto_shadowvpn_setup() {
 		-e "s#|CONCURRENCY|#$concurrency#g" \
 		/etc/shadowvpn/client.conf.template > /var/etc/shadowvpnclient.conf
 
-	echo "$config" > /var/etc/shadowvpn_intf
-
 	proto_export INTERFACE="$config"
 	logger -t shadowvpn "executing ShadowVPN"
 
@@ -57,7 +55,7 @@ proto_shadowvpn_teardown() {
 	local config="$1"
 	logger -t shadowvpn "bringing down ShadowVPN"
 	proto_kill_command "$config"
-	rm /var/etc/shadowvpnclient.conf /var/etc/shadowvpn_intf
+	rm -f /var/etc/shadowvpnclient.conf
 }
 
 add_protocol shadowvpn
