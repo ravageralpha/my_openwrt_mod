@@ -8,8 +8,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=exfat
-PKG_REV:=287
-PKG_VERSION:=r287
+PKG_REV:=422
+PKG_VERSION:=r$(PKG_REV)
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=svn
@@ -19,6 +19,7 @@ PKG_SOURCE_URL:=http://exfat.googlecode.com/svn/trunk/
 PKG_SOURCE:=$(PKG_SOURCE_SUBDIR).tar.gz
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/scons.mk
 
 define Package/exfat/template
   SECTION:=utils
@@ -45,6 +46,8 @@ endef
 define Package/exfat-utilities/description
   exFAT utilities like fsck
 endef
+
+TARGET_CFLAGS+=$(TARGET_CPPFLAGS) -std=c99 -fPIC
 
 define Build/Prepare
 	$(call Build/Prepare/Default)

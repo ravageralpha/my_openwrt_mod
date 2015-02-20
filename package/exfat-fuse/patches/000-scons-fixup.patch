@@ -1,0 +1,20 @@
+--- a/SConstruct
++++ a/SConstruct
+@@ -29,7 +29,7 @@
+ 	if var in os.environ:
+ 		env['ENV'][var] = os.environ[var]
+ 
+-destdir = env.get('DESTDIR', '/sbin');
++destdir = os.getenv('DESTDIR', '/sbin');
+ libs = ['exfat']
+ libfuse = 'fuse'
+ 
+@@ -44,6 +44,8 @@
+ 		conf.env.Replace(CC = os.environ['CC'])
+ 	if 'CCFLAGS' in os.environ:
+ 		conf.env.Replace(CCFLAGS = os.environ['CCFLAGS'])
++	if 'CFLAGS' in os.environ:
++		conf.env.Replace(CFLAGS = os.environ['CFLAGS'])
+ 	# Set default CCFLAGS for known compilers
+ 	if not conf.env['CCFLAGS']:
+ 		if conf.env['CC'] == 'gcc':
