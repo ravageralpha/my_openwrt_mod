@@ -49,11 +49,6 @@ endef
 
 TARGET_CFLAGS+=$(TARGET_CPPFLAGS) -std=c99 -fPIC
 
-define Build/Prepare
-	$(call Build/Prepare/Default)
-	$(CP) $(FILES_DIR)/Makefile $(PKG_BUILD_DIR)/
-endef
-
 define Package/exfat/install
 	$(INSTALL_DIR) $(1)/sbin
 	$(CP) $(PKG_BUILD_DIR)/mount.exfat $(1)/sbin/
