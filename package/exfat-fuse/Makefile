@@ -51,12 +51,12 @@ TARGET_CFLAGS+=$(TARGET_CPPFLAGS) -std=c99 -fPIC
 
 define Package/exfat/install
 	$(INSTALL_DIR) $(1)/sbin
-	$(CP) $(PKG_BUILD_DIR)/mount.exfat $(1)/sbin/
+	$(CP) $(PKG_BUILD_DIR)/fuse/mount.exfat-fuse $(1)/sbin/mount.exfat
 endef
 
 define Package/exfat-utils/install
 	$(INSTALL_DIR) $(1)/sbin
-	$(CP) $(PKG_BUILD_DIR)/fsck.exfat $(1)/sbin/
+	$(CP) $(PKG_BUILD_DIR)/fsck/exfatfsck $(1)/sbin/fsck.exfat
 endef
 
 define Package/exfat/postinst
