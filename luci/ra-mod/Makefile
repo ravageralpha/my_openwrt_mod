@@ -93,14 +93,6 @@ $(eval $(call application,shadowsocks,LuCI Support for shadowsocks,\
 	+PACKAGE_luci-app-shadowsocks:ipset \
 	+PACKAGE_luci-app-shadowsocks:resolveip))
 
-$(eval $(call application,redsocks2,LuCI Support for redsocks2,\
-	+PACKAGE_luci-app-redsocks2:redsocks2 \
-	+PACKAGE_luci-app-redsocks2:kmod-ipt-nat \
-	+PACKAGE_luci-app-redsocks2:kmod-ipt-nat-extra \
-	+PACKAGE_luci-app-redsocks2:kmod-ipt-ipset \
-	+PACKAGE_luci-app-redsocks2:ipset \
-	+PACKAGE_luci-app-shadowsocks:resolveip))
-
 $(eval $(call application,vsftpd,LuCI Support for vsftpd,\
 	+PACKAGE_luci-app-vsftpd:vsftpd))
 
