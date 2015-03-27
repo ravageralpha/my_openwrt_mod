@@ -80,10 +80,7 @@ define application
 endef
 
 $(eval $(call application,aria2,LuCI Support for aria2,\
-	+PACKAGE_luci-app-aria2:aria2 \
-	+PACKAGE_luci-app-aria2:curl \
-	+PACKAGE_luci-app-aria2:wget \
-	+PACKAGE_luci-app-aria2:openssl-util))
+	+PACKAGE_luci-app-aria2:aria2))
 
 $(eval $(call application,shadowsocks,LuCI Support for shadowsocks,\
 	+PACKAGE_luci-app-shadowsocks:shadowsocks-libev \
