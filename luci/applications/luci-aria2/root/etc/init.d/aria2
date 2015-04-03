@@ -37,8 +37,7 @@ start() {
 	aria2_downloadfolder="$mountpoint/$download_folder"
 
 	case "`mount | grep $device | cut -d' ' -f5`" in
-		#Only for fallocate patched uClibc
-		#'ext4')fileallocation="falloc";;
+		'ext4')fileallocation="falloc";;
 		*fat*)fileallocation="none";;
 		*)fileallocation="trunc";;
 	esac
