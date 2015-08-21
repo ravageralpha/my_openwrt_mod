@@ -5,6 +5,7 @@ mode=client
 concurrency=|CONCURRENCY|
 mtu=|MTU|
 intf=|INTERFACE|
+net=|NET|
 up=/etc/shadowvpn/client_up.sh
 down=/etc/shadowvpn/client_down.sh
 pidfile=/var/run/shadowvpn.pid

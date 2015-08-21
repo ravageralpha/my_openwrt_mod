@@ -13,7 +13,7 @@ You may obtain a copy of the License at
 local map, section, net = ...
 local fs = require "nixio.fs"
 
-local server, port, password, mtu, concurrency, ifname
+local server, port, password, mtu, concurrency, ifname, usertoken, localnet
 
 server = section:taboption("general", Value, "server", translate("VPN Server"))
 server.datatype = "host"
@@ -27,15 +27,22 @@ password = section:taboption("general", Value, "password", translate("Password")
 password.password = true
 password.optional = false
 
+usertoken = section:taboption("general", Value, "usertoken", translate("User Token"))
+usertoken.optional = true
+
 mtu = section:taboption("general", Value, "mtu", translate("MTU"))
 mtu.datatype = "uinteger"
-mtu.default = "1440"
-mtu.placeholder = "1440"
+mtu.default = "1432"
+mtu.placeholder = "1432"
 
 concurrency = section:taboption("general", Value, "concurrency", translate("Concurrency"))
 concurrency.datatype = "uinteger"
 concurrency.default = "1"
 concurrency.placeholder = "1"
+
+localnet = section:taboption("general", Value, "localnet", translate("Local Address"))
+localnet.default = "10.7.0.2/24"
+localnet.placeholder = "10.7.0.2/24"
 
 ifname = section:taboption("general", Value, "interface", translate("Output Interface"))
 ifname.template = "cbi/network_netlist"

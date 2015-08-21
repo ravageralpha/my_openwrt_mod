@@ -1,12 +1,13 @@
 #!/bin/sh
 . /lib/netifd/netifd-proto.sh
 
-LOCAL_ADDR="10.7.0.2"
-REMOTE_ADDR="10.7.0.1"
+LOCAL_ADDR="${net%???}"
+MASK="$(echo $net | tail -c3)"
+REMOTE_ADDR="${LOCAL_ADDR%?}1"
 DEFAULT_GATEWAY="`netstat -r -n | awk '/:/ { next; } /^(default|0\.0\.0\.0)/ { print $2; }'`"
 
 proto_init_update "$intf" 1
-proto_add_ipv4_address "$LOCAL_ADDR" 24 "" "$LOCAL_ADDR"
+proto_add_ipv4_address "$LOCAL_ADDR" $MASK "" "$LOCAL_ADDR"
 
 ifconfig "$intf" mtu "$mtu"
 
