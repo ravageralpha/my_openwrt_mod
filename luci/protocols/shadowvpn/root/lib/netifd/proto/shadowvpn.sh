@@ -10,6 +10,8 @@ proto_shadowvpn_init_config() {
 	proto_config_add_string "mtu"
 	proto_config_add_string "concurrency"
 	proto_config_add_string "interface"
+	proto_config_add_string "usertoken"
+	proto_config_add_string "localnet"
 	no_device=1
 	available=1
 }
@@ -45,7 +47,7 @@ proto_shadowvpn_setup() {
 		-e "s#|CONCURRENCY|#$concurrency#g" \
 		/etc/shadowvpn/client.conf.template > /var/etc/shadowvpnclient.conf
 
-	if [[ -n $usertoken ]]; then
+	if [[ -n "$usertoken" ]]; then
 		echo "user_token=$usertoken" >> /var/etc/shadowvpnclient.conf
 	fi
 

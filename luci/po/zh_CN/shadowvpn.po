@@ -9,3 +9,6 @@ msgstr "设备出口"
 
 msgid "User Token"
 msgstr "用户令牌"
+
+msgid "Local Address"
+msgstr "本机地址""

@@ -43,6 +43,7 @@ concurrency.placeholder = "1"
 localnet = section:taboption("general", Value, "localnet", translate("Local Address"))
 localnet.default = "10.7.0.2/24"
 localnet.placeholder = "10.7.0.2/24"
+localnet.optional = false
 
 ifname = section:taboption("general", Value, "interface", translate("Output Interface"))
 ifname.template = "cbi/network_netlist"

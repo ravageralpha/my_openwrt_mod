@@ -9,3 +9,6 @@ msgstr "Output Interface"
 
 msgid "User Token"
 msgstr "User Token"
+
+msgid "Local Address"
+msgstr "Local Address"

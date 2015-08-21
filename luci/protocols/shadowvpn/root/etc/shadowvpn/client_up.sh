@@ -4,7 +4,7 @@
 LOCAL_ADDR="${net%???}"
 MASK="$(echo $net | tail -c3)"
 REMOTE_ADDR="${LOCAL_ADDR%?}1"
-DEFAULT_GATEWAY="`netstat -r -n | awk '/:/ { next; } /^(default|0\.0\.0\.0)/ { print $2; }'`"
+DEFAULT_GATEWAY="$(ip route show 0/0 | sort -k 7 | head -n 1 | sed -e 's/.* via \([^ ]*\).*/\1/')"
 
 proto_init_update "$intf" 1
 proto_add_ipv4_address "$LOCAL_ADDR" $MASK "" "$LOCAL_ADDR"
