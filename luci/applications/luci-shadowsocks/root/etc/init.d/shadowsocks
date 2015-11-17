@@ -59,6 +59,8 @@ start() {
 			-p "$rport" \
 			-l "$tunnel_port" \
 			-L "$tunnel_forward" \
+			${cipher:+-m $cipher} \
+			-k "$pass" \
 			-u
 	}
 

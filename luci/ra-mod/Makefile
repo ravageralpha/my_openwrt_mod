@@ -85,9 +85,9 @@ $(eval $(call application,aria2,LuCI Support for aria2,\
 $(eval $(call application,shadowsocks,LuCI Support for shadowsocks,\
 	+PACKAGE_luci-app-shadowsocks:shadowsocks-libev \
 	+PACKAGE_luci-app-shadowsocks:kmod-ipt-nat \
-	+PACKAGE_luci-app-shadowsocks:kmod-ipt-nat-extra \
+	+PACKAGE_luci-app-shadowsocks:kmod-mod-nat-extra \
 	+PACKAGE_luci-app-shadowsocks:kmod-ipt-ipset \
-	+PACKAGE_luci-app-shadowsocks:kmod-ipt-tproxy \
+	+PACKAGE_luci-app-shadowsocks:kmod-mod-tproxy \
 	+PACKAGE_luci-app-shadowsocks:ipset \
 	+PACKAGE_luci-app-shadowsocks:resolveip))
 
