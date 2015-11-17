@@ -55,6 +55,19 @@ local_port = socks5:option(Value, "local_port", translate("Local Port"))
 local_port.datatype = "range(0,65535)"
 local_port.optional = false
 
+tunnel = m:section(TypedSection, "shadowsocks", translate("Forwarding Tunnel"))
+tunnel.anonymous = true
+
+tunnel_enable = tunnel:option(Flag, "tunnel_enabled", translate("Enable"))
+tunnel_enable.rmempty = false
+
+tunnel_port = tunnel:option(Value, "tunnel_port", translate("Tunnel Local Port"))
+tunnel_port.datatype = "range(0,65535)"
+tunnel_port.default = 5353
+
+tunnel_forward = tunnel:option(Value, "tunnel_forward", translate("Forwarding Port"))
+tunnel_forward.default = "8.8.8.8:53"
+
 redir = m:section(TypedSection, "shadowsocks", translate("Transparent Proxy"))
 redir.anonymous = true
 
@@ -64,6 +77,10 @@ redir_enable.default = false
 redir_port = redir:option(Value, "redir_port", translate("Transparent Proxy Local Port"))
 redir_port.datatype = "range(0,65535)"
 redir_port.optional = false
+
+tproxy_enable = redir:option(Value, "udp_enabled", translate("UDP Traffic"))
+tproxy_enable.default = false
+tproxy_enable.optional = false
 
 blacklist_enable = redir:option(Flag, "blacklist_enabled", translate("Bypass Lan IP"))
 blacklist_enable.default = false

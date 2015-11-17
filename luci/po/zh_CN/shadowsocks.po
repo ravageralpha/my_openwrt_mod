@@ -1,6 +1,3 @@
-msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8\n"
-
 msgid "Bypass IP Whitelist"
 msgstr "IP白名单"
 
@@ -45,3 +42,15 @@ msgstr "shadowsocks 未运行"
 
 msgid "shadowsocks is running"
 msgstr "shadowsocks 运行中"
+
+msg "UDP Traffic"
+msgstr "代理 UDP 流量"
+
+msgid "Forwarding Tunnel"
+msgstr "端口转发隧道"
+
+msgid "Tunnel Local Port"
+msgstr "隧道本地端口"
+
+msgid "Forwarding Port"
+msgstr "转发端口"
