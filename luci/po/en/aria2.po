@@ -90,3 +90,6 @@ msgstr "aria2 is not running,make sure you have mounted USB Storage device"
 
 msgid "aria2 is running"
 msgstr "aria2 is running"
+
+msgid "Run as User"
+msgstr "Run as User"

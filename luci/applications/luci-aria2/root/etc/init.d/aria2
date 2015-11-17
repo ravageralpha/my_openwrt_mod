@@ -2,9 +2,14 @@
 
 START=99
 
+SERVICE_USE_PID=1
+SERVICE_WRITE_PID=1
+SERVICE_DAEMONIZE=1
+SERVICE_SIG="INT"                                                               
+
 start() {
 	
-	ulimit -n 4096
+	ulimit -n 1024
 
 	config_load "aria2"	
 	config_get enabled config enabled 0
@@ -30,6 +35,7 @@ start() {
 	config_get udp_port config udp_port 51413
 	config_get seedtime config seedtime 525600
 	config_get rpc_token config rpc_token ""
+	config_get user config user "root"
 
 	aria2_conf_path="$mountpoint/.aria2"
 	aria2_downloadlist="$aria2_conf_path/aria2file.txt"
@@ -80,7 +86,7 @@ rpc-save-upload-metadata
 EOF
 	}
 
-	cmd="aria2c -c -D \
+	ARGS="-c -D \
 	--conf-path="$aria2_configfile" \
 	--dir="$aria2_downloadfolder" \
 	--enable-rpc \
@@ -100,14 +106,14 @@ EOF
 	--split=$maxthread \
 	--max-connection-per-server=$maxthread \
 	--max-concurrent-downloads=$maxjobs"
+	
+	[ -n "$rpc_token" ] && ARGS="$ARGS --rpc-secret=$rpc_token"
 
-	[ -n "$rpc_token" ] && cmd="$cmd --rpc-secret=$rpc_token"
-
-	eval "$cmd"
+	chmod -R "$user" "aria2_conf_path"
+	SERVICE_UID="$user"
+	service_start /usr/bin/aria2c "$ARGS"
 }
 
 stop() {
-	# must interrupt it to save session
-	killall -2 aria2c
-	sleep 3
+	service_stop /usr/bin/aria2c
 }

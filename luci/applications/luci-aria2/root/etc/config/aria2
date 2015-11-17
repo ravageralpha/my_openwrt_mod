@@ -13,3 +13,4 @@ config aria2 config
 	option seedtime '525600'
 	option rpc_auth '0'
 	option rpc_token ''
+	option user 'root'

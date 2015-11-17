@@ -23,6 +23,13 @@ s:tab("basic",  translate("Basic Settings"))
 switch = s:taboption("basic", Flag, "enabled", translate("Enable"))
 switch.rmempty = false
 
+user=s:taboption("basic", ListValue, "user", translate("Run as User"))
+local _user
+for i, _user in luci.util.vspairs(luci.util.split(luci.sys.exec("cat /etc/passwd | cut -f 1 -d :"))) do
+	user:value(_user)
+end
+user.default = "root"
+
 local devices = {}
 util.consume((fs.glob("/dev/sd??*")), devices)
 
