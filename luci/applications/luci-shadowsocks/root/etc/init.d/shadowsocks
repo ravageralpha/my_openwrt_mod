@@ -85,12 +85,12 @@ start() {
 		if [ "$whitelist_enabled" = '1' ];then
 			(echo "$remoteip";cat $IPSET_RESERVE;cat $IPSET_WHITELIST) |
 			sed -e "s/^/-A whitelist &/g" \
-				-e "1 i\-N whitelist nethash --hashsize 6144" |
+				-e "1 i\-N whitelist nethash" |
 			ipset -R -!
 		else
 			(echo "$remoteip";cat $IPSET_RESERVE) |
 			sed -e "s/^/-A whitelist &/g" \
-				-e "1 i\-N whitelist nethash --hashsize 6144" |
+				-e "1 i\-N whitelist nethash" |
 			ipset -R -!			
 		fi
 

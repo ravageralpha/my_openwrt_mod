@@ -10,6 +10,6 @@ config shadowsocks config
 	option redir_port ''
 	option redir_enabled '0'
 	option udp_enabled '0'
+	option tunnel_enabled '0'
 	option tunnel_port ''
 	option tunnel_forward ''
-	option tproxy_enabled '0'

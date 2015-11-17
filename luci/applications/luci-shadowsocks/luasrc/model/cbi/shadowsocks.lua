@@ -78,7 +78,7 @@ redir_port = redir:option(Value, "redir_port", translate("Transparent Proxy Loca
 redir_port.datatype = "range(0,65535)"
 redir_port.optional = false
 
-tproxy_enable = redir:option(Value, "udp_enabled", translate("UDP Traffic"))
+tproxy_enable = redir:option(Flag, "udp_enabled", translate("UDP Traffic"))
 tproxy_enable.default = false
 tproxy_enable.optional = false
 
