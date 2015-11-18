@@ -54,3 +54,6 @@ msgstr "Tunnel Local Port"
 
 msgid "Forwarding Port"
 msgstr "Forwarding Port"
+
+msgid "OneTime Authentication"
+msgstr "OneTime Authentication"

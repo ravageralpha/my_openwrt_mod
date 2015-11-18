@@ -16,11 +16,11 @@ start() {
 	
 	config_load "shadowsocks"
 	config_get enabled config enabled
-	config_get remote config remote_server
-	config_get rport config remote_port
-	config_get lport config local_port
+	config_get remote_server config remote_server
+	config_get remote_port config remote_port
+	config_get local_port config local_port
 	config_get cipher config cipher
-	config_get pass config password
+	config_get password config password
 	config_get redir_enabled config redir_enabled
 	config_get redir_port config redir_port
 	config_get whitelist_enabled config whitelist_enabled
@@ -29,49 +29,47 @@ start() {
 	config_get tunnel_enabled config tunnel_enabled
 	config_get tunnel_port config tunnel_port
 	config_get tunnel_forward config tunnel_forward
+	config_get ota_enabled config ota_enabled
 
-	[ -z "$remote" ] || [ -z "$rport" ] || [ -z "$lport" ] || [ -z "$pass" ] && {
+	[ -z "$remote_server" ] || [ -z "$remote_port" ] || [ -z "$local_port" ] || [ -z "$password" ] && {
 		echo "missing parameters. check config"
-		return 1
-	}
-
-	remoteip="`resolveip -4 -t10 $remote`"
-	[ -z "$remoteip" ] && {
-		echo "cannot resolve the server hostname"
 		return 1
 	}
 
 	[ "$enabled" = '1' ] && {
 		service_start /usr/bin/ss-local \
 			-b "0.0.0.0" \
-			-s "$remoteip" \
-			-p "$rport" \
-			-l "$lport" \
+			-s "$remote_server" \
+			-p "$remote_port" \
+			-l "$local_port" \
 			${cipher:+-m $cipher} \
-			-k "$pass" \
+			-k "$password" \
+			${ota_enabled:+-A} \
 			-u
 	}
 
 	[ "$tunnel_enabled" = '1' ] && {
 		service_start /usr/bin/ss-tunnel \
 			-b "0.0.0.0" \
-			-s "$remoteip" \
-			-p "$rport" \
+			-s "$remote_server" \
+			-p "$remote_port" \
 			-l "$tunnel_port" \
 			-L "$tunnel_forward" \
 			${cipher:+-m $cipher} \
-			-k "$pass" \
+			-k "$password" \
+			${ota_enabled:+-A} \
 			-u
 	}
 
 	[ "$redir_enabled" = '1' ] && {
 		service_start /usr/bin/ss-redir \
 			-b "0.0.0.0" \
-			-s "$remoteip" \
-			-p "$rport" \
+			-s "$remote_server" \
+			-p "$remote_port" \
 			-l "$redir_port" \
 			${cipher:+-m $cipher} \
-			-k "$pass" \
+			-k "$password" \
+			${ota_enabled:+-A} \
 			-u
 
 		iptables -t nat -N SHADOWSOCKS
@@ -85,12 +83,12 @@ start() {
 		}
 
 		if [ "$whitelist_enabled" = '1' ];then
-			(echo "$remoteip";cat $IPSET_RESERVE;cat $IPSET_WHITELIST) |
+			(echo "$remote_server";cat $IPSET_RESERVE;cat $IPSET_WHITELIST) |
 			sed -e "s/^/-A whitelist &/g" \
 				-e "1 i\-N whitelist nethash" |
 			ipset -R -!
 		else
-			(echo "$remoteip";cat $IPSET_RESERVE) |
+			(echo "$remote_server";cat $IPSET_RESERVE) |
 			sed -e "s/^/-A whitelist &/g" \
 				-e "1 i\-N whitelist nethash" |
 			ipset -R -!			

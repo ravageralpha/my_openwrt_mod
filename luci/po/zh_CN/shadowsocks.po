@@ -54,3 +54,6 @@ msgstr "隧道本地端口"
 
 msgid "Forwarding Port"
 msgstr "转发端口"
+
+msgid "OneTime Authentication"
+msgstr "一次验证"
