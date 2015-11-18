@@ -43,8 +43,8 @@ msgstr "shadowsocks 未运行"
 msgid "shadowsocks is running"
 msgstr "shadowsocks 运行中"
 
-msg "UDP Traffic"
-msgstr "代理 UDP 流量"
+msgid "UDP Traffic"
+msgstr "转发 UDP 流量"
 
 msgid "Forwarding Tunnel"
 msgstr "端口转发隧道"
