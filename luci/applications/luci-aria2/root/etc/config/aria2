@@ -14,3 +14,4 @@ config aria2 config
 	option rpc_auth '0'
 	option rpc_token ''
 	option user 'root'
+	option group 'root'
