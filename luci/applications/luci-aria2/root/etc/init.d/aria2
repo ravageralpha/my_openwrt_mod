@@ -105,11 +105,10 @@ EOF
 	--bt-max-peers=$btmaxpeers \
 	--split=$maxthread \
 	--max-connection-per-server=$maxthread \
-	--max-concurrent-downloads=$maxjobs"
-	
-	[ -n "$rpc_token" ] && ARGS="$ARGS --rpc-secret=$rpc_token"
+	--max-concurrent-downloads=$maxjobs \
+	${rpc_token:+--rpc-secret="$rpc_token"}"
 
-	chmod -R "$user" "aria2_conf_path"
+	chmod -R "$user" "$aria2_conf_path"
 	SERVICE_UID="$user"
 	service_start /usr/bin/aria2c "$ARGS"
 }
