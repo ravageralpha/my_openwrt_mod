@@ -24,18 +24,7 @@ proto_shadowvpn_setup() {
 	grep -q tun /proc/modules || insmod tun
 
 	logger -t shadowvpn "initializing..."
-
-	serv_addr=
-	for ip in $(resolveip -t 10 "$server"); do
-		( proto_add_host_dependency "$config" "$ip" $interface )
-		serv_addr=1
-	done
-	[ -n "$serv_addr" ] || {
-		logger -t shadowvpn "Could not resolve server address: '$server'"
-		sleep 60
-		proto_setup_failed "$config"
-		exit 1
-	}
+	proto_add_host_dependency "$config" "$server" $interface
 
 	mkdir -p /var/etc
 	sed -e "s#|SERVER|#$server#g" \
