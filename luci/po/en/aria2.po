@@ -93,3 +93,6 @@ msgstr "aria2 is running"
 
 msgid "Run as User"
 msgstr "Run as User"
+
+msgid "Run as Group"
+msgstr "Run as Group"

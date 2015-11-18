@@ -36,6 +36,7 @@ start() {
 	config_get seedtime config seedtime 525600
 	config_get rpc_token config rpc_token ""
 	config_get user config user "root"
+	config_get group config group "root"
 
 	aria2_conf_path="$mountpoint/.aria2"
 	aria2_downloadlist="$aria2_conf_path/aria2file.txt"
@@ -108,7 +109,7 @@ EOF
 	--max-concurrent-downloads=$maxjobs \
 	${rpc_token:+--rpc-secret="$rpc_token"}"
 
-	chown -R "$user" "$aria2_conf_path"
+	chown -R "$user":"$group" "$aria2_conf_path"
 	SERVICE_UID="$user"
 	service_start /usr/bin/aria2c "$ARGS"
 }

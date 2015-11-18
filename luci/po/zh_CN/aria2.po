@@ -92,4 +92,7 @@ msgid "aria2 is running"
 msgstr "aria2运行中"
 
 msgid "Run as User"
-msgstr "以用户运行本程序"
+msgstr "以用户运行"
+
+msgid "Run as Group"
+msgstr "以用户组运行"

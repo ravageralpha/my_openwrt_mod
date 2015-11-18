@@ -30,6 +30,13 @@ for i, _user in luci.util.vspairs(luci.util.split(luci.sys.exec("cat /etc/passwd
 end
 user.default = "root"
 
+group=s:taboption("basic", ListValue, "group", translate("Run as Group"))
+local _group
+for i, _group in luci.util.vspairs(luci.util.split(luci.sys.exec("cat /etc/group | cut -f 1 -d :"))) do
+	user:value(_group)
+end
+group.default = "root"
+
 local devices = {}
 util.consume((fs.glob("/dev/sd??*")), devices)
 
