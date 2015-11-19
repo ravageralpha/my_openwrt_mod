@@ -5,6 +5,7 @@ START=99
 SERVICE_USE_PID=1
 SERVICE_WRITE_PID=1
 SERVICE_DAEMONIZE=1
+SERVICE_PID_FILE="/var/run/aria2c.pid"
 SERVICE_SIG="INT"                                                               
 
 start() {
@@ -116,5 +117,6 @@ EOF
 }
 
 stop() {
+	echo $((`cat $SERVICE_PID_FILE`+2)) > $SERVICE_PID_FILE
 	service_stop /usr/bin/aria2c
 }
