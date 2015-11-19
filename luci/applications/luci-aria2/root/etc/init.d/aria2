@@ -87,8 +87,7 @@ rpc-save-upload-metadata
 EOF
 	}
 
-	ARGS="-c -D \
-	--conf-path="$aria2_configfile" \
+	ARGS="--conf-path="$aria2_configfile" \
 	--dir="$aria2_downloadfolder" \
 	--enable-rpc \
 	--rpc-listen-all \
