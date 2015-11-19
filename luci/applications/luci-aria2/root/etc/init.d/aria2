@@ -112,7 +112,7 @@ EOF
 	chown -R "$user":"$group" "$aria2_conf_path"
 	SERVICE_UID="$user"
 	SERVICE_GID="$group"
-	service_start /usr/bin/aria2c "$ARGS"
+	service_start /usr/bin/aria2c $ARGS
 }
 
 stop() {
