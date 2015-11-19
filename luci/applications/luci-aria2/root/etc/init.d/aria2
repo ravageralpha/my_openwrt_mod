@@ -5,7 +5,7 @@ START=99
 SERVICE_USE_PID=1
 SERVICE_DAEMONIZE=1
 SERVICE_PID_FILE="/var/run/aria2c.pid"
-SERVICE_SIG="INT"                                                         
+SERVICE_SIG="INT"
 
 start() {
 	
