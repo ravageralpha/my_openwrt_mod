@@ -37,7 +37,7 @@ define protocol
     TITLE:=LuCI - RA-MOD
     URL:=https://github.com/ravageralpha/my_openwrt_mod/
     MAINTAINER:=RA <ravageralpha@gmail.com>
-    SUBMENU:=2. LuCI Protocols
+    SUBMENU:=LuCI Protocols
     TITLE:=$(if $(2),$(2),LuCI $(1) protocol support)
     DEPENDS:=$(3)
   endef
@@ -63,7 +63,7 @@ define application
     TITLE:=LuCI - RA-MOD
     URL:=https://github.com/ravageralpha/my_openwrt_mod/
     MAINTAINER:=RA <ravageralpha@gmail.com>
-    SUBMENU:=1. LuCI Applications
+    SUBMENU:=LuCI Applications
     TITLE:=$(if $(2),$(2),LuCI $(1) application)
 	DEPENDS:=$(3)
   endef
@@ -83,7 +83,7 @@ $(eval $(call application,aria2,LuCI Support for aria2,\
 	+PACKAGE_luci-app-aria2:aria2))
 
 $(eval $(call application,shadowsocks,LuCI Support for shadowsocks,\
-	+PACKAGE_luci-app-shadowsocks:shadowsocks-libev \
+	+PACKAGE_luci-app-shadowsocks:shadowsocks-libev-git \
 	+PACKAGE_luci-app-shadowsocks:kmod-ipt-nat \
 	+PACKAGE_luci-app-shadowsocks:kmod-mod-nat-extra \
 	+PACKAGE_luci-app-shadowsocks:kmod-ipt-ipset \

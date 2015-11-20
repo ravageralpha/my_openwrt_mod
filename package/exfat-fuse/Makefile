@@ -23,9 +23,9 @@ include $(INCLUDE_DIR)/scons.mk
 
 define Package/exfat/template
   SECTION:=utils
-  CATEGORY:=Utilities
+  CATEGORY:=RA-MOD
+  SUBMENU:=Package
   URL:=http://code.google.com/p/exfat/
-  SUBMENU:=Filesystem
   DEPENDS:=+libfuse
 endef
 

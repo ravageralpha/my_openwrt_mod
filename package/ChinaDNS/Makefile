@@ -19,7 +19,8 @@ include $(INCLUDE_DIR)/package.mk
 
 define Package/ChinaDNS/Default
   SECTION:=net
-  CATEGORY:=Network
+  CATEGORY:=RA-MOD
+  SUBMENU:=Package
   TITLE:=ChinaDNS
 	URL:=https://github.com/clowwindy/ChinaDNS
 endef

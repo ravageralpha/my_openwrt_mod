@@ -19,7 +19,8 @@ include $(INCLUDE_DIR)/package.mk
 
 define Package/ShadowVPN/Default
   SECTION:=net
-  CATEGORY:=Network
+  CATEGORY:=RA-MOD
+  SUBMENU:=Package
   TITLE:=ShadowVPN
   DEPENDS:=+kmod-tun +ip
   URL:=https://github.com/clowwindy/ShadowVPN

@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=shadowsocks-libev
+PKG_NAME:=shadowsocks-libev-git
 PKG_VERSION:=2.4.1
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
@@ -20,43 +20,44 @@ PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/shadowsocks-libev/Default
+define Package/shadowsocks-libev-git/Default
   SECTION:=net
-  CATEGORY:=Network
+  CATEGORY:=RA-MOD
+  SUBMENU:=Package
   TITLE:=Lightweight Secured Socks5 Proxy
   URL:=https://github.com/madeye/shadowsocks-libev
 endef
 
-define Package/shadowsocks-libev
-  $(call Package/shadowsocks-libev/Default)
+define Package/shadowsocks-libev-git
+  $(call Package/shadowsocks-libev-git/Default)
   TITLE+= (OpenSSL)
   VARIANT:=openssl
   DEPENDS:=+libopenssl
 endef
 
-define Package/shadowsocks-libev-polarssl
-  $(call Package/shadowsocks-libev/Default)
+define Package/shadowsocks-libev-polarssl-git
+  $(call Package/shadowsocks-libev-git/Default)
   TITLE+= (PolarSSL)
   VARIANT:=polarssl
   DEPENDS:=+libpolarssl
 endef
 
-define Package/shadowsocks-libev/description
+define Package/shadowsocks-libev-git/description
 Shadowsocks-libev is a lightweight secured scoks5 proxy for embedded devices and low end boxes.
 endef
 
-Package/shadowsocks-libev-polarssl/description=$(Package/shadowsocks-libev/description)
+Package/shadowsocks-libev-polarssl-git/description=$(Package/shadowsocks-libev-git/description)
 
 ifeq ($(BUILD_VARIANT),polarssl)
         CONFIGURE_ARGS += --with-crypto-library=polarssl
 endif
 
-define Package/shadowsocks-libev/install
+define Package/shadowsocks-libev-git/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/ss-{local,redir,tunnel} $(1)/usr/bin
 endef
 
-Package/shadowsocks-libev-polarssl/install=$(Package/shadowsocks-libev/install)
+Package/shadowsocks-libev-polarssl-git/install=$(Package/shadowsocks-libev-git/install)
 
-$(eval $(call BuildPackage,shadowsocks-libev))
-$(eval $(call BuildPackage,shadowsocks-libev-polarssl))
+$(eval $(call BuildPackage,shadowsocks-libev-git))
+$(eval $(call BuildPackage,shadowsocks-libev-polarssl-git))
