@@ -5,6 +5,7 @@ config shadowsocks config
 	option local_port ''
 	option cipher 'rc4-md5'
 	option password ''
+	option timeout '60'
 	option whitelist_enabled '0'
 	option blacklist_enabled '0'
 	option redir_port ''
@@ -13,3 +14,4 @@ config shadowsocks config
 	option tunnel_enabled '0'
 	option tunnel_port ''
 	option tunnel_forward ''
+	option alt_enabled '0'

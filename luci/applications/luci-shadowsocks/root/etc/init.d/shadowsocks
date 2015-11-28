@@ -2,10 +2,6 @@
 
 START=95
 
-SERVICE_USE_PID=1
-SERVICE_WRITE_PID=1
-SERVICE_DAEMONIZE=1
-
 IPSET_BLACKLIST="/etc/ipset/blacklist"
 IPSET_WHITELIST="/etc/ipset/whitelist"
 IPSET_RESERVE="/etc/ipset/reserve"
@@ -21,6 +17,7 @@ start() {
 	config_get local_port config local_port
 	config_get cipher config cipher
 	config_get password config password
+	config_get timeout config timeout
 	config_get redir_enabled config redir_enabled
 	config_get redir_port config redir_port
 	config_get whitelist_enabled config whitelist_enabled
@@ -30,44 +27,60 @@ start() {
 	config_get tunnel_port config tunnel_port
 	config_get tunnel_forward config tunnel_forward
 	config_get ota_enabled config ota_enabled
+	config_get alt_enabled config alt_enabled
+	config_get alt_server config alt_server
+	config_get alt_port config alt_port
+	config_get alt_passwd config alt_passwd
+	config_get alt_cipher config alt_cipher
+	config_get alt_ota_enabled config alt_ota_enabled
+	config_get alt_redir_port config alt_redir_port
 
 	[ "$ota_enabled" != '1' ] && unset ota_enabled
 
 	[ "$enabled" = '1' ] && {
-		service_start /usr/bin/ss-local \
+		/usr/bin/ss-local \
 			-b "0.0.0.0" \
 			-s "$remote_server" \
 			-p "$remote_port" \
 			-l "$local_port" \
-			${cipher:+-m $cipher} \
+			-m "$cipher" \
 			-k "$password" \
+			-t "$timeout" \
 			${ota_enabled:+-A} \
-			-u
+			-u &
 	}
 
 	[ "$tunnel_enabled" = '1' ] && {
-		service_start /usr/bin/ss-tunnel \
-			-b "0.0.0.0" \
-			-s "$remote_server" \
-			-p "$remote_port" \
+
+		ARGS="-b "0.0.0.0" \
+			-s "${remote_server:-$alt_server}" \
+			-p "${remote_port:-$alt_port}" \
 			-l "$tunnel_port" \
 			-L "$tunnel_forward" \
-			${cipher:+-m $cipher} \
-			-k "$password" \
-			${ota_enabled:+-A} \
-			-u
+			-m "${cipher:-$alt_cipher}" \
+			-k "${password:-$alt_passwd}" \
+			-t "${timeout:-$alt_timeout}""
+
+		if [ "$alt_enabled" = '1' ];then
+			ARGS="$ARGS -u ${ota_enabled:+-A}"
+		else
+			ARGS="$ARGS -U ${alt_ota_enabled:+-A}"
+		fi
+
+		/usr/bin/ss-tunnel $ARGS &
 	}
 
 	[ "$redir_enabled" = '1' ] && {
-		service_start /usr/bin/ss-redir \
+		/usr/bin/ss-redir \
 			-b "0.0.0.0" \
 			-s "$remote_server" \
 			-p "$remote_port" \
 			-l "$redir_port" \
-			${cipher:+-m $cipher} \
+			-m "$cipher" \
 			-k "$password" \
+			-t "$timeout" \
 			${ota_enabled:+-A} \
-			-u
+			-u &
 
 		iptables -t nat -N SHADOWSOCKS
 
@@ -88,19 +101,34 @@ start() {
 			(echo "$remote_server";cat $IPSET_RESERVE) |
 			sed -e "s/^/-A whitelist &/g" \
 				-e "1 i\-N whitelist nethash" |
-			ipset -R -!			
+			ipset -R -!
 		fi
 
 		iptables -t nat -A SHADOWSOCKS -p tcp -m set ! --match-set whitelist dst \
 				-j REDIRECT --to-ports $redir_port
 
 		[ "$udp_enabled" = '1' ] && {
+
+			[ "$alt_enabled" = '1' ] && {
+				redir_port=$alt_redir_port
+				/usr/bin/ss-redir \
+					-b "0.0.0.0" \
+					-s "$alt_server" \
+					-p "$alt_port" \
+					-l "$alt_redir_port" \
+					-m "$alt_cipher" \
+					-k "$alt_passwd" \
+					-t "$alt_timeout" \
+					${alt_ota_enabled:+-A} \
+					-U &
+			}
+
 			ip rule add fwmark 0x01/0x01 table 100
 			ip route add local 0.0.0.0/0 dev lo table 100
 			iptables -t mangle -N SS_UDP
 
 			if [ "$blacklist_enabled" = '1' ];then
-				iptables -t mangle -A SS_UDP -p udp -m set ! --match-set blacklist src \
+				iptables -t mangle -A SS_UDP -p udp -m set --match-set blacklist src \
 					-j RETURN
 			fi
 			iptables -t mangle -A SS_UDP -p udp -m set ! --match-set whitelist dst \
@@ -114,9 +142,9 @@ start() {
 }
 
 stop() {
-	service_stop /usr/bin/ss-local
-	service_stop /usr/bin/ss-tunnel
-	service_stop /usr/bin/ss-redir && {
+	killall -q -9 ss-local
+	killall -q -9 ss-tunnel
+	killall -q -9 ss-redir && {
 		iptables -t nat -D zone_lan_prerouting -j SHADOWSOCKS 2> /dev/null
 		iptables -t mangle -D PREROUTING -p udp -j SS_UDP 2> /dev/null
 		iptables -t nat -F SHADOWSOCKS 2> /dev/null &&

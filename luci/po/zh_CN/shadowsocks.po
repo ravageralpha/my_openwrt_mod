@@ -31,9 +31,6 @@ msgstr "SOCK5代理"
 msgid "Transparent Proxy"
 msgstr "透明代理"
 
-msgid "Transparent Proxy Local Port"
-msgstr "透明代理本地端口"
-
 msgid "shadowsocks"
 msgstr "shadowsocks"
 
@@ -57,3 +54,27 @@ msgstr "转发端口"
 
 msgid "OneTime Authentication"
 msgstr "一次验证"
+
+msgid "Timeout"
+msgstr "超时值"
+
+msgid "Alternate Server For UDP Traffic"
+msgstr "为 UDP 流量设置独立服务端"
+
+msgid "Alternate Server Address"
+msgstr "UDP 服务器地址"
+
+msgid "Alternate Port"
+msgstr "UDP 服务器端口"
+
+msgid "Alternate Password"
+msgstr "UDP 服务器密码"
+
+msgid "Alternate Cipher Method"
+msgstr "UDP 服务器加密方式"
+
+msgid "Alternate Timeout"
+msgstr "UDP 服务器超时值"
+
+msgid "Alternate OneTime Authentication"
+msgstr "UDP 服务器一次验证"

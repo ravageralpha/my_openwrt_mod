@@ -12,6 +12,26 @@ else
 	m = Map("shadowsocks", translate("shadowsocks"), translate("shadowsocks is not running"))
 end
 
+c = {
+	"table",
+	"rc4",
+	"rc4-md5",
+	"aes-128-cfb",
+	"aes-192-cfb",
+	"aes-256-cfb",
+	"bf-cfb",
+	"cast5-cfb",
+	"des-cfb",
+	"camellia-128-cfb",
+	"camellia-192-cfb",
+	"camellia-256-cfb",
+	"idea-cfb",
+	"rc2-cfb",
+	"seed-cfb",
+	"chacha20",
+	"salsa20",
+}
+
 server = m:section(TypedSection, "shadowsocks", translate("Server Setting"))
 server.anonymous = true
 
@@ -25,27 +45,50 @@ remote_port.optional = false
 
 password = server:option(Value, "password", translate("Password"))
 password.password = true
+password.optional = false
+
+timeout = server:option(Value, "timeout", translate("Timeout"))
+timeout.default = "60"
+timeout.optional = false
 
 ota = server:option(Flag, "ota_enabled", translate("OneTime Authentication"))
 
 cipher = server:option(ListValue, "cipher", translate("Cipher Method"))
-cipher:value("table")
-cipher:value("rc4")
-cipher:value("rc4-md5")
-cipher:value("aes-128-cfb")
-cipher:value("aes-192-cfb")
-cipher:value("aes-256-cfb")
-cipher:value("bf-cfb")
-cipher:value("cast5-cfb")
-cipher:value("des-cfb")
-cipher:value("camellia-128-cfb")
-cipher:value("camellia-192-cfb")
-cipher:value("camellia-256-cfb")
-cipher:value("idea-cfb")
-cipher:value("rc2-cfb")
-cipher:value("seed-cfb")
-cipher:value("chacha20")
-cipher:value("salsa20")
+for i,v in ipairs(c) do
+	cipher:value(v)
+end
+
+alt_enabled = server:option(Flag, "alt_enabled", translate("Alternate Server For UDP Traffic"))
+alt_enabled.rmempty = false
+
+alt_server = server:option(Value, "alt_server", translate("Alternate Server Address"))
+alt_server:depends("alt_enabled", 1)
+alt_server.optional = false
+alt_server.datatype = ipaddr
+
+alt_port = server:option(Value, "alt_port", translate("Alternate Port"))
+alt_port:depends("alt_enabled", 1)
+alt_port.optional = false
+
+alt_passwd = server:option(Value, "alt_passwd", translate("Alternate Password"))
+alt_passwd:depends("alt_enabled", 1)
+alt_passwd.password = true
+alt_passwd.optional = false
+
+alt_cipher = server:option(ListValue, "alt_cipher", translate("Alternate Cipher Method"))
+alt_cipher:depends("alt_enabled", 1)
+alt_cipher.optional = false
+for i,v in ipairs(c) do
+	alt_cipher:value(v)
+end
+
+alt_timeout = server:option(Value, "alt_timeout", translate("Alternate Timeout"))
+alt_timeout:depends("alt_enabled", 1)
+alt_timeout.default = "60"
+alt_timeout.optional = false
+
+alt_ota = server:option(Flag, "alt_ota_enabled", translate("Alternate OneTime Authentication"))
+alt_ota:depends("alt_enabled", 1)
 
 socks5 = m:section(TypedSection, "shadowsocks", translate("SOCKS5 Proxy"))
 socks5.anonymous = true
@@ -76,13 +119,18 @@ redir.anonymous = true
 redir_enable = redir:option(Flag, "redir_enabled", translate("Enable"))
 redir_enable.default = false
 
-redir_port = redir:option(Value, "redir_port", translate("Transparent Proxy Local Port"))
+redir_port = redir:option(Value, "redir_port", translate("Local Port"))
 redir_port.datatype = "range(0,65535)"
 redir_port.optional = false
 
 tproxy_enable = redir:option(Flag, "udp_enabled", translate("UDP Traffic"))
 tproxy_enable.default = false
 tproxy_enable.optional = false
+
+alt_redir_port = redir:option(Value, "alt_redir_port", translate("Alternate Local Port"))
+alt_redir_port:depends("udp_enabled", 1)
+alt_redir_port.datatype = "range(0,65535)"
+alt_redir_port.optional = false
 
 blacklist_enable = redir:option(Flag, "blacklist_enabled", translate("Bypass Lan IP"))
 blacklist_enable.default = false
