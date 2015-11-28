@@ -76,5 +76,8 @@ msgstr "UDP 服务器加密方式"
 msgid "Alternate Timeout"
 msgstr "UDP 服务器超时值"
 
+msgid "Alternate Local Port"
+msgstr "UDP 本地转发端口"
+
 msgid "Alternate OneTime Authentication"
 msgstr "UDP 服务器一次验证"

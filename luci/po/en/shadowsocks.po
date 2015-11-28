@@ -76,5 +76,8 @@ msgstr "Alternate Cipher Method"
 msgid "Alternate Timeout"
 msgstr "Alternate Timeout"
 
+msgid "Alternate Local Port"
+msgstr "Alternate Local Port"
+
 msgid "Alternate OneTime Authentication"
 msgstr "Alternate OneTime Authentication"
