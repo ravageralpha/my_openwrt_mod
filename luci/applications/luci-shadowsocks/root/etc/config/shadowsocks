@@ -3,7 +3,7 @@ config shadowsocks config
 	option remote_server ''
 	option remote_port ''
 	option local_port ''
-	option cipher ''
+	option cipher 'rc4-md5'
 	option password ''
 	option whitelist_enabled '0'
 	option blacklist_enabled '0'

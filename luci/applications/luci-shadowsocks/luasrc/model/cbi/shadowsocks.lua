@@ -27,8 +27,6 @@ password = server:option(Value, "password", translate("Password"))
 password.password = true
 
 ota = server:option(Flag, "ota_enabled", translate("OneTime Authentication"))
-ota.rmempty = false
-ota.default =  false
 
 cipher = server:option(ListValue, "cipher", translate("Cipher Method"))
 cipher:value("table")

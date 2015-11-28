@@ -12,6 +12,5 @@ config aria2 config
 	option udp_port '51413'
 	option seedtime '525600'
 	option rpc_auth '0'
-	option rpc_token ''
 	option user 'root'
 	option group 'root'

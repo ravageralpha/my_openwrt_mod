@@ -34,7 +34,7 @@ start() {
 	config_get tcp_port config tcp_port 51413
 	config_get udp_port config udp_port 51413
 	config_get seedtime config seedtime 525600
-	config_get rpc_token config rpc_token ""
+	config_get rpc_token config rpc_token
 	config_get user config user "root"
 	config_get group config group "root"
 
@@ -52,6 +52,7 @@ start() {
 	[ ! -d "$aria2_conf_path" ] && mkdir -p "$aria2_conf_path"
 	[ ! -f "$aria2_downloadlist" ] && touch "$aria2_downloadlist"
 	[ ! -f "$aria2_DHT" ] && touch "$aria2_DHT"
+	[ -z "$rpc_token" ] && unset rpc_token
 
 	aria2_configfile="/etc/aria2/aria2.conf"
 	[ ! -f "$aria2_configfile" ] && {
