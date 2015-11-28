@@ -32,6 +32,7 @@ start() {
 	config_get alt_port config alt_port
 	config_get alt_passwd config alt_passwd
 	config_get alt_cipher config alt_cipher
+	config_get alt_timeout config alt_timeout
 	config_get alt_ota_enabled config alt_ota_enabled
 	config_get alt_redir_port config alt_redir_port
 
@@ -47,27 +48,34 @@ start() {
 			-k "$password" \
 			-t "$timeout" \
 			${ota_enabled:+-A} \
-			-u &
+			-u & 1> /dev/null
 	}
 
 	[ "$tunnel_enabled" = '1' ] && {
 
-		ARGS="-b "0.0.0.0" \
-			-s "${remote_server:-$alt_server}" \
-			-p "${remote_port:-$alt_port}" \
-			-l "$tunnel_port" \
-			-L "$tunnel_forward" \
-			-m "${cipher:-$alt_cipher}" \
-			-k "${password:-$alt_passwd}" \
-			-t "${timeout:-$alt_timeout}""
-
-		if [ "$alt_enabled" = '1' ];then
-			ARGS="$ARGS -u ${ota_enabled:+-A}"
+		if [ "$alt_enabled" = '0' ];then
+			ARGS="-b "0.0.0.0" \
+				  -s "$remote_server" \
+				  -p "$remote_port" \
+				  -l "$tunnel_port" \
+				  -L "$tunnel_forward" \
+				  -m "$cipher" \
+				  -k "$password" \
+				  -t "$timeout" \
+				  -u ${ota_enabled:+-A}"
 		else
-			ARGS="$ARGS -U ${alt_ota_enabled:+-A}"
+			ARGS="-b "0.0.0.0" \
+				  -s "$alt_server" \
+				  -p "$alt_port" \
+				  -l "$tunnel_port" \
+				  -L "$tunnel_forward" \
+				  -m "$alt_cipher" \
+				  -k "$alt_passwd" \
+				  -t "$alt_timeout" \
+				  -u ${alt_ota_enabled:+-A}"
 		fi
 
-		/usr/bin/ss-tunnel $ARGS &
+		/usr/bin/ss-tunnel $ARGS & 1> /dev/null
 	}
 
 	[ "$redir_enabled" = '1' ] && {
@@ -93,16 +101,19 @@ start() {
 		}
 
 		if [ "$whitelist_enabled" = '1' ];then
-			(echo "$remote_server";cat $IPSET_RESERVE;cat $IPSET_WHITELIST) |
+			(cat $IPSET_RESERVE;cat $IPSET_WHITELIST) |
 			sed -e "s/^/-A whitelist &/g" \
 				-e "1 i\-N whitelist nethash" |
 			ipset -R -!
 		else
-			(echo "$remote_server";cat $IPSET_RESERVE) |
+			(cat $IPSET_RESERVE) |
 			sed -e "s/^/-A whitelist &/g" \
 				-e "1 i\-N whitelist nethash" |
 			ipset -R -!
 		fi
+
+		ipset -! add whitelist $remote_server
+		[ "$alt_enabled" = '1' ] && ipset -! add whitelist $alt_server
 
 		iptables -t nat -A SHADOWSOCKS -p tcp -m set ! --match-set whitelist dst \
 				-j REDIRECT --to-ports $redir_port
@@ -145,15 +156,15 @@ stop() {
 	killall -q -9 ss-local
 	killall -q -9 ss-tunnel
 	killall -q -9 ss-redir && {
-		iptables -t nat -D zone_lan_prerouting -j SHADOWSOCKS 2> /dev/null
-		iptables -t mangle -D PREROUTING -p udp -j SS_UDP 2> /dev/null
+		iptables -t nat -D zone_lan_prerouting -j SHADOWSOCKS 2> /dev/null &&
+		iptables -t mangle -D PREROUTING -p udp -j SS_UDP 2> /dev/null &&
 		iptables -t nat -F SHADOWSOCKS 2> /dev/null &&
 		iptables -t nat -X SHADOWSOCKS 2> /dev/null
 		iptables -t mangle -F SS_UDP 2> /dev/null &&
-		iptables -t mangle -X SS_UDP 2> /dev/null
-		ip rule del fwmark 0x01/0x01 table 100 2>/dev/null
-		ip route del local 0.0.0.0/0 dev lo table 100 2>/dev/null
-		ipset destroy whitelist 2> /dev/null
+		iptables -t mangle -X SS_UDP 2> /dev/null &&
+		ip rule del fwmark 0x01/0x01 table 100 2>/dev/null &&
+		ip route del local 0.0.0.0/0 dev lo table 100 2>/dev/null &&
+		ipset destroy whitelist 2> /dev/null &&
 		ipset destroy blacklist 2> /dev/null
 	}
 }
