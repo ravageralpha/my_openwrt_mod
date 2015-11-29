@@ -48,34 +48,26 @@ start() {
 			-k "$password" \
 			-t "$timeout" \
 			${ota_enabled:+-A} \
-			-u & 1> /dev/null
+			-u &
 	}
 
 	[ "$tunnel_enabled" = '1' ] && {
 
-		if [ "$alt_enabled" = '0' ];then
-			ARGS="-b "0.0.0.0" \
-				  -s "$remote_server" \
-				  -p "$remote_port" \
-				  -l "$tunnel_port" \
-				  -L "$tunnel_forward" \
-				  -m "$cipher" \
-				  -k "$password" \
-				  -t "$timeout" \
-				  -u ${ota_enabled:+-A}"
-		else
-			ARGS="-b "0.0.0.0" \
-				  -s "$alt_server" \
-				  -p "$alt_port" \
-				  -l "$tunnel_port" \
-				  -L "$tunnel_forward" \
-				  -m "$alt_cipher" \
-				  -k "$alt_passwd" \
-				  -t "$alt_timeout" \
-				  -u ${alt_ota_enabled:+-A}"
-		fi
+		ARGS="-b "0.0.0.0" \
+			  -s "${alt_server:-$remote_server}" \
+			  -p "${alt_port:-$remote_port}" \
+			  -l "$tunnel_port" \
+			  -L "$tunnel_forward" \
+			  -m "${alt_cipher:-$cipher}" \
+			  -k "${alt_passwd:-$password}" \
+			  -t "${alt_timeout:-$timeout}""
 
-		/usr/bin/ss-tunnel $ARGS & 1> /dev/null
+		if [ "$alt_enabled" = '0' ];then
+			ARGS="$ARGS -u ${ota_enabled:+-A}"
+		else
+			ARGS="$ARGS -U ${alt_ota_enabled:+-A}"
+		fi
+		/usr/bin/ss-tunnel $ARGS &
 	}
 
 	[ "$redir_enabled" = '1' ] && {
