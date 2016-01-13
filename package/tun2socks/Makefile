@@ -27,6 +27,10 @@ define Package/tun2socks/Default
   DEPENDS:=+kmod-tun +ip
 endef
 
+define Package/tun2socks
+  $(call Package/tun2socks/Default)
+endef
+
 define Package/tun2socks/description
 tun2socks - the title said all
 endef
