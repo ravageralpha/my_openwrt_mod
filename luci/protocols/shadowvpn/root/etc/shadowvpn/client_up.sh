@@ -18,7 +18,7 @@ chnroutes="/etc/chinadns_chnroute.txt"
 if [ -f "$chnroutes" ]; then
 	sed -e "s/^/route add &/g" -e "s/$/ via $DEFAULT_GATEWAY/g" \
 			$chnroutes > /tmp/routes
-	ip -batch /tmp/routes
+	/usr/bin/ip -batch /tmp/routes
 fi
 
 proto_send_update "$INTERFACE"
