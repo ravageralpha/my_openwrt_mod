@@ -24,6 +24,7 @@ define Package/tun2socks/Default
   CATEGORY:=RA-MOD
   SUBMENU:=Package
   TITLE:=tun2socks
+  DEPENDS:=+kmod-tun +ip
 endef
 
 define Package/tun2socks/description
