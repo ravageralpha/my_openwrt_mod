@@ -10,6 +10,7 @@ proto_tun2socks_init_config() {
 	proto_config_add_string "localnet"
 	proto_config_add_int "udprelay"
 	proto_config_add_string "opts"
+	proto_config_add_string "localdns"
 	no_device=1
 	available=1
 }
@@ -17,12 +18,18 @@ proto_tun2socks_init_config() {
 proto_tun2socks_setup() {
 	local config="$1"
 
-	json_get_vars server interface localnet remote udprelay opts
+	json_get_vars server interface localnet remote udprelay opts localdns
 
 	grep -q tun /proc/modules || insmod tun
 
 	logger -t tun2socks "initializing..."
 	proto_add_host_dependency "$config" "$remote" $interface
+	
+	[ -n "$localdns" ] && {
+		for i in $(echo $localdns | tr "," "\n")
+		proto_add_host_dependency "$config" "$i" $interface
+	}
+
 	proto_export INTERFACE="$config"
 	logger -t tun2socks "executing tun2socks"
 
