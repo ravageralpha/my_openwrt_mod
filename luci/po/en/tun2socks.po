@@ -1,0 +1,17 @@
+msgid "Socks Server"
+msgstr "Socks Server"
+
+msgid "Actual Server IP Address"
+msgstr "Actual Server IP Address"
+
+msgid "Enable UDP Relay"
+msgstr "Enable UDP Relay"
+
+msgid "Local Address"
+msgstr "Local Address"
+
+msgid "Extra Options"
+msgstr "Extra Options"
+
+msgid "Output Interface"
+msgstr "Output Interface"

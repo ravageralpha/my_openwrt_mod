@@ -54,6 +54,7 @@ define protocol
 endef
 
 $(eval $(call protocol,shadowvpn,Support for ShadowVPN,+ShadowVPN))
+$(eval $(call protocol,tun2socks,Support for tun2socks,+tun2socks))
 
 ### Applications ###
 define application

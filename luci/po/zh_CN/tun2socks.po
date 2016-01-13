@@ -1,0 +1,17 @@
+msgid "Socks Server"
+msgstr "Socks 服务器"
+
+msgid "Actual Server IP Address"
+msgstr "远端服务器地址"
+
+msgid "Enable UDP Relay"
+msgstr "启动 UDP 中转"
+
+msgid "Local Address"
+msgstr "本地地址"
+
+msgid "Extra Options"
+msgstr "自定义命令"
+
+msgid "Output Interface"
+msgstr "输出接口"
