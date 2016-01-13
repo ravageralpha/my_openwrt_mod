@@ -35,3 +35,5 @@ define Package/tun2socks/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tun2socks/badvpn-tun2socks $(1)/usr/bin/tun2socks
 endef
+
+$(eval $(call BuildPackage,tun2socks))
