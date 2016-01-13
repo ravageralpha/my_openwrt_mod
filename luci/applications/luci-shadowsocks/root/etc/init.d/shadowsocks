@@ -37,6 +37,7 @@ start() {
 	config_get alt_redir_port config alt_redir_port
 
 	[ "$ota_enabled" != '1' ] && unset ota_enabled
+	[ "$alt_ota_enabled" != '1' ] && unset alt_ota_enabled
 	[ "$alt_enabled" != '1' ] && {
 		unset alt_server
 		unset alt_port

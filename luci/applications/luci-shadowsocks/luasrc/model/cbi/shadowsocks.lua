@@ -128,7 +128,6 @@ tproxy_enable.default = false
 tproxy_enable.optional = false
 
 alt_redir_port = redir:option(Value, "alt_redir_port", translate("Alternate Local Port"))
-alt_redir_port:depends("udp_enabled", 1)
 alt_redir_port.datatype = "range(0,65535)"
 alt_redir_port.optional = false
 
