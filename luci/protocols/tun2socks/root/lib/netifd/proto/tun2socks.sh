@@ -26,12 +26,13 @@ proto_tun2socks_setup() {
 	proto_export INTERFACE="$config"
 	logger -t tun2socks "executing tun2socks"
 
+	local localip="`/bin/ipcalc.sh $localnet | grep IP | cut -d'=' -f2`"
 	local netmask="`/bin/ipcalc.sh $localnet | grep NETMASK | cut -d'=' -f2`"
 
 	proto_run_command "$config" \
 	/usr/bin/tun2socks \
 		--tundev "vpn-$config" \
-		--netif-ipaddr "$localnet" \
+		--netif-ipaddr "$localip" \
 		--netif-netmask "$netmask" \
 		--socks-server-addr "$server" \
 		${udprelay:+--enable-udprelay} \
