@@ -27,7 +27,9 @@ proto_tun2socks_setup() {
 	
 	[ -n "$localdns" ] && {
 		for i in $(echo $localdns | tr "," "\n")
-		proto_add_host_dependency "$config" "$i" $interface
+		do
+			proto_add_host_dependency "$config" "$i" $interface
+		done
 	}
 
 	proto_export INTERFACE="$config"
