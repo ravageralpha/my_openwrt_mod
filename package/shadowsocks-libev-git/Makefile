@@ -1,13 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=shadowsocks-libev-git
-PKG_VERSION:=2.4.3
+PKG_VERSION:=2.4.5
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/madeye/shadowsocks-libev.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=d4268dd94665cfb706d88d48e1d9af484c21e1bb
+PKG_SOURCE_VERSION:=3a0c6a19191b38e928f7932a926524e376970571
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 PKG_MAINTAINER:=Max Lv <max.c.lv@gmail.com>
 
@@ -47,6 +47,8 @@ Shadowsocks-libev is a lightweight secured scoks5 proxy for embedded devices and
 endef
 
 Package/shadowsocks-libev-polarssl-git/description=$(Package/shadowsocks-libev-git/description)
+
+CONFIGURE_ARGS += --disable-ssp
 
 ifeq ($(BUILD_VARIANT),polarssl)
         CONFIGURE_ARGS += --with-crypto-library=polarssl
