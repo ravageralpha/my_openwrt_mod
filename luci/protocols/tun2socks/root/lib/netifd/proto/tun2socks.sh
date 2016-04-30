@@ -40,6 +40,7 @@ proto_tun2socks_setup() {
 
 	proto_run_command "$config" \
 	/usr/bin/tun2socks \
+		--loglevel 1 \
 		--tundev "vpn-$config" \
 		--netif-ipaddr "$localip" \
 		--netif-netmask "$netmask" \
