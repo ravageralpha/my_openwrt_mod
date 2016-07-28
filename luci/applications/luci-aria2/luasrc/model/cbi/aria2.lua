@@ -124,6 +124,7 @@ rpc=m:section(TypedSection, "aria2", translate("Authentication"))
 rpc.anonymous = true
 rpc_auth = rpc:option(Flag, "rpc_auth", translate("Enable"))
 rpc_auth.default = false
+rpc_auth.rmempty = false
 rpc_token = rpc:option(Value, "rpc_token", translate("RPC secret authorization token"))
 rpc_token:depends("rpc_auth", 1)
 
