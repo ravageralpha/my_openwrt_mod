@@ -48,7 +48,7 @@ endef
 
 Package/shadowsocks-libev-polarssl-git/description=$(Package/shadowsocks-libev-git/description)
 
-CONFIGURE_ARGS += --disable-ssp
+CONFIGURE_ARGS += --disable-ssp --disable-documentation
 
 ifeq ($(BUILD_VARIANT),polarssl)
         CONFIGURE_ARGS += --with-crypto-library=polarssl
