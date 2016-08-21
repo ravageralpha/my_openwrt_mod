@@ -139,7 +139,6 @@ blacklist.template = "cbi/tvalue"
 blacklist.size = 30
 blacklist.rows = 10
 blacklist.wrap = "off"
-blacklist:depends("blacklist_enabled", 1)
 
 function blacklist.cfgvalue(self, section)
 	return fs.readfile("/etc/ipset/blacklist") or ""
@@ -164,7 +163,6 @@ whitelist.template = "cbi/tvalue"
 whitelist.size = 30
 whitelist.rows = 10
 whitelist.wrap = "off"
-whitelist:depends("whitelist_enabled", 1)
 
 function whitelist.cfgvalue(self, section)
 	return fs.readfile("/etc/ipset/whitelist") or ""

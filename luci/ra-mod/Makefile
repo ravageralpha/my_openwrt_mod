@@ -80,8 +80,8 @@ define application
   LUCI_BUILD_PACKAGES += luci-app-$(1)
 endef
 
-$(eval $(call application,aria2,LuCI Support for aria2,\
-	+PACKAGE_luci-app-aria2:aria2))
+$(eval $(call application,aria2-ra,LuCI Support for aria2,\
+	+PACKAGE_luci-app-aria2-ra:aria2))
 
 $(eval $(call application,shadowsocks,LuCI Support for shadowsocks,\
 	+PACKAGE_luci-app-shadowsocks:shadowsocks-libev-git \

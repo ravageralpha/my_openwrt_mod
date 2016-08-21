@@ -126,6 +126,5 @@ rpc_auth = rpc:option(Flag, "rpc_auth", translate("Enable"))
 rpc_auth.default = false
 rpc_auth.rmempty = false
 rpc_token = rpc:option(Value, "rpc_token", translate("RPC secret authorization token"))
-rpc_token:depends("rpc_auth", 1)
 
 return m
