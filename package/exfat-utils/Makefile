@@ -31,7 +31,7 @@ define Package/exfat-utils/template
 endef
 
 define Package/exfat-utils
-  $(call Package/exfat/template)
+  $(call Package/exfat-utils/template)
   TITLE:=exFAT utilities
 endef
 
