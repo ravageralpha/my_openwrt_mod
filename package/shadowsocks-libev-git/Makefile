@@ -32,14 +32,14 @@ define Package/shadowsocks-libev-git
   $(call Package/shadowsocks-libev-git/Default)
   TITLE+= (OpenSSL)
   VARIANT:=openssl
-  DEPENDS:=+libopenssl +libpthread
+  DEPENDS:=+libopenssl +libpthread +libpcre
 endef
 
 define Package/shadowsocks-libev-polarssl-git
   $(call Package/shadowsocks-libev-git/Default)
   TITLE+= (PolarSSL)
   VARIANT:=polarssl
-  DEPENDS:=+libpolarssl +libpthread
+  DEPENDS:=+libpolarssl +libpthread +libpcre
 endef
 
 define Package/shadowsocks-libev-git/description
