@@ -42,16 +42,28 @@ define Package/shadowsocks-libev-polarssl-git
   DEPENDS:=+libpolarssl +libpthread +libpcre
 endef
 
+define Package/shadowsocks-libev-mbedtls-git
+  $(call Package/shadowsocks-libev-git/Default)
+  TITLE+= (mbedTLS)
+  VARIANT:=mbedtls
+  DEPENDS:=+libmbedtls +libpthread +libpcre
+endef
+
 define Package/shadowsocks-libev-git/description
 Shadowsocks-libev is a lightweight secured scoks5 proxy for embedded devices and low end boxes.
 endef
 
 Package/shadowsocks-libev-polarssl-git/description=$(Package/shadowsocks-libev-git/description)
+Package/shadowsocks-libev-mbedtls-git/description=$(Package/shadowsocks-libev-git/description)
 
-CONFIGURE_ARGS += --disable-ssp --disable-documentation
+CONFIGURE_ARGS += --disable-documentation --disable-ssp
 
 ifeq ($(BUILD_VARIANT),polarssl)
-        CONFIGURE_ARGS += --with-crypto-library=polarssl
+	CONFIGURE_ARGS += --with-crypto-library=polarssl
+endif
+
+ifeq ($(BUILD_VARIANT),mbedtls)
+	CONFIGURE_ARGS += --with-crypto-library=mbedtls
 endif
 
 define Package/shadowsocks-libev-git/install
@@ -63,3 +75,4 @@ Package/shadowsocks-libev-polarssl-git/install=$(Package/shadowsocks-libev-git/i
 
 $(eval $(call BuildPackage,shadowsocks-libev-git))
 $(eval $(call BuildPackage,shadowsocks-libev-polarssl-git))
+$(eval $(call BuildPackage,shadowsocks-libev-mbedtls-git))
