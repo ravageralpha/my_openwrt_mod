@@ -1,13 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=shadowsocks-libev-git
-PKG_VERSION:=2.5.2
+PKG_VERSION:=2.5.6
 PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/madeye/shadowsocks-libev.git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION:=0949f9a73b64d0b37cabc240b381c591148bc6b3
+PKG_SOURCE_VERSION:=aca5f5ddb46c1555b3fde61f95ccf0d6271ed607
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 PKG_MAINTAINER:=Max Lv <max.c.lv@gmail.com>
 
@@ -56,7 +56,7 @@ endef
 Package/shadowsocks-libev-polarssl-git/description=$(Package/shadowsocks-libev-git/description)
 Package/shadowsocks-libev-mbedtls-git/description=$(Package/shadowsocks-libev-git/description)
 
-CONFIGURE_ARGS += --disable-documentation --disable-ssp
+CONFIGURE_ARGS += --disable-ssp --disable-documentation --disable-assert
 
 ifeq ($(BUILD_VARIANT),polarssl)
 	CONFIGURE_ARGS += --with-crypto-library=polarssl
