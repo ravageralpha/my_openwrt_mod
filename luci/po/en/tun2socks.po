@@ -4,9 +4,6 @@ msgstr "Socks Server"
 msgid "Actual Server IP Address"
 msgstr "Actual Server IP Address"
 
-msgid "Enable UDP Relay"
-msgstr "Enable UDP Relay"
-
 msgid "Local Address"
 msgstr "Local Address"
 

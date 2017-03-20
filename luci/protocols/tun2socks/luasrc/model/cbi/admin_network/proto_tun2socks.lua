@@ -13,7 +13,7 @@ You may obtain a copy of the License at
 local map, section, net = ...
 local fs = require "nixio.fs"
 
-local server, remote, ifname, localnet, udprelay, opts, localdns
+local server, remote, ifname, localnet, opts, localdns
 
 server = section:taboption("general", Value, "server", translate("Socks Server"))
 server.placeholder = "127.0.0.1:1080"
@@ -22,8 +22,6 @@ server.optional = false
 remote = section:taboption("general", Value, "remote", translate("Actual Server IP Address"))
 remote.datatype = ipaddr
 remote.optional = false
-
-udprelay = section:taboption("general", Flag, "udprelay", translate("Enable UDP Relay"))
 
 localnet = section:taboption("general", Value, "localnet", translate("Local Address"))
 localnet.default = "10.0.0.2/24"

@@ -8,7 +8,6 @@ proto_tun2socks_init_config() {
 	proto_config_add_string "remote"
 	proto_config_add_string "interface"
 	proto_config_add_string "localnet"
-	proto_config_add_int "udprelay"
 	proto_config_add_string "opts"
 	proto_config_add_string "localdns"
 	no_device=1
@@ -46,7 +45,6 @@ proto_tun2socks_setup() {
 		--netif-ipaddr "$localip" \
 		--netif-netmask "$netmask" \
 		--socks-server-addr "$server" \
-		${udprelay:+--enable-udprelay} \
 		${opts:+$opts}
 
 	[ -f "/etc/tun2socks/client_up.sh" ] && {
