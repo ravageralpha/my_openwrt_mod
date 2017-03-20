@@ -6,7 +6,7 @@ PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_URL:=https://github.com/ravageralpha/badvpn/releases/download/$(PKG_VERSION)
 PKG_SOURCE:=badvpn-$(PKG_VERSION).tar.gz
-PKG_MD5SUM:=b784ea6d284d24b9fba2495d3c52dae3
+PKG_MD5SUM:=bd3328d42026f10a4bd32cebc148ef37
 	
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)/badvpn-$(PKG_VERSION)
 
