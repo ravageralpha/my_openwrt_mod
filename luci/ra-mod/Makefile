@@ -83,8 +83,8 @@ endef
 $(eval $(call application,aria2-ra,LuCI Support for aria2,\
 	+PACKAGE_luci-app-aria2-ra:aria2))
 
-$(eval $(call application,vsftpd,LuCI Support for vsftpd,\
-	+PACKAGE_luci-app-vsftpd:vsftpd))
+$(eval $(call application,vsftpd-ra,LuCI Support for vsftpd,\
+	+PACKAGE_luci-app-vsftpd-ra:vsftpd))
 
 $(eval $(call application,chinadns,LuCI Support for ChinaDNS,\
 	+PACKAGE_luci-app-chinadns:ChinaDNS))

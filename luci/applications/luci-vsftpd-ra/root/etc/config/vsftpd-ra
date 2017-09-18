@@ -1,0 +1,2 @@
+config vsftpd-ra config
+	option enabled '0'
