@@ -10,12 +10,12 @@ yaaw="&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"button\" value=\" " .. "yaaw" .. " \
 aria2_webui="&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"button\" value=\" " .. "aria2-webui" .. " \" onclick=\"window.open('http://ziahamza.github.io/webui-aria2')\"/>"
 
 if running then
-	m = Map("aria2", translate("aria2"), translate("aria2 is running") .. yaaw .. aria2_webui)
+	m = Map("aria2-ra", translate("aria2"), translate("aria2 is running") .. yaaw .. aria2_webui)
 else
-	m = Map("aria2", translate("aria2"), translate("aria2 is not running,make sure you have mounted USB Storage device"))
+	m = Map("aria2-ra", translate("aria2"), translate("aria2 is not running,make sure you have mounted USB Storage device"))
 end
 
-s = m:section(TypedSection, "aria2", translate("Settings"))
+s = m:section(TypedSection, "aria2-ra", translate("Settings"))
 s.anonymous = true
 
 s:tab("basic",  translate("Basic Settings"))
@@ -83,7 +83,7 @@ function editconf.write(self, section, value)
 end
 
 -- Network
-network=m:section(TypedSection, "aria2", translate("Network"))
+network=m:section(TypedSection, "aria2-ra", translate("Network"))
 network.anonymous = true
 
 maxthread = network:option(Value, "maxthread", translate("Max Thread"), translate("Default 5"))
@@ -120,7 +120,7 @@ seedtime.placeholder = "525600"
 seedtime.datatype = "uinteger"
 
 -- Authentication
-rpc=m:section(TypedSection, "aria2", translate("Authentication"))
+rpc=m:section(TypedSection, "aria2-ra", translate("Authentication"))
 rpc.anonymous = true
 rpc_auth = rpc:option(Flag, "rpc_auth", translate("Enable"))
 rpc_auth.default = false

@@ -17,6 +17,6 @@ function index()
 	page.order  = 65
 
 	page = entry({"admin", "RA-MOD", "vsftpd"}, cbi("vsftpd"), _("vsftpd"), 50)
-	page.i18n = "vsftpd"
+	page.i18n = "vsftpd-ra"
 	page.dependent = true
 end

@@ -11,7 +11,7 @@ else
 	m = Map("vsftpd", translate("vsftpd"), translate("vsftpd is not running"))
 end
 
-s = m:section(TypedSection, "vsftpd", "")
+s = m:section(TypedSection, "vsftpd-ra", "")
 s.anonymous = true
 
 switch = s:option(Flag, "enabled", translate("Enable"))
