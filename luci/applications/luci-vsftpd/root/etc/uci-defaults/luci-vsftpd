@@ -3,7 +3,7 @@
 uci -q batch <<-EOF >/dev/null
 	delete ucitrack.@vsftpd[-1]
 	add ucitrack vsftpd
-	set ucitrack.@vsftpd[-1].init=vsftpd
+	set ucitrack.@vsftpd[-1].init=vsftpd-ra
 	commit ucitrack
 EOF
 
