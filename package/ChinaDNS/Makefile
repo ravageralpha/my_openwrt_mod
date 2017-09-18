@@ -6,7 +6,7 @@ PKG_RELEASE=$(PKG_SOURCE_VERSION)
 
 PKG_SOURCE_URL:=https://github.com/clowwindy/ChinaDNS/releases/download/$(PKG_VERSION)
 PKG_SOURCE:=chinadns-$(PKG_VERSION).tar.gz
-PKG_MAINTAINER:=clowwindy <clowwindy42@gmail.com>
+PKG_MD5SUM=f3ece30f2a453d25cc22ef6e1ef579b0
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)/chinadns-$(PKG_VERSION)
 
