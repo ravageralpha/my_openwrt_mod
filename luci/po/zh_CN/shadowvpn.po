@@ -4,9 +4,6 @@ msgstr "MTU"
 msgid "Concurrency"
 msgstr "并发连接数"
 
-msgid "Output Interface"
-msgstr "设备出口"
-
 msgid "User Token"
 msgstr "用户令牌"
 

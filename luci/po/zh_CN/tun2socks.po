@@ -10,8 +10,5 @@ msgstr "本地地址"
 msgid "Extra Options"
 msgstr "自定义命令"
 
-msgid "Output Interface"
-msgstr "输出接口"
-
 msgid "Local DNS"
 msgstr "本机使用的远端 DNS 服务器"

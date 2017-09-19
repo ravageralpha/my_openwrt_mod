@@ -6,7 +6,6 @@ init_proto "$@"
 proto_tun2socks_init_config() {
 	proto_config_add_string "server"
 	proto_config_add_string "remote"
-	proto_config_add_string "interface"
 	proto_config_add_string "localnet"
 	proto_config_add_string "opts"
 	proto_config_add_string "localdns"
@@ -17,19 +16,11 @@ proto_tun2socks_init_config() {
 proto_tun2socks_setup() {
 	local config="$1"
 
-	json_get_vars server interface localnet remote udprelay opts localdns
+	json_get_vars server localnet remote opts localdns
 
 	grep -q tun /proc/modules || insmod tun
 
 	logger -t tun2socks "initializing..."
-	proto_add_host_dependency "$config" "$remote" $interface
-	
-	[ -n "$localdns" ] && {
-		for i in $(echo $localdns | tr "," "\n")
-		do
-			proto_add_host_dependency "$config" "$i" $interface
-		done
-	}
 
 	proto_export INTERFACE="$config"
 	logger -t tun2socks "executing tun2socks"
@@ -49,7 +40,7 @@ proto_tun2socks_setup() {
 
 	[ -f "/etc/tun2socks/client_up.sh" ] && {
 		/bin/sh /etc/tun2socks/client_up.sh \
-			"$config" "vpn-$config" "$localnet"
+			"$config" "vpn-$config" "$localnet" "$remote" "$localdns"
 	}
 }
 
@@ -59,7 +50,7 @@ proto_tun2socks_teardown() {
 	proto_kill_command "$config"
 	[ -f "/etc/tun2socks/client_down.sh" ] && {
 		/bin/sh /etc/tun2socks/client_down.sh \
-			"$config" "vpn-$config"
+			"$config" "vpn-$config" "$remote" "$localdns"
 	}
 }
 

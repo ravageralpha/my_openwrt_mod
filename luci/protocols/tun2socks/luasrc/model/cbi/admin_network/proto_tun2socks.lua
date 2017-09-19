@@ -36,9 +36,6 @@ opts = section:taboption("general", Value, "opts", translate("Extra Options"))
 opts.rmempty = true
 opts.optional = true
 
-ifname = section:taboption("general", Value, "interface", translate("Output Interface"))
-ifname.template = "cbi/network_netlist"
-
 clientup = section:taboption("advanced", TextValue, "clientup", "client_up.sh")
 clientup.template = "cbi/tvalue"
 clientup.rows = 15

@@ -53,8 +53,8 @@ define protocol
   LUCI_BUILD_PACKAGES += luci-proto-$(1)
 endef
 
-$(eval $(call protocol,shadowvpn,Support for ShadowVPN,+ShadowVPN))
-$(eval $(call protocol,tun2socks,Support for tun2socks,+tun2socks))
+$(eval $(call protocol,shadowvpn,Support for ShadowVPN,+ShadowVPN +ip-full))
+$(eval $(call protocol,tun2socks,Support for tun2socks,+tun2socks +ip-full))
 
 ### Applications ###
 define application

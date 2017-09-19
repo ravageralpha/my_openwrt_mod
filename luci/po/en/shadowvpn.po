@@ -4,9 +4,6 @@ msgstr "MTU"
 msgid "Concurrency"
 msgstr "Concurrency"
 
-msgid "Output Interface"
-msgstr "Output Interface"
-
 msgid "User Token"
 msgstr "User Token"
 

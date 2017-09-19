@@ -9,7 +9,6 @@ proto_shadowvpn_init_config() {
 	proto_config_add_string "password"
 	proto_config_add_string "mtu"
 	proto_config_add_string "concurrency"
-	proto_config_add_string "interface"
 	proto_config_add_string "usertoken"
 	proto_config_add_string "localnet"
 	no_device=1
@@ -19,12 +18,11 @@ proto_shadowvpn_init_config() {
 proto_shadowvpn_setup() {
 	local config="$1"
 
-	json_get_vars server port password mtu concurrency interface usertoken localnet
+	json_get_vars server port password mtu concurrency usertoken localnet
 
 	grep -q tun /proc/modules || insmod tun
 
 	logger -t shadowvpn "initializing..."
-	proto_add_host_dependency "$config" "$server" $interface
 
 	mkdir -p /var/etc
 	sed -e "s#|SERVER|#$server#g" \

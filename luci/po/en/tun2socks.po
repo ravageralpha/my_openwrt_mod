@@ -10,8 +10,5 @@ msgstr "Local Address"
 msgid "Extra Options"
 msgstr "Extra Options"
 
-msgid "Output Interface"
-msgstr "Output Interface"
-
 msgid "Local DNS"
 msgstr "Local DNS"

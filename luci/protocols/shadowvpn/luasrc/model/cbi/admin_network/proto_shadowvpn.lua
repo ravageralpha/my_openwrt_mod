@@ -45,9 +45,6 @@ localnet.default = "10.7.0.2/24"
 localnet.placeholder = "10.7.0.2/24"
 localnet.optional = false
 
-ifname = section:taboption("general", Value, "interface", translate("Output Interface"))
-ifname.template = "cbi/network_netlist"
-
 clientup = section:taboption("advanced", TextValue, "clientup", "client_up.sh")
 clientup.template = "cbi/tvalue"
 clientup.rows = 15
