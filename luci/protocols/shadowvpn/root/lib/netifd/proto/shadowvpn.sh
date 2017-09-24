@@ -50,7 +50,7 @@ proto_shadowvpn_teardown() {
 	local config="$1"
 	logger -t shadowvpn "bringing down ShadowVPN"
 	proto_kill_command "$config"
-	rm -f /var/etc/shadowvpnclient.conf
+	rm -f /var/etc/shadowvpnclient.conf /var/etc/shadowvpn
 }
 
 add_protocol shadowvpn
