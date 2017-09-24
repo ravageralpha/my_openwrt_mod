@@ -42,7 +42,7 @@ proto_tun2socks_setup() {
 		/bin/sh /etc/tun2socks/client_up.sh \
 			"$config" "vpn-$config" "$localnet" "$remote" "$localdns"
 	}
-	[ "$?" = 0 ] && echo "vpn-$config" > /var/etc/tun2socks
+	[ "$?" = 0 ] && echo "$config" > /var/etc/tun2socks
 }
 
 proto_tun2socks_teardown() {

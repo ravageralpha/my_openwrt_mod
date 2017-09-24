@@ -5,12 +5,4 @@ TEMPFILE=/var/etc/tun2socks
 
 [ -f "$TEMPFILE" ] || exit 0
 
-INTF="$(cat $TEMPFILE)"
-
-[ "$ACTION" = ifup -o "$ACTION" = ifupdate ] && ifup $INTF
-}
-
-[ "$ACTION" = ifdown ] && {
-	ifdown $INTF
-	rm -f $TEMPFILE
-}
+[ "$ACTION" = ifup -o "$ACTION" = ifupdate ] && ifup "$(cat $TEMPFILE)"
