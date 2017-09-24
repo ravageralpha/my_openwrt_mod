@@ -43,6 +43,7 @@ proto_shadowvpn_setup() {
 
 	proto_run_command "$config" \
 	/usr/bin/shadowvpn -c /var/etc/shadowvpnclient.conf
+	[ "$?" = 0 ] && echo "vpn-$config" > /var/etc/shadowvpn
 }
 
 proto_shadowvpn_teardown() {
