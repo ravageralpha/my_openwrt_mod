@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=exfat-utils
-PKG_VERSION:=1.2.4
+PKG_VERSION:=1.2.7
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/relan/exfat/releases/download/v$(PKG_VERSION)/
-PKG_MD5SUM:=05de4d0bbaf56e572b1800747dce88be
+PKG_MD5SUM:=c70d295a9a2e4ec16af21c0b7d02743c
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)/$(PKG_NAME)-$(PKG_VERSION)
 
