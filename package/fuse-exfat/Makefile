@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fuse-exfat
-PKG_VERSION:=1.2.4
+PKG_VERSION:=1.2.7
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/relan/exfat/releases/download/v$(PKG_VERSION)/
-PKG_MD5SUM:=1ed881862bea9616003398cb6eab9903
+PKG_MD5SUM:=afeed70fa0528ebd9fae28fac282a524
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)/$(PKG_NAME)-$(PKG_VERSION)
 
