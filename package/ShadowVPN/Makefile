@@ -25,7 +25,7 @@ define Package/ShadowVPN/Default
   CATEGORY:=RA-MOD
   SUBMENU:=Package
   TITLE:=ShadowVPN
-  DEPENDS:=+kmod-tun +ip
+  DEPENDS:=+kmod-tun
   URL:=https://github.com/clowwindy/ShadowVPN
 endef
 
