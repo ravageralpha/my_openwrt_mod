@@ -59,6 +59,9 @@ diskcache:value("1M")
 diskcache:value("2M")
 diskcache:value("4M")
 diskcache:value("8M")
+diskcache:value("16M")
+diskcache:value("32M")
+diskcache:value("64M")
 
 s:tab("editconf", translate("Edit Configuration"))
 editconf = s:taboption("editconf", Value, "conf", 
