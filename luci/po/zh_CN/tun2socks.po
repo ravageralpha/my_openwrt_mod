@@ -8,7 +8,7 @@ msgid "Local Address"
 msgstr "本地地址"
 
 msgid "Extra Options"
-msgstr "自定义命令"
+msgstr "自定义选项"
 
 msgid "Local DNS"
 msgstr "本机使用的远端 DNS 服务器"

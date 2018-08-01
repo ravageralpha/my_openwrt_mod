@@ -55,6 +55,7 @@ endef
 
 $(eval $(call protocol,shadowvpn,Support for ShadowVPN,+ShadowVPN +ip-full))
 $(eval $(call protocol,tun2socks,Support for tun2socks,+tun2socks +ip-full))
+$(eval $(call protocol,tinyfecvpn,Support for tinyfecVPN,+tinyfecVPN +ip-full))
 
 ### Applications ###
 define application

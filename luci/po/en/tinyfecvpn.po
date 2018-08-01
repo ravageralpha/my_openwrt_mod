@@ -1,0 +1,14 @@
+msgid "Server"
+msgstr "Server"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "FEC"
+msgstr "FEC"
+
+msgid "Extra Options"
+msgstr "Extra Options"
+
+msgid "Subnet"
+msgstr "Subnet"

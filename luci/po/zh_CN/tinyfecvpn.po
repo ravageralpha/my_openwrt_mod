@@ -1,0 +1,14 @@
+msgid "Server"
+msgstr "服务器"
+
+msgid "Password"
+msgstr "密码"
+
+msgid "FEC"
+msgstr "纠错包"
+
+msgid "Extra Options"
+msgstr "自定义选项"
+
+msgid "Subnet"
+msgstr "子网"
