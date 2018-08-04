@@ -1,7 +1,7 @@
 local map, section, net = ...
 local fs = require "nixio.fs"
 
-local server, port, passwd, fec, subnet, extra
+local server, passwd, fec, subnet, extra
 
 server = section:taboption("general", Value, "server", translate("Server"))
 server.optional = false

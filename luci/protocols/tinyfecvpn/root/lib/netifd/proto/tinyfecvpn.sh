@@ -27,12 +27,12 @@ proto_tinyfecvpn_setup() {
 
 	proto_run_command "$config" \
 	/usr/bin/tinyfecvpn -c \
-						-r $server \
-						-k $passwd \
-						-f $fec \
-						--tun-dev vpn-$config \
-						--sub-net $subnet \
-						$extra
+			-r $server \
+			-k $passwd \
+			-f $fec \
+			--tun-dev vpn-$config \
+			--sub-net $subnet \
+			$extra
 
 	[ -f "/etc/tinyfecvpn/client_up.sh" ] && {
 		/bin/sh /etc/tinyfecvpn/client_up.sh \
