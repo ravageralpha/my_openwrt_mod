@@ -30,6 +30,7 @@ proto_tinyfecvpn_setup() {
 			-r $server \
 			-k $passwd \
 			-f $fec \
+			--manual-set-tun \
 			--tun-dev vpn-$config \
 			--sub-net $subnet \
 			$extra
