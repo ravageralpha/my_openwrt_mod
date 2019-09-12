@@ -1,0 +1,16 @@
+#!/bin/sh
+
+uci -q batch <<-EOF >/dev/null
+	delete ucitrack.@chinadns[-1]
+	add ucitrack chinadns
+	set ucitrack.@chinadns[-1].init=chinadns
+	commit ucitrack
+EOF
+
+[ -n "${IPKG_INSTROOT}" ] || {
+	chmod 755 /etc/init.d/chinadns >/dev/null 2>&1
+	/etc/init.d/chinadns enable >/dev/null 2>&1
+}
+
+rm -f /tmp/luci-indexcache
+exit 0
