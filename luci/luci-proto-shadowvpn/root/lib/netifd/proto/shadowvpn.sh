@@ -34,7 +34,7 @@ proto_shadowvpn_setup() {
 		-e "s#|CONCURRENCY|#$concurrency#g" \
 		/etc/shadowvpn/client.conf.template > /var/etc/shadowvpnclient.conf
 
-	if [[ -n "$usertoken" ]]; then
+	if [ -n "$usertoken" ]; then
 		echo "user_token=$usertoken" >> /var/etc/shadowvpnclient.conf
 	fi
 

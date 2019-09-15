@@ -1,0 +1,17 @@
+{
+	"luci-proto-tun2socks": {
+		"description": "Grant access to LuCI tun2socks procedures",
+		"read": {
+			"ubus": {
+				"luci.tun2socks": [ "getScript" ]
+			},
+			"uci": [ "network" ]
+		},
+		"write": {
+			"ubus": {
+				"luci.tun2socks": [ "setScript" ]
+			},
+			"uci": [ "network" ]
+		}
+	}
+}

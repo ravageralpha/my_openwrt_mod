@@ -3,7 +3,7 @@ local interface = luci.model.network.interface
 local proto = netmod:register_protocol("tinyfecvpn")
 
 function proto.get_i18n(self)
-	return luci.i18n.translate("tinyfecvpn")
+	return luci.i18n.translate("tinyFecVPN")
 end
 
 function proto.ifname(self)
@@ -38,4 +38,4 @@ function proto.contains_interface(self, ifc)
 	 return (netmod:ifnameof(ifc) == self:ifname())
 end
 
-netmod:register_pattern_virtual("^vpn-%w")
+netmod:register_pattern_virtual("^vpn%-%w")

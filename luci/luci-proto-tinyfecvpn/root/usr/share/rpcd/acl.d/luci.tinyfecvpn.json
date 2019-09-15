@@ -1,0 +1,17 @@
+{
+	"luci-proto-tinyfecvpn": {
+		"description": "Grant access to LuCI tinyFecVPN procedures",
+		"read": {
+			"ubus": {
+				"luci.tinyfecvpn": [ "getScript" ]
+			},
+			"uci": [ "network" ]
+		},
+		"write": {
+			"ubus": {
+				"luci.tinyfecvpn": [ "setScript" ]
+			},
+			"uci": [ "network" ]
+		}
+	}
+}

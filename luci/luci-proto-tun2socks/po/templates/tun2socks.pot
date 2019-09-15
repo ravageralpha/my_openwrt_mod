@@ -3,33 +3,33 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: luci-proto-tun2socks/htdocs/luci-static/resources/protocol/tun2socks.js:72
 msgid "Extra Options"
-msgstr "自定义选项"
+msgstr ""
 
 #: luci-proto-tun2socks/htdocs/luci-static/resources/protocol/tun2socks.js:69
 msgid "Local DNS(Direct Connect)"
-msgstr "直连 DNS 服务器"
+msgstr ""
 
 #: luci-proto-tun2socks/htdocs/luci-static/resources/protocol/tun2socks.js:75
 msgid "Post Connection Script"
-msgstr "上线脚本"
+msgstr ""
 
 #: luci-proto-tun2socks/htdocs/luci-static/resources/protocol/tun2socks.js:86
 msgid "Post Disconnection Script"
-msgstr "下线脚本"
+msgstr ""
 
 #: luci-proto-tun2socks/htdocs/luci-static/resources/protocol/tun2socks.js:60
 msgid "Remote Server Address"
-msgstr "服务器地址"
+msgstr ""
 
 #: luci-proto-tun2socks/htdocs/luci-static/resources/protocol/tun2socks.js:56
 msgid "Socks Server"
-msgstr "本地代理地址"
+msgstr ""
 
 #: luci-proto-tun2socks/htdocs/luci-static/resources/protocol/tun2socks.js:64
 msgid "Subnet"
-msgstr "本机子网"
+msgstr ""
 
 #: luci-proto-tun2socks/htdocs/luci-static/resources/protocol/tun2socks.js:24
 #: luci-proto-tun2socks/luasrc/model/network/proto_tun2socks.lua:25
 msgid "tun2socks"
-msgstr "tun2socks"
+msgstr ""

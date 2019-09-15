@@ -3,41 +3,41 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: luci-proto-shadowvpn/htdocs/luci-static/resources/protocol/shadowvpn.js:76
 msgid "Concurrency"
-msgstr "并发连接数"
+msgstr ""
 
 #: luci-proto-shadowvpn/htdocs/luci-static/resources/protocol/shadowvpn.js:80
 msgid "Local Address"
-msgstr "本机地址"
+msgstr ""
 
 #: luci-proto-shadowvpn/htdocs/luci-static/resources/protocol/shadowvpn.js:71
 msgid "Override MTU"
-msgstr "Override MTU"
+msgstr ""
 
 #: luci-proto-shadowvpn/htdocs/luci-static/resources/protocol/shadowvpn.js:64
 msgid "Password"
-msgstr "密码"
+msgstr ""
 
 #: luci-proto-shadowvpn/htdocs/luci-static/resources/protocol/shadowvpn.js:85
 msgid "Post Connection Script"
-msgstr "上线脚本"
+msgstr ""
 
 #: luci-proto-shadowvpn/htdocs/luci-static/resources/protocol/shadowvpn.js:96
 msgid "Post Disconnection Script"
-msgstr "下线脚本"
+msgstr ""
 
 #: luci-proto-shadowvpn/htdocs/luci-static/resources/protocol/shadowvpn.js:24
 #: luci-proto-shadowvpn/luasrc/model/network/proto_shadowvpn.lua:25
 msgid "ShadowVPN"
-msgstr "ShadowVPN"
+msgstr ""
 
 #: luci-proto-shadowvpn/htdocs/luci-static/resources/protocol/shadowvpn.js:68
 msgid "User Token"
-msgstr "用户令牌"
+msgstr ""
 
 #: luci-proto-shadowvpn/htdocs/luci-static/resources/protocol/shadowvpn.js:56
 msgid "VPN Server"
-msgstr "服务器地址"
+msgstr ""
 
 #: luci-proto-shadowvpn/htdocs/luci-static/resources/protocol/shadowvpn.js:60
 msgid "VPN Server port"
-msgstr "服务器端口"
+msgstr ""

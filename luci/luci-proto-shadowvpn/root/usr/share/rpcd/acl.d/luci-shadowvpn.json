@@ -1,0 +1,17 @@
+{
+	"luci-proto-shadowvpn": {
+		"description": "Grant access to LuCI ShadowVPN procedures",
+		"read": {
+			"ubus": {
+				"luci.shadowvpn": [ "getScript" ]
+			},
+			"uci": [ "network" ]
+		},
+		"write": {
+			"ubus": {
+				"luci.shadowvpn": [ "setScript" ]
+			},
+			"uci": [ "network" ]
+		}
+	}
+}

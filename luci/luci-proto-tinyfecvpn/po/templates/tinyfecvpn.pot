@@ -3,33 +3,33 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: luci-proto-tinyfecvpn/htdocs/luci-static/resources/protocol/tinyfecvpn.js:73
 msgid "Extra Options"
-msgstr "自定义选项"
+msgstr ""
 
 #: luci-proto-tinyfecvpn/htdocs/luci-static/resources/protocol/tinyfecvpn.js:64
 msgid "FEC"
-msgstr "纠错包比例"
+msgstr ""
 
 #: luci-proto-tinyfecvpn/htdocs/luci-static/resources/protocol/tinyfecvpn.js:60
 msgid "Password"
-msgstr "服务器密码"
+msgstr ""
 
 #: luci-proto-tinyfecvpn/htdocs/luci-static/resources/protocol/tinyfecvpn.js:76
 msgid "Post Connection Script"
-msgstr "上线脚本"
+msgstr ""
 
 #: luci-proto-tinyfecvpn/htdocs/luci-static/resources/protocol/tinyfecvpn.js:87
 msgid "Post Disconnection Script"
-msgstr "下线脚本"
+msgstr ""
 
 #: luci-proto-tinyfecvpn/htdocs/luci-static/resources/protocol/tinyfecvpn.js:68
 msgid "Subnet"
-msgstr "本地子网"
+msgstr ""
 
 #: luci-proto-tinyfecvpn/htdocs/luci-static/resources/protocol/tinyfecvpn.js:56
 msgid "VPN Server"
-msgstr "服务器地址"
+msgstr ""
 
 #: luci-proto-tinyfecvpn/htdocs/luci-static/resources/protocol/tinyfecvpn.js:24
 #: luci-proto-tinyfecvpn/luasrc/model/network/proto_tinyfecvpn.lua:6
 msgid "tinyFecVPN"
-msgstr "tinyFecVPN"
+msgstr ""

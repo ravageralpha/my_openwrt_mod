@@ -46,7 +46,7 @@ proto_tinyfecvpn_setup() {
 
 proto_tinyfecvpn_teardown() {
 	local config="$1"
-	logger -t tinyfecvpn "bringing down tinyfecVPN"
+	logger -t tinyfecvpn "bringing down tinyFecVPN"
 	proto_kill_command "$config"
 	[ -f "/etc/tinyfecvpn/client_down.sh" ] && {
 		/bin/sh /etc/tinyfecvpn/client_down.sh \
