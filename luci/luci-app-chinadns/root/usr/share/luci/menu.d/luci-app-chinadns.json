@@ -1,0 +1,14 @@
+{
+	"admin/RA-MOD/chinadns": {
+		"title": "chinadns",
+		"action": {
+			"type": "cbi",
+			"path": "chinadns",
+			"post": { "cbi.submit": true }
+		},
+		"depends": {
+			"acl": [ "luci-app-chinadns" ],
+			"uci": { "chinadns": true }
+		}
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"admin/RA-MOD/aria2_ra": {
+		"title": "aria2",
+		"action": {
+			"type": "cbi",
+			"path": "aria2",
+			"post": { "cbi.submit": true }
+		},
+		"depends": {
+			"acl": [ "luci-app-aria2_ra" ],
+			"uci": { "aria2_ra": true }
+		}
+	}
+}
