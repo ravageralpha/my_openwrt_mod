@@ -1,5 +1,5 @@
 {
-	"admin/RA-MOD/aria2_ra": {
+	"admin/services/aria2_ra": {
 		"title": "aria2",
 		"action": {
 			"type": "cbi",
@@ -8,7 +8,7 @@
 		},
 		"depends": {
 			"acl": [ "luci-app-aria2_ra" ],
-			"uci": { "aria2_ra": true }
+			"uci": { "aria2-ra": true }
 		}
 	}
 }

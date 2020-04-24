@@ -1,5 +1,5 @@
 {
-	"admin/RA-MOD/chinadns": {
+	"admin/services/chinadns": {
 		"title": "chinadns",
 		"action": {
 			"type": "cbi",
