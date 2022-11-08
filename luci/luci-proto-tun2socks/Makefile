@@ -4,7 +4,7 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=LuCI support for tun2socks
-LUCI_DEPENDS:=+tun2socks +ip-full
+LUCI_DEPENDS:=+luci-compat +tun2socks +ip-full
 LUCI_PKGARCH:=all
 
 include ../../../luci/luci.mk

@@ -4,7 +4,7 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=LuCI support for ChinaDNS
-LUCI_DEPENDS:=+ChinaDNS
+LUCI_DEPENDS:=+luci-compat +ChinaDNS
 LUCI_PKGARCH:=all
 
 include ../../../luci/luci.mk

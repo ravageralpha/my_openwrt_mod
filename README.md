@@ -6,7 +6,7 @@ Install
 
 Add this line to your feeds.conf.default.
 
-    src-git ramod git://github.com/ravageralpha/my_openwrt_mod.git 
+    src-git ramod src-git-full ramod https://github.com/ravageralpha/my_openwrt_mod.git
 
 And run
 
