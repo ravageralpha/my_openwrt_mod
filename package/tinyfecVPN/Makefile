@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=tinyfecVPN
-PKG_VERSION:=20190502
+PKG_VERSION:=20210116
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/wangyu-/tinyfecVPN.git
-PKG_SOURCE_VERSION:=7e2c06a2adb1ef0898ea12a44d519ad927bdca4a
+PKG_SOURCE_VERSION:=cd4973c36fb75fb0d84241987febea41eee43611
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
@@ -29,7 +29,7 @@ define Package/tinyfecVPN
 	SUBMENU:=Package
 	TITLE:=tinyfecVPN
 	URL:=https://github.com/wangyu-/tinyfecVPN
-	DEPENDS:= +libstdcpp +librt
+	DEPENDS:=+kmod-tun +libstdcpp +librt
 endef
 
 define Package/tinyfecVPN/description

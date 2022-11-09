@@ -1,8 +1,0 @@
-#!/bin/sh
-TEMPFILE=/var/etc/tun2socks
-
-[ "$INTERFACE" = wan ] || exit 0
-
-[ -f "$TEMPFILE" ] || exit 0
-
-[ "$ACTION" = ifup -o "$ACTION" = ifupdate ] && ifup "$(cat $TEMPFILE)"
