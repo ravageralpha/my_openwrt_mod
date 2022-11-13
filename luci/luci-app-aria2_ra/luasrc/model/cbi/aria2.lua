@@ -1,7 +1,3 @@
---[[
-RA-MOD
-]]--
-
 local fs = require "nixio.fs"
 local util = require "nixio.util"
 

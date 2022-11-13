@@ -1,0 +1,15 @@
+#!/bin/sh
+
+uci -q batch <<-EOF >/dev/null
+	delete ucitrack.@udp2raw[-1]
+	add ucitrack udp2raw
+	set ucitrack.@udp2raw[-1].init=udp2raw
+	commit ucitrack
+EOF
+
+[ -n "${IPKG_INSTROOT}" ] || {
+	chmod 755 /etc/init.d/udp2raw >/dev/null 2>&1
+	/etc/init.d/udp2raw enable >/dev/null 2>&1
+}
+
+exit 0

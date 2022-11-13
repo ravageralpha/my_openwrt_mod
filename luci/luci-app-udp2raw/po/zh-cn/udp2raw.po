@@ -1,0 +1,11 @@
+msgid "udp2raw"
+msgstr "udp2raw"
+
+msgid "udp2raw is not running"
+msgstr "udp2raw 未启动"
+
+msgid "udp2raw is running"
+msgstr "udp2raw 已启动"
+
+msgid "Args"
+msgstr "命令"

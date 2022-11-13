@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
-LUCI_TITLE:=LuCI support for aria2
-LUCI_DEPENDS:=+luci-compat +aria2
+LUCI_TITLE:=LuCI support for udp2raw
+LUCI_DEPENDS:=+luci-compat +udp2raw
 LUCI_PKGARCH:=all
 
 include ../../../luci/luci.mk

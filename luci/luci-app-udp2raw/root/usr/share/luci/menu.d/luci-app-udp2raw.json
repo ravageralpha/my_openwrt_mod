@@ -1,0 +1,14 @@
+{
+	"admin/services/udp2raw": {
+		"title": "udp2raw",
+		"action": {
+			"type": "cbi",
+			"path": "udp2raw",
+			"post": { "cbi.submit": true }
+		},
+		"depends": {
+			"acl": [ "luci-app-udp2raw" ],
+			"uci": { "udp2raw": true }
+		}
+	}
+}

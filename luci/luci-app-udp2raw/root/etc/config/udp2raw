@@ -1,0 +1,4 @@
+
+config udp2raw
+	option enabled '0'
+	option args ''
