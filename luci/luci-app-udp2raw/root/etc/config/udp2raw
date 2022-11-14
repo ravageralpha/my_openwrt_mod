@@ -1,4 +1,4 @@
 
-config udp2raw
+config udp2raw 'config'
 	option enabled '0'
 	option args ''

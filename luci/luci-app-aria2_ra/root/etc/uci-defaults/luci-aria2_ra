@@ -1,0 +1,16 @@
+#!/bin/sh
+
+uci -q batch <<-EOF >/dev/null
+	delete ucitrack.@aria2_ra[-1]
+	add ucitrack aria2_ra
+	set ucitrack.@aria2_ra[-1].init=aria2_ra
+	commit ucitrack
+EOF
+
+[ -n "${IPKG_INSTROOT}" ] || {
+	chmod 755 /etc/init.d/aria2_ra >/dev/null 2>&1
+	/etc/init.d/aria2_ra enable >/dev/null 2>&1
+}
+
+rm -rf /tmp/luci-indexcache /tmp/luci-modulecache
+exit 0

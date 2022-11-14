@@ -1,4 +1,4 @@
-config aria2-ra config
+config aria2_ra config
 	option enabled '0'
 	option device '/dev/sda1'
 	option download_folder 'Downloads'

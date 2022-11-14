@@ -14,7 +14,7 @@ start()
 
 	config_get args config args
 
-	service_start /usr/bin/udp2raw "$args"
+	service_start /usr/bin/udp2raw $args
 }
 
 stop()

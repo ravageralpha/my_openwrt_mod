@@ -3,12 +3,12 @@
 		"title": "aria2",
 		"action": {
 			"type": "cbi",
-			"path": "aria2",
+			"path": "aria2_ra",
 			"post": { "cbi.submit": true }
 		},
 		"depends": {
 			"acl": [ "luci-app-aria2_ra" ],
-			"uci": { "aria2-ra": true }
+			"uci": { "aria2_ra": true }
 		}
 	}
 }

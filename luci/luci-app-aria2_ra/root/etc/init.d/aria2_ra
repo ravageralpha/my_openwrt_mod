@@ -11,7 +11,7 @@ start() {
 	
 	ulimit -n 1024
 
-	config_load "aria2-ra"	
+	config_load "aria2_ra"	
 	config_get enabled config enabled 0
 
 	[ "$enabled" = 0 ] && return 0
